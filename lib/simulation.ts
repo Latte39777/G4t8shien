@@ -4,6 +4,7 @@
  */
 
 import type { ChildInput, FamilyPlan } from "./types/finance";
+import type { RegionSelection } from "./regions/types";
 
 /**
  * 現在の状況：すでに子どもがいる / これから子どもを持つ予定 / 未定
@@ -13,6 +14,9 @@ export type PlanStatus = (typeof PLAN_STATUSES)[number];
 
 /** 子ども1行の種別：現在の子 / 将来生まれる予定の子 */
 export type ChildRowKind = "existing" | "planned";
+
+/** 世帯に障害のある方の有無（任意回答。詳細な情報は求めない） */
+export type DisabilityInHousehold = "none" | "present" | null;
 
 /**
  * 子ども1人分の入力行（M3）。
@@ -92,6 +96,17 @@ export type HouseholdInput = {
   workAfterBirth: WorkAfterBirth | null;
   /** 現在利用している支援制度（制度ID）。支給見込みの重複防止に使用 */
   usedSupportProgramIds: string[];
+  /**
+   * 居住地（正規化済み・制度検索用）。都道府県＋市区町村の選択から生成する。
+   * 未選択は null。municipality（表示用文字列）の正規化元でもある（互換のため両方保持）。
+   */
+  region?: RegionSelection | null;
+  /**
+   * 世帯に障害のある方の有無（任意・制度案内のための回答）。
+   * - "none": いない / "present": いる / null: 未回答
+   * - 制度の種類や診断名などの詳細は聞かない。未回答でも試算は進められる。
+   */
+  disabilityInHousehold?: DisabilityInHousehold;
 };
 
 export type SimulationInput = {
@@ -99,8 +114,11 @@ export type SimulationInput = {
   childCount: number;
   /** 現在の貯蓄額（円） */
   savings: number;
-  /** 目標とする養育資金額（円） */
-  targetAmount: number;
+  /**
+   * 目標とする養育資金額（円）。未入力は null。
+   * 費用・支援の計算には使わず、結果画面の「目標に対するカバー状況」表示のみに使う。
+   */
+  targetAmount: number | null;
 
   /** 現在の状況（未選択は null） */
   planStatus: PlanStatus | null;
@@ -150,6 +168,14 @@ export const SAMPLE_INPUT: SimulationInput = {
     monthlyLivingExpenseYen: 220_000,
     monthlyHousingCostYen: 90_000,
     municipality: "東京都世田谷区",
+    region: {
+      prefectureCode: "13",
+      prefectureName: "東京都",
+      municipalityName: "世田谷区",
+      municipalityKind: "ward",
+      label: "東京都世田谷区",
+    },
+    disabilityInHousehold: null,
     householdType: "couple",
     schoolCourse: "public",
     universityCourse: "national",
@@ -194,12 +220,12 @@ export function calculateSupport(childCount: number): SupportProgram[] {
  * 入力値とモックの公的支援額からシミュレーション結果を計算する
  */
 export function calculateSimulation(input: SimulationInput) {
+  const targetAmount = input.targetAmount ?? 0;
   const supportPrograms = calculateSupport(input.childCount);
   const supportTotal = supportPrograms.reduce((sum, program) => sum + program.amount, 0);
   const covered = input.savings + supportTotal;
-  const shortfall = Math.max(input.targetAmount - covered, 0);
-  const coverageRate =
-    input.targetAmount > 0 ? (covered / input.targetAmount) * 100 : 0;
+  const shortfall = Math.max(targetAmount - covered, 0);
+  const coverageRate = targetAmount > 0 ? (covered / targetAmount) * 100 : 0;
 
   return { supportPrograms, supportTotal, covered, shortfall, coverageRate };
 }

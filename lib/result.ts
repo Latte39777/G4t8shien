@@ -20,12 +20,15 @@ import {
   COST_MASTER,
   entranceCostYen,
   STAGE_YEARS,
+  stageForAge,
 } from "./finance/costs";
-import { projectCashflow } from "./finance/cashflow";
+import { allocateSelfFunding, projectCashflow } from "./finance/cashflow";
 import {
+  allocateSupportByStage,
   calculateSupportEffects,
   type SupportCalcResult,
   type SupportEffect,
+  type UnallocatedSupport,
 } from "./finance/supports";
 import type { SupportProgram } from "./types/support";
 import type { ChildRow, SimulationInput, WorkAfterBirth } from "./simulation";
@@ -124,6 +127,33 @@ export type UniversityOption = {
   basis: "reference" | "assumed";
 };
 
+/**
+ * 教育段階ごとの費用を「どうまかなうか」（支援ON/OFF表示用）。
+ * 内訳（自前資金＋充当した支援＋不足額）は常に totalYen と一致する。
+ */
+export type StageFunding = {
+  /** 青：自分で用意できる資金（現在の貯蓄と各年の収支から段階ごとに配分。重複計上なし） */
+  selfFundedYen: number;
+  /** 確定している支援額（この段階に配分した額） */
+  supportConfirmedYen: number;
+  /** 推定・要確認の支援額（この段階に配分した額） */
+  supportEstimatedYen: number;
+  /** 支援OFF時の不足額（必要額 − 自前資金） */
+  shortageWithoutSupportYen: number;
+  /** 不足に充当した確定支援額（緑のうち確定分） */
+  supportConfirmedAppliedYen: number;
+  /** 不足に充当した推定支援額（緑のうち推定・要確認分） */
+  supportEstimatedAppliedYen: number;
+  /** 不足に充当した支援額の合計（緑） */
+  supportAppliedYen: number;
+  /** 支援ON時も残る不足額（赤） */
+  shortageWithSupportYen: number;
+  /** 必要額を上回った支援額（棒には描画しない） */
+  supportSurplusYen: number;
+  /** この段階に配分した制度 ID */
+  supportProgramIds: string[];
+};
+
 export type StageCostDetail = {
   key: DisplayStageKey;
   label: string;
@@ -141,6 +171,8 @@ export type StageCostDetail = {
   dataMissing: boolean;
   /** 大学段階のみ：国立・公立・私立の区分別金額 */
   universityOptions?: UniversityOption[];
+  /** 費用のまかなえ方（自前資金・支援・不足額） */
+  funding: StageFunding;
 };
 
 /** 子ども1人分の結果 */
@@ -163,6 +195,16 @@ export type ChildResult = {
   referenceYen: number;
   supportConfirmedYen: number;
   supportEstimatedYen: number;
+};
+
+/** 段階別の資金配分の前提・要確認事項（UI への明示用） */
+export type FundingMeta = {
+  /** 自分で用意できる資金の計算前提・予測の限界 */
+  selfFundingNotes: string[];
+  /** 支援の段階別配分の前提・要確認事項 */
+  supportAllocationNotes: string[];
+  /** 段階別に配分できなかった支援（理由付き） */
+  unallocatedSupports: UnallocatedSupport[];
 };
 
 /** 計算に使用した前提条件（仮定値・未確認値の区別つき） */
@@ -218,6 +260,20 @@ export type SimulationResult = {
     afterConfirmedYen: number;
     afterAllYen: number;
   };
+  /**
+   * 目標とする養育資金額のカバー状況（未入力は null）。
+   * 現在の貯蓄（確定）と支援見込額（未確認・推定を含む）は確度が異なるため、
+   * 画面では区別して表示する。
+   */
+  goalCoverage: {
+    targetYen: number;
+    savingsYen: number;
+    supportConfirmedYen: number;
+    supportEstimatedYen: number;
+    supportTotalYen: number;
+    /** 目標との差額（正=不足、負=目標を上回る金額） */
+    gapYen: number;
+  } | null;
   yearly: YearlyRowView[];
   savingsSeries: {
     yearOffset: number;
@@ -225,6 +281,8 @@ export type SimulationResult = {
     savingsEndYen: number;
     savingsWithEstimatedYen: number;
   }[];
+  /** 段階別の資金配分の前提・要確認事項 */
+  fundingMeta: FundingMeta;
   assumptions: AssumptionItem[];
   /** 未入力を 0 円等で扱った場合の影響（ユーザーへの明示用） */
   unenteredNotices: string[];
@@ -285,8 +343,11 @@ function aggregateChildStages(
   return { yearsByStage, oneTimeByStage };
 }
 
-/** 1人の段階別内訳（グラフ・詳細パネル用） */
-function buildStageDetails(child: ChildInput, agg: ChildAgg): StageCostDetail[] {
+/** 1人の段階別内訳（グラフ・詳細パネル用。funding は呼び出し側で配分結果を付与する） */
+function buildStageDetails(
+  child: ChildInput,
+  agg: ChildAgg,
+): Omit<StageCostDetail, "funding">[] {
   const course = { school: child.course, university: child.universityCourse };
   return DISPLAY_STAGES.map((def) => {
     const items: CostLineItem[] = [];
@@ -461,11 +522,75 @@ export function buildUnenteredNotices(input: SimulationInput): string[] {
   return notices;
 }
 
+/** engine Stage を、結果画面の教育段階キーへ集約する（対応する段階がなければ null） */
+function displayStageKeyForEngineStage(stage: Stage): DisplayStageKey | null {
+  const def = DISPLAY_STAGES.find((d) => d.engineStages.includes(stage));
+  return def === undefined ? null : def.key;
+}
+
+/**
+ * 年齢→結果画面の教育段階キー。
+ * ageYears=null は出生前の年で「妊娠・出産」段階に対応付ける（対象期間の重なりの規準）。
+ */
+function displayStageKeyForAge(
+  ageYears: number | null,
+): DisplayStageKey | null {
+  if (ageYears === null) return "pregnancy";
+  return displayStageKeyForEngineStage(stageForAge(ageYears));
+}
+
+/**
+ * 教育段階ごとの「必要額のまかなえ方」を組み立てる。
+ * - 自前資金は必要額を超えて充当されない（超過分も次の段階へ繰り越さない＝重複計上なし）
+ * - 緑（支援）は不足部分に充当する形で表示し、確定支援を先に充当して推定はその残りから充当する
+ * - 必要額を上回った支援は棒に描画せず supportSurplusYen として保持する
+ * - selfFundedYen + supportAppliedYen + shortageWithSupportYen = totalYen が常に成立する
+ */
+function buildStageFunding(input: {
+  totalYen: number;
+  selfFundedYen: number;
+  supportConfirmedYen: number;
+  supportEstimatedYen: number;
+  supportProgramIds: string[];
+}): StageFunding {
+  const totalYen = Math.max(input.totalYen, 0);
+  const selfFundedYen = Math.min(Math.max(input.selfFundedYen, 0), totalYen);
+  const shortageWithoutSupportYen = totalYen - selfFundedYen;
+  const supportConfirmedAppliedYen = Math.min(
+    input.supportConfirmedYen,
+    shortageWithoutSupportYen,
+  );
+  const supportEstimatedAppliedYen = Math.min(
+    input.supportEstimatedYen,
+    shortageWithoutSupportYen - supportConfirmedAppliedYen,
+  );
+  const supportAppliedYen =
+    supportConfirmedAppliedYen + supportEstimatedAppliedYen;
+  const shortageWithSupportYen = shortageWithoutSupportYen - supportAppliedYen;
+  const supportSurplusYen = Math.max(
+    input.supportConfirmedYen + input.supportEstimatedYen - supportAppliedYen,
+    0,
+  );
+  return {
+    selfFundedYen,
+    supportConfirmedYen: input.supportConfirmedYen,
+    supportEstimatedYen: input.supportEstimatedYen,
+    shortageWithoutSupportYen,
+    supportConfirmedAppliedYen,
+    supportEstimatedAppliedYen,
+    supportAppliedYen,
+    shortageWithSupportYen,
+    supportSurplusYen,
+    supportProgramIds: input.supportProgramIds,
+  };
+}
+
 /**
  * フォーム入力と支援制度データから、結果画面のビューモデルを組み立てる（純関数）。
  * - 子ども別合計の総和 = 世帯合計 = projection.totals.childCostTotalYen（整合）
  * - 世帯年収（annualIncomeYen）は支援の対象条件確認にのみ使い、
  *   家計収支の収入には月の手取り収入 × 12 を使う
+ * - 段階別の自前資金・支援額は、貯蓄・支援額を段階間で重複計上しないよう配分する
  */
 export function buildSimulationResult(
   input: SimulationInput,
@@ -476,6 +601,26 @@ export function buildSimulationResult(
     excludeProgramIds: input.household.usedSupportProgramIds,
   });
   const projection = projectCashflow(plan, supports.schedule);
+
+  // 教育段階ごとの資金配分（自前資金・支援。貯蓄・支援額の重複計上をしない）
+  const selfAllocation = allocateSelfFunding(plan, projection);
+  const supportAllocation = allocateSupportByStage(plan, supports.effects, {
+    stageKeys: DISPLAY_STAGES.map((d) => d.key),
+    stageKeyForAge: displayStageKeyForAge,
+  });
+  const selfByDisplayStage = (
+    byStage: Map<Stage, number> | undefined,
+  ): Map<DisplayStageKey, number> => {
+    const out = new Map<DisplayStageKey, number>();
+    if (byStage === undefined) return out;
+    for (const [engineStage, yen] of byStage) {
+      const key = displayStageKeyForEngineStage(engineStage);
+      if (key === null || yen <= 0) continue;
+      out.set(key, (out.get(key) ?? 0) + yen);
+    }
+    return out;
+  };
+  const householdSelfByStage = selfByDisplayStage(selfAllocation.byStage);
 
   // 子ども別の支援見込額（確定/推定を分離。利用中制度は除外済み）
   const perChildConfirmed: Record<string, number> = {};
@@ -507,6 +652,22 @@ export function buildSimulationResult(
       childInput,
       aggregateChildStages(row.id, projection),
     );
+    // この子の段階別の自前資金・支援額を付与（世帯全体と二重に数えない）
+    const childSelfByStage = selfByDisplayStage(selfAllocation.byChild.get(row.id));
+    const childSupportByStage = supportAllocation.byChild.get(row.id);
+    const stagesWithFunding: StageCostDetail[] = stages.map((st) => {
+      const bucket = childSupportByStage?.get(st.key);
+      return {
+        ...st,
+        funding: buildStageFunding({
+          totalYen: st.totalYen,
+          selfFundedYen: childSelfByStage.get(st.key) ?? 0,
+          supportConfirmedYen: bucket?.confirmedYen ?? 0,
+          supportEstimatedYen: bucket?.estimatedYen ?? 0,
+          supportProgramIds: bucket?.programIds ?? [],
+        }),
+      };
+    });
     const totalYen = stages.reduce((s, st) => s + st.totalYen, 0);
     const assumedYen = stages.reduce((s, st) => s + st.assumedYen, 0);
     return {
@@ -517,7 +678,7 @@ export function buildSimulationResult(
       courseLabel: childInput.course === "public" ? "公立" : "私立",
       universityLabel: UNIVERSITY_LABELS[childInput.universityCourse],
       excludedFromCalc: plan.children.every((c) => c.id !== row.id),
-      stages,
+      stages: stagesWithFunding,
       totalYen,
       assumedYen,
       referenceYen: totalYen - assumedYen,
@@ -555,6 +716,16 @@ export function buildSimulationResult(
       items: [...itemMap.values()],
       note: parts[0]?.note ?? null,
       dataMissing: def.dataMissing,
+      funding: buildStageFunding({
+        totalYen,
+        selfFundedYen: householdSelfByStage.get(def.key) ?? 0,
+        supportConfirmedYen:
+          supportAllocation.byStage.get(def.key)?.confirmedYen ?? 0,
+        supportEstimatedYen:
+          supportAllocation.byStage.get(def.key)?.estimatedYen ?? 0,
+        supportProgramIds:
+          supportAllocation.byStage.get(def.key)?.programIds ?? [],
+      }),
       ...(def.key === "university"
         ? { universityOptions: universityOptions() }
         : {}),
@@ -673,6 +844,35 @@ export function buildSimulationResult(
     },
   ];
 
+  // 段階別資金配分の前提・要確認事項（推定値を確定扱いしないための明示）
+  const fundingMeta: FundingMeta = {
+    selfFundingNotes: [
+      "「自分で用意できる資金」は、現在の貯蓄と各年の収支（手取り収入 − 世帯生活費）から、その年に支払える分だけを教育段階ごとに充当して計算しています（同じ貯蓄を複数の段階で重複して使っていません）。",
+      ...(h.monthlyTakeHomeYen === null
+        ? [
+            "月の手取り収入が未入力のため収入0円として計算しています。将来の家計予測には予測の限界があり、自前資金も実際より少なくなる可能性があります（要確認）。",
+          ]
+        : []),
+      ...(h.monthlyLivingExpenseYen === null
+        ? [
+            "月々の生活費が未入力のため、世帯生活費は暫定値で計算しています。将来の家計予測の精度には限界があります（要確認）。",
+          ]
+        : []),
+      ...(selfAllocation.uncoveredYen > 0
+        ? [
+            `自前資金でまかなえない費用が ${selfAllocation.uncoveredYen}円 あります。不足額（赤）には、支援を反映しても残る費用が含まれます（要確認）。`,
+          ]
+        : []),
+    ],
+    supportAllocationNotes: [
+      "教育段階ごとの支援額は、制度の対象年齢・対象期間と各年の子どもの年齢の重なりで配分しています（出生前の期間は「妊娠・出産」に計上）。",
+      "貸付（返済が必要）・金額未確認・対象外・現在利用中の制度は配分せず、理由を付けて未配分としています。",
+      "推定・要確認の支援を含みます。支給が確定した金額ではありません（モック・未確認データ）。",
+      ...supportAllocation.notes,
+    ],
+    unallocatedSupports: supportAllocation.unallocated,
+  };
+
   return {
     plan,
     projection,
@@ -697,6 +897,22 @@ export function buildSimulationResult(
       afterAllYen:
         costTotalYen - supports.confirmedTotalYen - supports.estimatedTotalYen,
     },
+    goalCoverage:
+      input.targetAmount !== null && input.targetAmount > 0
+        ? {
+            targetYen: input.targetAmount,
+            savingsYen: input.savings,
+            supportConfirmedYen: supports.confirmedTotalYen,
+            supportEstimatedYen: supports.estimatedTotalYen,
+            supportTotalYen:
+              supports.confirmedTotalYen + supports.estimatedTotalYen,
+            gapYen:
+              input.targetAmount -
+              input.savings -
+              supports.confirmedTotalYen -
+              supports.estimatedTotalYen,
+          }
+        : null,
     yearly,
     savingsSeries: yearly.map((y) => ({
       yearOffset: y.yearOffset,
@@ -704,6 +920,7 @@ export function buildSimulationResult(
       savingsEndYen: y.savingsEndYen,
       savingsWithEstimatedYen: y.savingsWithEstimatedYen,
     })),
+    fundingMeta,
     assumptions,
     unenteredNotices: buildUnenteredNotices(input),
     incomeChangeNote,

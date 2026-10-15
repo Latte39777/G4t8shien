@@ -25,6 +25,8 @@ export type SupportEffect = {
   perChild: Array<{ childId: string; totalYen: number | null }>
   /** 各年の見込額（yearOffset 順） */
   yearlyYen: number[]
+  /** 子どもごと・各年の見込額（yearOffset 順。教育段階への配分に使用する） */
+  perChildYearly: Array<{ childId: string; yearlyYen: number[] }>
 }
 
 export type SupportSchedule = {
@@ -148,8 +150,10 @@ export function calculateSupportEffects(
     const yearly: number[] = new Array(horizon + 1).fill(0)
     const computable =
       program.amount.value !== null && program.amount.unit !== 'other'
+    const childYearlyList: Array<{ childId: string; yearlyYen: number[] }> = []
     const perChild = plan.children.map((child) => {
       const childYearly = perChildYearly(child, program, horizon)
+      childYearlyList.push({ childId: child.id, yearlyYen: childYearly })
       for (let t = 0; t <= horizon; t += 1) yearly[t] += childYearly[t]
       return {
         childId: child.id,
@@ -183,6 +187,7 @@ export function calculateSupportEffects(
       excludedReason,
       perChild,
       yearlyYen: yearly,
+      perChildYearly: childYearlyList,
     }
   })
 
@@ -223,5 +228,164 @@ export function calculateSupportEffects(
     estimatedTotalYen,
     uncounted: effects.filter((e) => !e.includedInTotal),
     schedule: { confirmedByYear, estimatedByYear },
+  }
+}
+
+/** 教育段階ごとの支援見込額（確定・推定は常に分離する） */
+export type StageSupportBucket = {
+  /** 確定している支援額（円） */
+  confirmedYen: number
+  /** 推定・要確認の支援額（円） */
+  estimatedYen: number
+  /** 配分に寄与した制度 ID */
+  programIds: string[]
+}
+
+/** 段階別に配分できなかった支援（理由付きで UI に表示する） */
+export type UnallocatedSupport = {
+  programId: string
+  programName: string
+  category: SupportProgram['category']
+  amountYen: number | null
+  reason: string
+  /** 世帯の支援見込額の合計に含まれていたか（Σ段階別＋この区分＝合計が成立する） */
+  includedInTotal: boolean
+}
+
+export type SupportStageAllocation = {
+  /** 教育段階キー → 配分額 */
+  byStage: Map<string, StageSupportBucket>
+  /** 子ども ID → 教育段階キー → 配分額 */
+  byChild: Map<string, Map<string, StageSupportBucket>>
+  /** 配分対象外・配分不能な制度 */
+  unallocated: UnallocatedSupport[]
+  /** 配分した確定支援額の合計（Σ段階別と一致する） */
+  confirmedTotalYen: number
+  /** 配分した推定支援額の合計（Σ段階別と一致する） */
+  estimatedTotalYen: number
+  /** 配分の前提・要確認事項 */
+  notes: string[]
+}
+
+function emptyStageSupportBucket(): StageSupportBucket {
+  return { confirmedYen: 0, estimatedYen: 0, programIds: [] }
+}
+
+/**
+ * 支援見込額を、対象年齢と教育段階の重なりで教育段階へ配分する（純関数）。
+ *
+ * ルール（二重計上の防止）:
+ * - 合計に含めた制度（includedInTotal）のみを配分対象とし、
+ *   Σ 段階別の配分額 = 世帯全体の支援見込額（confirmedTotalYen / estimatedTotalYen）が厳密に成立する
+ * - 各子ども・各年の見込額を、その年の子どもの年齢に対応する教育段階にのみ計上する
+ *   （対象期間・支給期間・金額単位は calculateSupportEffects 側で各年に反映済み。
+ *   同じ支援額を世帯全体と子ども別で二重に足さないよう、配分元は perChildYearly のみ）
+ * - 貸付（loan）・金額未確認・対象外・現在利用中・併用不可の制度は配分せず、
+ *   unallocated に理由付きで記録する（返済が必要な貸付を現金給付と同じ扱いにしない）
+ * - 確定（confirmed）と推定（estimated）は常に分離する
+ * - 情報不足で段階へ対応付けられない場合は、根拠のない比率では按分せず未配分・要確認とする
+ * - 対象年齢の記載がない制度は、その年の年齢に対応する段階へ暫定配分し、notes に要確認として記録する
+ */
+export function allocateSupportByStage(
+  plan: FamilyPlan,
+  effects: SupportEffect[],
+  options: {
+    stageKeys: string[]
+    /** 年齢→教育段階キー。ageYears=null は出生前の年（呼び出し側で妊娠・出産段階などに対応付ける） */
+    stageKeyForAge: (ageYears: number | null) => string | null
+  },
+): SupportStageAllocation {
+  const byStage = new Map<string, StageSupportBucket>()
+  const byChild = new Map<string, Map<string, StageSupportBucket>>()
+  for (const key of options.stageKeys) byStage.set(key, emptyStageSupportBucket())
+  const unallocated: UnallocatedSupport[] = []
+  const notes: string[] = []
+  let confirmedTotalYen = 0
+  let estimatedTotalYen = 0
+
+  const bucketFor = (
+    childId: string,
+    stageKey: string,
+  ): { stage: StageSupportBucket; child: StageSupportBucket } => {
+    const stageBucket =
+      byStage.get(stageKey) ?? emptyStageSupportBucket()
+    byStage.set(stageKey, stageBucket)
+    let childMap = byChild.get(childId)
+    if (childMap === undefined) {
+      childMap = new Map()
+      byChild.set(childId, childMap)
+    }
+    const childBucket = childMap.get(stageKey) ?? emptyStageSupportBucket()
+    childMap.set(stageKey, childBucket)
+    return { stage: stageBucket, child: childBucket }
+  }
+
+  for (const effect of effects) {
+    const program = effect.program
+    if (!effect.includedInTotal) {
+      unallocated.push({
+        programId: program.id,
+        programName: program.name,
+        category: program.category,
+        amountYen: effect.estimatedTotalYen,
+        reason: effect.excludedReason ?? '合計に含めていないため段階別にも配分していません',
+        includedInTotal: false,
+      })
+      continue
+    }
+    const periodUndefined =
+      program.period.startAgeYears === null && program.period.endAgeYears === null
+    if (periodUndefined) {
+      notes.push(
+        `「${program.name}」は対象年齢の記載がないため、各年の見込額をその年の年齢に対応する教育段階へ暫定配分しています（要確認）。`,
+      )
+    }
+    for (const childYearly of effect.perChildYearly) {
+      const child = plan.children.find((c) => c.id === childYearly.childId)
+      if (child === undefined) continue
+      for (let t = 0; t < childYearly.yearlyYen.length; t += 1) {
+        const amount = childYearly.yearlyYen[t]
+        if (amount <= 0) continue
+        const age = childAgeAt(child, t)
+        const stageKey = options.stageKeyForAge(age)
+        if (stageKey === null) {
+          unallocated.push({
+            programId: program.id,
+            programName: program.name,
+            category: program.category,
+            amountYen: amount,
+            reason: '対象期間を教育段階に対応付けられないため未配分（要確認）',
+            includedInTotal: true,
+          })
+          continue
+        }
+        const isConfirmed = program.amount.basis === 'confirmed'
+        const buckets = bucketFor(child.id, stageKey)
+        if (isConfirmed) {
+          buckets.stage.confirmedYen += amount
+          buckets.child.confirmedYen += amount
+          confirmedTotalYen += amount
+        } else {
+          buckets.stage.estimatedYen += amount
+          buckets.child.estimatedYen += amount
+          estimatedTotalYen += amount
+        }
+        if (!buckets.stage.programIds.includes(program.id)) {
+          buckets.stage.programIds.push(program.id)
+        }
+        if (!buckets.child.programIds.includes(program.id)) {
+          buckets.child.programIds.push(program.id)
+        }
+      }
+    }
+  }
+
+  return {
+    byStage,
+    byChild,
+    unallocated,
+    confirmedTotalYen,
+    estimatedTotalYen,
+    notes,
   }
 }

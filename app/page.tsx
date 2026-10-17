@@ -70,7 +70,7 @@ export default function Home() {
     <div className="flex min-h-dvh flex-col bg-gradient-to-b from-slate-50 via-white to-blue-50">
       {/* ヘッダー */}
       <header className="sticky top-0 z-10 border-b border-slate-100 bg-white/80 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-3xl items-center justify-between px-5 py-3.5">
+        <div className="mx-auto flex w-full max-w-[1520px] items-center justify-between px-4 py-3.5 sm:px-6 lg:px-10">
           <div className="flex items-center gap-2.5">
             <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-500 text-sm font-black text-white shadow-sm">
               ¥
@@ -144,10 +144,12 @@ export default function Home() {
 
       {/* フッター */}
       <footer className="border-t border-slate-100 bg-white/70">
-        <p className="mx-auto w-full max-w-3xl px-5 py-4 text-center text-xs leading-5 text-slate-400">
-          ※ 本アプリはプロトタイプです。表示される支援額はモックデータに基づく試算であり、
-          実際の支給額・制度とは異なります。
-        </p>
+        <div className="mx-auto w-full max-w-[1520px] px-4 py-4 sm:px-6 lg:px-10">
+          <p className="mx-auto max-w-3xl text-center text-xs leading-5 text-slate-400">
+            ※ 本アプリはプロトタイプです。表示される支援額はモックデータに基づく試算であり、
+            実際の支給額・制度とは異なります。
+          </p>
+        </div>
       </footer>
     </div>
   )

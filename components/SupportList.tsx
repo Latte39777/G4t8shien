@@ -1,11 +1,13 @@
 "use client";
 
 /**
- * 支援制度一覧（M4）
+ * 支援制度一覧（M4 / M6-C）
  *
- * - 既存の /api/supports からモックデータを取得して制度カードを表示する
- * - モックデータは未確認情報を含むため、確定済みの事実として表示しない
+ * - 既存の /api/supports から制度データを取得して制度カードを表示する
+ * - 未確認情報を確定済みの事実として表示しない
  *   （「モック・未確認」「要確認」バッジ、URL未確認のリンクは公式リンクとして扱わない）
+ * - M6-C: 公式確認済みの制度と未確認のモック制度をバッジで区別する。
+ *   確認済み項目・未確認項目（理由付き）・適用年度・対象地域を区別して表示する
  * - 「この制度について相談する」ボタンは M5 の相談画面につながる
  *   （親から渡す onConsult コールバックを呼び出す）
  */
@@ -14,6 +16,19 @@ import { z } from "zod";
 import { supportProgramSchema, type SupportProgram } from "@/lib/types/support";
 import type { SupportEffect } from "@/lib/finance/supports";
 import { formatYen } from "@/lib/simulation";
+import {
+  amountBandsText,
+  amountText,
+  checkedAtText,
+  fiscalYearLabel,
+  legalBasisText,
+  LEVEL_LABELS,
+  periodText,
+  sourceEntryText,
+  unconfirmedItemsText,
+  verificationBadgeText,
+} from "@/lib/supports/display";
+import { jurisdictionText } from "@/lib/supports/region";
 
 const ELIGIBILITY_LABELS: Record<string, string> = {
   likely: "受給できる可能性あり（目安）",
@@ -28,30 +43,6 @@ const CATEGORY_LABELS: Record<string, string> = {
   loan: "貸付（返済義務あり）",
   tax: "税制",
 };
-
-const UNIT_LABELS: Record<string, string> = {
-  yen_per_month: "月額",
-  yen_per_year: "年額",
-  yen_one_time: "一時金",
-  other: "単位不明",
-};
-
-function periodText(program: SupportProgram): string {
-  const { startAgeYears, endAgeYears, durationMonths } = program.period;
-  const age =
-    startAgeYears === null && endAgeYears === null
-      ? "対象年齢の記載なし（要確認）"
-      : `${startAgeYears ?? 0}歳〜${endAgeYears ?? "上限なし"}歳`;
-  const duration =
-    durationMonths !== null ? `（支給期間の上限：${durationMonths}か月）` : "";
-  return `${age}${duration}`;
-}
-
-function amountText(program: SupportProgram): string {
-  const { value, unit } = program.amount;
-  if (value === null || unit === "other") return "金額未確認（要確認）";
-  return `${formatYen(value)}（${UNIT_LABELS[unit]}）`;
-}
 
 export type SupportCardProps = {
   program: SupportProgram;
@@ -71,6 +62,7 @@ export function SupportCard({
 }: SupportCardProps) {
   const eligibility = effect?.eligibility ?? program.eligibility;
   const missing = effect?.program.missingInformation ?? program.missingInformation;
+  const legal = legalBasisText(program.legalBasis);
   const [open, setOpen] = useState(false);
   const detailId = `support-detail-${program.id}`;
   return (
@@ -78,19 +70,41 @@ export function SupportCard({
       className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
       data-testid={`support-card-${program.id}`}
     >
-      {/* 制度名・区分・未確認バッジ */}
+      {/* 制度名・区分・確認状況バッジ（確認済み／未確認を必ず区別する） */}
       <div className="flex flex-wrap items-center gap-2">
         <h3 className="text-sm font-bold text-slate-900">{program.name}</h3>
-        {program.mock && (
+        <span
+          className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
+            verificationBadgeText(program) === "公式確認済み"
+              ? "bg-emerald-100 text-emerald-700"
+              : verificationBadgeText(program) === "公式確認済み（一部要確認）"
+                ? "bg-amber-100 text-amber-700"
+                : "bg-rose-100 text-rose-600"
+          }`}
+        >
+          {verificationBadgeText(program)}
+        </span>
+        {/* 金額の確度（初期表示で確認できるようにする） */}
+        {program.amount.basis === "confirmed" && (
+          <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+            確認済み
+          </span>
+        )}
+        {program.amount.basis === "estimated" && (
+          <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-700">
+            推定・要確認
+          </span>
+        )}
+        {program.amount.basis === "unknown" && (
           <span className="rounded-full bg-rose-100 px-2 py-0.5 text-[10px] font-bold text-rose-600">
-            モック・未確認
+            未確認
           </span>
         )}
         <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-500">
           {CATEGORY_LABELS[program.category]}
         </span>
         <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-500">
-          {program.level === "national" ? "国の制度" : "自治体の制度"}
+          {LEVEL_LABELS[program.level]}
         </span>
         {isUsed && (
           <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-bold text-blue-600">
@@ -116,7 +130,9 @@ export function SupportCard({
               : "未計算（要確認）"}
           </dd>
           <dd className="mt-1 text-[11px] leading-4 text-slate-500">
-            モック・未確認データに基づく目安です。支給が確定した金額ではありません。
+            {program.mock
+              ? "モック・未確認データに基づく目安です。支給が確定した金額ではありません。"
+              : "確認済みの公式情報と推定値に基づく目安です。受給資格は未判定（要確認）であり、支給が確定した金額ではありません。"}
           </dd>
         </div>
         <div className="rounded-xl bg-slate-50 px-3 py-2">
@@ -196,6 +212,14 @@ export function SupportCard({
           <dd className="mt-1 text-[11px] leading-4 text-slate-500">
             {program.amount.description}
           </dd>
+          <dd className="mt-1 text-[11px] leading-4 text-slate-500">
+            {fiscalYearLabel(program.amount.fiscalYear)}
+          </dd>
+          {amountBandsText(program) !== null && (
+            <dd className="mt-1 text-[11px] leading-4 text-emerald-700">
+              {amountBandsText(program)}
+            </dd>
+          )}
         </div>
         <div className="rounded-xl bg-slate-50 px-3 py-2">
           <dt className="text-[10px] font-semibold text-slate-400">対象期間</dt>
@@ -259,21 +283,24 @@ export function SupportCard({
         )}
       </div>
 
-      {/* 根拠法令・申請情報 */}
+      {/* 根拠法令・対象地域・申請情報 */}
       <dl className="mt-3 space-y-2 text-[11px] leading-4">
+        <div>
+          <dt className="font-semibold text-slate-400">対象地域</dt>
+          <dd className="mt-0.5 text-slate-600">
+            {jurisdictionText(program.jurisdiction)}
+          </dd>
+        </div>
         <div>
           <dt className="font-semibold text-slate-400">
             根拠法令
-            <span className="ml-1.5 rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-700">
-              要確認
-            </span>
+            {legal.needsCheck && (
+              <span className="ml-1.5 rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-700">
+                要確認
+              </span>
+            )}
           </dt>
-          <dd className="mt-0.5 text-slate-600">
-            {program.legalBasis.lawName ?? "法令名は未確認"}
-            {program.legalBasis.ordinanceName &&
-              `／${program.legalBasis.ordinanceName}`}
-            {program.legalBasis.note && `（${program.legalBasis.note}）`}
-          </dd>
+          <dd className="mt-0.5 text-slate-600">{legal.text}</dd>
         </div>
         <div>
           <dt className="font-semibold text-slate-400">申請期限・申請時期</dt>
@@ -294,34 +321,51 @@ export function SupportCard({
         </div>
       </dl>
 
+      {/* 未確認の項目と理由（確認済みと未確認を明確に区別する） */}
+      {unconfirmedItemsText(program).length > 0 && (
+        <div className="mt-3 rounded-xl border border-amber-100 bg-amber-50 px-3 py-2.5">
+          <p className="text-[10px] font-semibold text-amber-700">
+            未確認の項目と理由
+          </p>
+          <ul className="mt-1 space-y-0.5 text-[11px] leading-4 text-amber-800">
+            {unconfirmedItemsText(program).map((line) => (
+              <li key={line}>・{line}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       {/* 公式情報へのリンク（URL未確認は公式リンクとして扱わない） */}
       <div className="mt-3">
         <p className="text-[10px] font-semibold text-slate-400">公式情報</p>
         <ul className="mt-1 space-y-1">
-          {program.sources.map((source) => (
-            <li key={source.title} className="text-[11px] leading-4">
-              {source.url !== null && source.urlVerified ? (
-                <a
-                  href={source.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 underline"
-                >
-                  {source.title}（{source.organization}）
-                </a>
-              ) : (
-                <span className="text-slate-500">
-                  {source.title}（{source.organization}）—{" "}
-                  <span className="font-semibold text-amber-600">
-                    URL未確認（公式リンクとして扱いません）
+          {program.sources.map((source) => {
+            const entry = sourceEntryText(source);
+            return (
+              <li key={source.title} className="text-[11px] leading-4">
+                {entry.isLink && entry.href !== null ? (
+                  <a
+                    href={entry.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 underline"
+                  >
+                    {entry.label}
+                  </a>
+                ) : (
+                  <span className="text-slate-500">
+                    {entry.label}—{" "}
+                    <span className="font-semibold text-amber-600">
+                      {entry.unverifiedText}
+                    </span>
                   </span>
-                </span>
-              )}
-            </li>
-          ))}
+                )}
+              </li>
+            );
+          })}
         </ul>
         <p className="mt-1 text-[11px] text-slate-400">
-          情報の確認日：{program.checkedAt}
+          {checkedAtText(program)}
         </p>
       </div>
 
@@ -354,6 +398,7 @@ export default function SupportList({
 }: SupportListProps) {
   const [programs, setPrograms] = useState<SupportProgram[] | null>(null);
   const [disclaimer, setDisclaimer] = useState<string>("");
+  const [verificationNote, setVerificationNote] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -363,6 +408,7 @@ export default function SupportList({
       .then((body: unknown) => {
         const data = body as {
           disclaimer?: string;
+          verificationNote?: string;
           programs?: unknown;
         };
         const parsed = z.array(supportProgramSchema).safeParse(data.programs);
@@ -373,6 +419,7 @@ export default function SupportList({
         if (!cancelled) {
           setPrograms(parsed.data);
           setDisclaimer(data.disclaimer ?? "");
+          setVerificationNote(data.verificationNote ?? "");
         }
       })
       .catch(() => {
@@ -392,6 +439,11 @@ export default function SupportList({
         {disclaimer ||
           "この制度情報はモックデータです。金額・対象条件・根拠法令・申請期限は未確認の仮データであり、確定情報ではありません。"}
       </p>
+      {verificationNote !== "" && (
+        <p className="mt-2 rounded-xl bg-amber-50 px-4 py-3 text-xs leading-5 text-amber-800">
+          {verificationNote}
+        </p>
+      )}
 
       {error && (
         <p className="mt-4 rounded-xl bg-rose-50 px-4 py-3 text-xs text-rose-700">
@@ -404,7 +456,7 @@ export default function SupportList({
         </p>
       )}
       {programs !== null && (
-        <ul className="mt-4 space-y-4">
+        <ul className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
           {programs.map((program) => (
             <SupportCard
               key={program.id}

@@ -107,3 +107,39 @@ export function kindForStatus(status: number): ConsultErrorKind {
   if (status === 504) return 'timeout'
   return 'server'
 }
+
+/** ログに出してよいエラー属性（許可リスト。自由文・スタックは含めない） */
+export type SafeErrorInfo = {
+  /** エラー名（既知の種類のみ。未知は 'unknown'） */
+  name: 'ConsultSendError' | 'AbortError' | 'TimeoutError' | 'TypeError' | 'Error' | 'unknown'
+  /** ConsultSendError の種別（それ以外は null） */
+  kind: ConsultErrorKind | null
+  /** HTTP ステータス（数値のときのみ。それ以外は null） */
+  status: number | null
+}
+
+const KNOWN_ERROR_NAMES: readonly string[] = [
+  'ConsultSendError',
+  'AbortError',
+  'TimeoutError',
+  'TypeError',
+  'Error',
+]
+
+/**
+ * エラーからログ記録用の安全な属性のみを取り出す（P9-3）。
+ * - 許可リスト（エラー名・種別・HTTP ステータス）以外は記録しない
+ * - error.message・スタック・上流レスポンス本文はログに載せない
+ *   （質問文・API キー等がエラー文に混入していても出力しない）
+ */
+export function safeErrorInfo(error: unknown): SafeErrorInfo {
+  const e = error as { name?: unknown; kind?: unknown; status?: unknown }
+  const rawName = typeof e?.name === 'string' ? e.name : ''
+  const name: SafeErrorInfo['name'] = KNOWN_ERROR_NAMES.includes(rawName)
+    ? (rawName as SafeErrorInfo['name'])
+    : 'unknown'
+  const kind = error instanceof ConsultSendError ? error.kind : null
+  const status =
+    typeof e?.status === 'number' && Number.isFinite(e.status) ? e.status : null
+  return { name, kind, status }
+}

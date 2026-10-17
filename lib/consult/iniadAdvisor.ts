@@ -7,15 +7,20 @@
  * - 送信は chat.completions.create({ model, messages }) のみ（大学の使用例どおり）
  * - 上記以外（Responses API / web_search / structured outputs / レート上限 /
  *   価格 / データ保持）は大学側で未確認のため使用しない
+ * - Web 検索・公式サイトの取得は lib/consult/officialSource.ts（M6-E・未実装）に
+ *   分離済み。このモジュールは取得処理を持たない。設計は docs/consult-m6e-design.md
  *
  * 【フェーズ1（G0）の制約】
  * - このプロバイダは CONSULT_LIVE_AI=1 かつ INIAD_API_KEY 設定の
  *   両方そろったときのみ provider.ts 経由で選択される（テストでは偽
  *   クライアントを注入し、実 API へは一切接続しない）
- * - 具体的な制度情報（特定プログラムの受給資格・金額・期限・窓口など）を
- *   断定しない。確認質問・一般的な進め方・公式窓口の案内に限定する
+ * - 具体的な制度情報（特定プログラムの受給資格・金額・期限・窓口など）は、
+ *   「公式情報 KB」ブロックの「確認済みの事実」に記載された範囲でのみ説明する。
+ *   KB にない・未確認の内容は断定せず、確認質問・一般的な進め方・公式窓口の
+ *   案内に限定する
  * - AI が挙げた URL を出典として表示しない
- * - 個人情報は redact.ts でマスキングしてから送る。金額は渡さない
+ * - 相談文・履歴の個人情報は redact.ts でマスキングしてから送る（相談者の
+ *   金額は渡さない）。KB の確認済みの事実（公表値）は KB ブロックとして送る
  */
 import OpenAI from 'openai'
 import { ConsultSendError } from './errors'
@@ -25,7 +30,12 @@ import {
   toConsultReplyFromAi,
   toConsultReplyFromRawText,
 } from './replySchema'
-import { redactForApi } from './redact'
+import { redactForApi, redactText } from './redact'
+import { buildKbPromptBlock, buildProgramCandidateList } from './kbPrompt'
+import {
+  resolveAiProposedPrograms,
+  type KbConsultContext,
+} from './kbContext'
 import type {
   ConsultProvider,
   ConsultReply,
@@ -90,13 +100,13 @@ export function resolveCapabilityFlags(
 export function buildSystemPrompt(flags: ConsultCapabilityFlags): string {
   const lines = [
     'あなたは子育て・住宅・教育・就労などの支援制度に関する相談を補助するアシスタントです。',
-    'Web検索は利用できません。検索をした・公式サイトを確認したかのような表現は一切禁止です。',
-    '制度の具体的な情報は検証されていないため、次の事項を断定して答えないこと：',
+    'Web検索は利用できません。ご自身で検索をした・公式サイトを確認したかのような表現は一切禁止です（サーバーから渡される「公式情報 KB」の確認記録を説明するのはこの限りでない）。',
+    '制度の具体的な情報は、「公式情報 KB」ブロックの「確認済みの事実」に記載された内容に限り、記載の範囲・記載どおりに説明してよい。それ以外（KB にない情報・未確認の情報）は検証されていないため、次の事項を断定して答えないこと：',
     '・特定の制度の受給資格・対象条件・所得制限',
     '・金額・支給額・補助額',
     '・申請期限・申請時期・対象期間',
     '・申請先窓口・必要書類・申請手順の詳細',
-    '「公式確認済み」「確定」などの表現も使用禁止です。',
+    '「公式確認済み」「確定」などの表現で断定しないこと（KB の確認状態を「KB の記録では確認済み」と説明するのはよい）。相談者本人の受給資格・利用資格・申請可否を確定と表現しないこと。',
     'URL やリンクを回答に含めないこと（出典として扱わないため）。',
     '架空の制度名・金額・期限を作り出さないこと。',
     '回答できること：',
@@ -110,10 +120,12 @@ export function buildSystemPrompt(flags: ConsultCapabilityFlags): string {
   if (flags.jsonMode === 'prompt') {
     lines.push(
       '応答は必ず次の JSON オブジェクトのみを返してください（コードフェンスや前置きの文章は禁止）：',
-      '{"reply": "回答本文", "clarificationQuestions": ["確認質問1", "確認質問2"], "unsupported": false}',
-      'reply には回答本文のみを入れ、制度の具体的な金額・期限・条件の確定情報を含めないでください。',
+      '{"reply": "回答本文", "clarificationQuestions": ["確認質問1", "確認質問2"], "unsupported": false, "programIds": ["制度ID"]}',
+      'reply には回答本文を入れる。制度の具体的な金額・期限・条件は、公式情報 KB の「確認済みの事実」に記載されたものに限り、その範囲・記載どおりに含めてよい。KB にない・未確認の確定情報は含めないでください。',
       'clarificationQuestions は状況把握に必要な質問（最大3つ。なければ空配列）。',
       '制度と無関係な質問や、正確な制度情報が必要な質問に答えられない場合は unsupported: true とし、根拠のない制度情報を生成しないでください。',
+      'programIds は、サーバーから渡される「支援制度候補リスト」にある制度 ID の中から、相談者の状況に関連する可能性があるものを最大 5 件だけ入れる（リストにない ID・架空の制度 ID は禁止。関連する制度がなければ空配列）。',
+      '制度候補の提案は関連性の目安にすぎず、受給資格の判定ではない。提案した制度についても、受給資格・金額・申請期限を断定しないこと。候補が見つからない場合は無理に選ばず、本文で確認できる候補がないこと・追加の確認が必要なことを案内する。',
     )
   }
   return lines.join('\n')
@@ -125,10 +137,16 @@ const MAX_HISTORY_MESSAGES = 12
 const MAX_MESSAGE_CHARS = 1000
 const MAX_CONTEXT_CHARS = 600
 
-/** 相談リクエスト → API 送信用メッセージ（個人情報をマスキング・最小限のみ） */
+/**
+ * 相談リクエスト → API 送信用メッセージ（個人情報をマスキング・最小限のみ）。
+ * kbContext（サーバー側で解決済みの KB 文脈）が与えられた場合のみ、KB ブロックを
+ * system メッセージとして追加する（クライアント入力の URL・金額・確認状態は使わない）。
+ * モック経路ではこの関数自体を呼ばない。
+ */
 export function buildApiMessages(
   request: ConsultRequest,
   flags: ConsultCapabilityFlags,
+  kbContext?: KbConsultContext | null,
 ): ApiChatMessage[] {
   const messages: ApiChatMessage[] = [
     { role: 'system', content: buildSystemPrompt(flags) },
@@ -153,6 +171,27 @@ export function buildApiMessages(
     messages.push({
       role: 'system',
       content: redactForApi(contextLines.join('\n'), MAX_CONTEXT_CHARS),
+    })
+  }
+
+  // 支援制度候補リスト（AI 提案用。P10）。ID・名称・区分のみ
+  // （金額・期限・窓口・URL・受給資格は含めない）。相談セッションがあるときだけ
+  // 渡し、制度と無関係な質問には候補制度名を送らない（送信する項目はサーバー側で制御）
+  if (request.program !== null || request.userContext !== null) {
+    const candidateList = buildProgramCandidateList()
+    if (candidateList.length > 0) {
+      messages.push({ role: 'system', content: redactText(candidateList) })
+    }
+  }
+
+  // KB ブロック（サーバー側 KB の確認済み事実のみ。URL なし・kbPrompt が長さ制限済み）。
+  // KB 未特定（cards 空）なら空文字が返り、この行自体が入らない
+  const kbBlock = buildKbPromptBlock(kbContext ?? { cards: [], amountCalculationPolicy: '' })
+  if (kbBlock.length > 0) {
+    messages.push({
+      role: 'system',
+      // redactText でマスキングのみ（途中切り詰めしない。長さは kbPrompt 側で制限済み）
+      content: redactText(kbBlock),
     })
   }
 
@@ -291,10 +330,13 @@ export function createIniadConsultProvider(
     id: 'iniad-live',
     label: `AI回答（INIAD API ${model}・Web検索なし）`,
     isMock: false,
-    async respond(request: ConsultRequest): Promise<ConsultReply> {
+    async respond(
+      request: ConsultRequest,
+      kbContext?: KbConsultContext | null,
+    ): Promise<ConsultReply> {
       const flags = resolveCapabilityFlags(env)
       const client = options.client ?? createDefaultIniadClient(env)
-      const messages = buildApiMessages(request, flags)
+      const messages = buildApiMessages(request, flags, kbContext)
 
       // 上流障害（429/5xx/通信/タイムアウト）は retryCount 回まで自動リトライ
       const createWithRetry = async (msgs: ApiChatMessage[]): Promise<string> => {
@@ -346,7 +388,12 @@ export function createIniadConsultProvider(
         parsed = parseAiReplyJson(retried)
       }
       // それでも駄目なら生出力を破棄して限定文のみ（残りは破棄）
-      return parsed === null ? LIMITED_FALLBACK_REPLY : toConsultReplyFromAi(parsed)
+      if (parsed === null) return LIMITED_FALLBACK_REPLY
+      const reply = toConsultReplyFromAi(parsed)
+      // AI 提案（programIds）はサーバー側レジストリで ID を検証してのみ
+      // チップ化する（不明な ID は破棄。名称・出典・金額は AI 生成文から採用しない）
+      const proposed = resolveAiProposedPrograms(parsed.programIds ?? [])
+      return proposed.length === 0 ? reply : { ...reply, relatedPrograms: proposed }
     },
   }
 }

@@ -8,8 +8,10 @@
  * 【フェーズ1の禁止事項の保証】
  * - 具体的制度情報フィールド（programs[] の金額・期限・条件など）は
  *   スキーマに存在せず、モデルが返しても破棄する（strip）
- * - 関連制度（relatedPrograms）は常に空。検証済みナレッジベースが
- *   未整備のため、具体制度を案内しない
+ * - 関連制度は AI に書かせない。AI が返すのは制度 ID（programIds）のみで、
+ *   関連制度チップはサーバー側レジストリで ID を検証してから
+ *   lib/consult/kbContext.ts の resolveAiProposedPrograms が生成する
+ *   （不明な ID は破棄。制度名・出典・金額は AI 生成文から採用しない）
  * - hasUnverified は常に true（未確認ラベルを外さない）
  * - 本文中の URL は出典として扱わない（アンカー化しない）。URL を
  *   検出した場合は注記を付す
@@ -19,13 +21,16 @@ import type { ConsultReply } from './types'
 
 /**
  * AI に要求する JSON の形（プロンプトで指示する）。
- * reply / clarificationQuestions / unsupported のみ許可し、それ以外の
- * フィールド（programs・amounts・sources など）は strip で破棄する。
+ * reply / clarificationQuestions / unsupported / programIds のみ許可し、
+ * それ以外のフィールド（programs・amounts・sources など）は strip で破棄する。
+ * programIds は制度 ID の文字列のみ（制度名・金額・URL は渡らせない）。
+ * 採用はサーバー側でレジストリ検証してから（resolveAiProposedPrograms）。
  */
 export const aiReplyJsonSchema = z.object({
   reply: z.string().min(1).max(4000),
   clarificationQuestions: z.array(z.string().min(1).max(200)).max(5).optional(),
   unsupported: z.boolean().optional(),
+  programIds: z.array(z.string().min(1).max(100)).max(20).optional(),
 })
 
 export type AiReplyJson = z.infer<typeof aiReplyJsonSchema>
@@ -77,6 +82,9 @@ function urlCautionNote(text: string): string {
 /**
  * 検証済み AI JSON → ConsultReply（フェーズ1の固定制約を適用）。
  * - isMock: false / hasUnverified: true / relatedPrograms: [] を強制
+ * - programIds からチップを付けるのは呼び出し側（iniadAdvisor）が
+ *   resolveAiProposedPrograms でレジストリ検証してから行う。
+ *   この関数自体は AI 生成の関連制度情報を一切返さない
  */
 export function toConsultReplyFromAi(parsed: AiReplyJson): ConsultReply {
   let text = parsed.reply.trim()

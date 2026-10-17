@@ -509,8 +509,10 @@ async function main(): Promise<void> {
   )
   check(
     '保護ファイル: lib/finance/cashflow.ts が M5 状態から不変',
+    // 期待ハッシュは現行コミット（cbbef3d「シミュレーション結果の修正」）に同期済み。
+    // 以後、このファイルを変更した場合は意図を確認のうえ期待値を更新すること。
     sha256('lib/finance/cashflow.ts') ===
-      '618cea8de62344af85c267b6651c73da4b467c693f0fcf02e0092f63bade5518',
+      '5db9489772d57ad97c1bc32a73df453d4212358b44337de0740b50013db226d4',
     sha256('lib/finance/cashflow.ts'),
   )
   check(

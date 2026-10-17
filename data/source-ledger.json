@@ -1,0 +1,1265 @@
+{
+  "version": 1,
+  "savedAt": "2026-10-16T16:34:17.807Z",
+  "entries": [
+    {
+      "urlId": "src-www-cfa-go-jp-policies-kokoseido-jidouteate",
+      "url": "https://www.cfa.go.jp/policies/kokoseido/jidouteate",
+      "title": "こども家庭庁の公式ページ",
+      "organization": "こども家庭庁",
+      "programIds": [
+        "mock-child-allowance"
+      ],
+      "registeredAt": "2026-10-15",
+      "registrationNote": "M6-C 調査ログ（2026-10-15）から転記",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-15T00:00:00+09:00",
+      "officialConfirmedAt": "2026-10-15",
+      "officialConfirmNote": "法令名・支給額・所得制限の記載なし",
+      "contentRetrievedAt": "2026-10-16T06:32:31.478Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-16",
+        "reviewedFields": [
+          "name",
+          "summary",
+          "period",
+          "jurisdiction"
+        ],
+        "note": "実取得ページと照合: 制度名・概要（目的/対象）・対象期間・実施主体。金額・所得制限・法令名はこのページに記載なし（未確認のまま）",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "research-log-transcribed",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動 ホーム ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 Global Site 検索 メニュー 閉じる ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 新着・更新 広報・報道 大臣等会見 組織情報 政策 会議等 法令 採用 資料 申請・届出 調達情報 関連リンク Global Site サイトポリシー SNSポリシー コピーライトポリシー ご意見・ご要望 サイトマップ ホーム 政策 子ども・子育て支援制度 児童手当 児童手当 関係法令・…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-cfa-go-jp-policies-kokoseido-jidouteate-annai",
+      "url": "https://www.cfa.go.jp/policies/kokoseido/jidouteate/annai",
+      "title": "こども家庭庁の公式ページ",
+      "organization": "こども家庭庁",
+      "programIds": [
+        "mock-child-allowance"
+      ],
+      "registeredAt": "2026-10-15",
+      "registrationNote": "M6-C 調査ログ（2026-10-15）から転記",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-15T00:00:00+09:00",
+      "officialConfirmedAt": "2026-10-15",
+      "officialConfirmNote": "所得制限・根拠法令名・金額の適用年度（適用開始時期）の明記なし",
+      "contentRetrievedAt": "2026-10-16T06:32:32.729Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-16",
+        "reviewedFields": [
+          "name",
+          "summary",
+          "amountBands",
+          "period",
+          "application.where",
+          "application.documents",
+          "application.deadlineNote",
+          "application.steps",
+          "jurisdiction"
+        ],
+        "note": "実取得ページと照合: 支給額内訳・支給時期・申請先/期限・必要書類・手順。所得制限・根拠法令名・適用年度は未確認のまま",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "research-log-transcribed",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動 ホーム ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 Global Site 検索 メニュー 閉じる ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 新着・更新 広報・報道 大臣等会見 組織情報 政策 会議等 法令 採用 資料 申請・届出 調達情報 関連リンク Global Site サイトポリシー SNSポリシー コピーライトポリシー ご意見・ご要望 サイトマップ ホーム 政策 子ども・子育て支援制度 児童手当 児童手当制度のご案内…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-mext-go-jp-a-menu-shotou-mushouka-index-htm",
+      "url": "https://www.mext.go.jp/a_menu/shotou/mushouka/index.htm",
+      "title": "文部科学省の公式ページ",
+      "organization": "文部科学省",
+      "programIds": [
+        "mock-high-school-scholarship"
+      ],
+      "registeredAt": "2026-10-15",
+      "registrationNote": "M6-C 調査ログ（2026-10-15）から転記",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-15T00:00:00+09:00",
+      "officialConfirmedAt": "2026-10-15",
+      "officialConfirmNote": "給付額・所得基準・適用年度・根拠法令名の記載なし",
+      "contentRetrievedAt": "2026-10-15T00:00:00+09:00",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-15",
+        "reviewedFields": [
+          "name",
+          "summary",
+          "category",
+          "application.where",
+          "conditions.other",
+          "jurisdiction"
+        ],
+        "note": "給付額・所得基準・適用年度・根拠法令名の記載なし",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "research-log-transcribed",
+        "retrieval": "research-log-transcribed",
+        "review": "research-log-transcribed"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "高校生等奨学給付金＝授業料以外の教育費（教科書費・教材費等）を支援する返還不要の給付金。申請先は都道府県または学校、手続きは都道府県により異なる",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jfc-go-jp",
+      "url": "https://www.jfc.go.jp/",
+      "title": "日本政策金融公庫の公式ページ",
+      "organization": "日本政策金融公庫",
+      "programIds": [
+        "mock-education-loan"
+      ],
+      "registeredAt": "2026-10-15",
+      "registrationNote": "M6-C 調査ログ（2026-10-15）から転記",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-15T00:00:00+09:00",
+      "officialConfirmedAt": "2026-10-15",
+      "officialConfirmNote": "貸付限度額・金利・必要書類・正式名称（教育一般貸付）・根拠法令は未確認（詳細ページに到達できず）",
+      "contentRetrievedAt": "2026-10-15T00:00:00+09:00",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-15",
+        "reviewedFields": [
+          "summary",
+          "category",
+          "application.where"
+        ],
+        "note": "貸付限度額・金利・必要書類・正式名称（教育一般貸付）・根拠法令は未確認（詳細ページに到達できず）",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "research-log-transcribed",
+        "retrieval": "research-log-transcribed",
+        "review": "research-log-transcribed"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "「国の教育ローン」＝お子さまの教育資金を必要とする方をサポートする日本政策金融公庫の取扱い、教育ローンコールセンターの案内",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin",
+      "url": "https://www.jasso.go.jp/shogakukin/",
+      "title": "独立行政法人日本学生支援機構の公式ページ",
+      "organization": "独立行政法人日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin",
+        "official-jasso-taiyo-shogakukin"
+      ],
+      "registeredAt": "2026-10-15",
+      "registrationNote": "M6-C 調査ログ（2026-10-15）から転記",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-15T00:00:00+09:00",
+      "officialConfirmedAt": "2026-10-15",
+      "officialConfirmNote": "金額・申込資格の詳細・適用年度は未確認",
+      "contentRetrievedAt": "2026-10-16T06:32:34.683Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-16",
+        "reviewedFields": [
+          "name",
+          "summary",
+          "category",
+          "conditions.other"
+        ],
+        "note": "実取得ページと照合: 制度名・概要（貸与/給付の区別）・カテゴリ・条件の概要。金額・申込資格詳細・適用年度は未確認のまま",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "research-log-transcribed",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-purpose-shogakukin-detail-1193882-1548-html",
+      "url": "https://www.jasso.go.jp/purpose/shogakukin/detail/1193882_1548.html",
+      "title": "日本学生支援機構「申込資格や採用基準を満たしているか知りたい」",
+      "organization": "独立行政法人日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin",
+        "official-jasso-taiyo-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "優先グループ#5（利用者承認 2026-10-16）: 採用基準（家計・学力）の確認用",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T14:45:41.594Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T14:45:41.594Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-16",
+        "reviewedFields": [
+          "name"
+        ],
+        "note": "リンク集であり、リンク先の詳細な金額・基準等は未確認",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-index-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/index.html",
+      "title": "日本学生支援機構「奨学金制度の種類と概要」",
+      "organization": "独立行政法人日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin",
+        "official-jasso-taiyo-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "優先グループ#4・#6（利用者承認 2026-10-16）: 給付/貸与の区分・支援区分の確認用",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T14:45:43.406Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T14:45:43.406Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-16",
+        "reviewedFields": [
+          "name",
+          "summary",
+          "category"
+        ],
+        "note": "貸与型（返済必要）と給付型（返済不要）の区別を確認。支援区分・支給額・申込資格は下層ページにあり未確認",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-cfa-go-jp-policies-kokoseido-jidouteate-mottoouen",
+      "url": "https://www.cfa.go.jp/policies/kokoseido/jidouteate/mottoouen",
+      "title": "こども家庭庁「もっと子育て応援！児童手当（制度の改正について）」",
+      "organization": "こども家庭庁",
+      "programIds": [
+        "mock-child-allowance"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "優先グループ#2（利用者承認 2026-10-16）: 支給額の適用時期・変更点の確認用",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T14:45:35.048Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T14:45:35.048Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-16",
+        "reviewedFields": [
+          "name",
+          "summary",
+          "amountBands",
+          "period",
+          "legalBasis.lawName"
+        ],
+        "note": "支給対象（0歳から18歳に達する日以後の最初の3月31日まで）・支給額（3歳未満15,000円/3歳以上〜高校生年代10,000円・第3子以降30,000円）・適用開始時期（令和6年10月分から）・児童手当法第3条第3項の引用（施設等の定義）を確認。所得上限限度額は言及のみで基準額の記載なし、適用年度の記載なし（所得制限・適用年度は未確認のまま）",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動 ホーム ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 Global Site 検索 メニュー 閉じる ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 新着・更新 広報・報道 大臣等会見 組織情報 政策 会議等 法令 採用 資料 申請・届出 調達情報 関連リンク Global Site サイトポリシー SNSポリシー コピーライトポリシー ご意見・ご要望 サイトマップ ホーム 政策 子ども・子育て支援制度 児童手当 もっと子育て応援！児…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-purpose-shogakukin-detail-1193860-1548-html",
+      "url": "https://www.jasso.go.jp/purpose/shogakukin/detail/1193860_1548.html",
+      "title": "日本学生支援機構「支給・貸与月額について知りたい」",
+      "organization": "独立行政法人日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin",
+        "official-jasso-taiyo-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "優先グループ#4・#6（利用者承認 2026-10-16）: 給付月額・貸与月額の確認用",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T14:45:36.776Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T14:45:36.776Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-16",
+        "reviewedFields": [
+          "name"
+        ],
+        "note": "リンク集であり、リンク先の詳細な金額・基準等は未確認",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-purpose-shogakukin-detail-1193883-1548-html",
+      "url": "https://www.jasso.go.jp/purpose/shogakukin/detail/1193883_1548.html",
+      "title": "日本学生支援機構「奨学金の申込資格や支給額、申込方法を知りたい」",
+      "organization": "独立行政法人日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin",
+        "official-jasso-taiyo-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "優先グループ#5（利用者承認 2026-10-16）: 申込資格・支給額・申込方法の確認用",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T14:45:38.707Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T14:45:38.707Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-16",
+        "reviewedFields": [
+          "name"
+        ],
+        "note": "リンク集であり、リンク先の詳細な金額・基準等は未確認",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-cfa-go-jp-policies-kokoseido-jidouteate-faq",
+      "url": "https://www.cfa.go.jp/policies/kokoseido/jidouteate/faq",
+      "title": "こども家庭庁「児童手当Q&A」",
+      "organization": "こども家庭庁",
+      "programIds": [
+        "mock-child-allowance"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "優先グループ#1（利用者承認 2026-10-16）: 所得制限・受給要件の確認用",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T14:45:33.795Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T14:45:33.795Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-16",
+        "reviewedFields": [
+          "name"
+        ],
+        "note": "リンク集であり、リンク先の詳細な金額・基準等は未確認",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動 ホーム ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 Global Site 検索 メニュー 閉じる ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 新着・更新 広報・報道 大臣等会見 組織情報 政策 会議等 法令 採用 資料 申請・届出 調達情報 関連リンク Global Site サイトポリシー SNSポリシー コピーライトポリシー ご意見・ご要望 サイトマップ ホーム 政策 子ども・子育て支援制度 児童手当 Q&A Q&A 児童…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-taiyo-taiyo-2shu-riritsu-index-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/taiyo/taiyo_2shu/riritsu/index.html",
+      "title": "日本学生支援機構「第二種奨学金の貸与利率」",
+      "organization": "独立行政法人日本学生支援機構",
+      "programIds": [
+        "official-jasso-taiyo-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "優先グループ#6（利用者承認 2026-10-16）: 貸与利率の確認用",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T14:45:45.131Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T14:45:45.131Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-16",
+        "reviewedFields": [
+          "name"
+        ],
+        "note": "リンク集であり、リンク先の詳細な金額・基準等は未確認",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-cfa-go-jp-policies-kokoseido-jidouteate-faq-ippan",
+      "url": "https://www.cfa.go.jp/policies/kokoseido/jidouteate/faq/ippan",
+      "title": "児童手当の基本的な取扱いについて（Q&A）",
+      "organization": "こども家庭庁",
+      "programIds": [
+        "mock-child-allowance"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "所得制限・適用時期・受給要件の裏付け用（2026-10-16承認 P1-1）",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:24:48.764Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:24:48.764Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "name",
+          "summary",
+          "amountBands",
+          "period",
+          "application.where",
+          "application.steps",
+          "application.deadlineNote",
+          "application.documents"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後。日付粒度+09:00で取得日時を包含）: Q&A本文より「高校卒業まで（18歳の誕生日後の最初の3月31日まで）・月額1万5千円または1万円（第3子以降3万円）・偶数月に前月分まで2か月分支給」。申請書類は「認定請求書」「額改定認定請求書」「現況届」を目視確認。所得制限・適用年度は記載なし（未確認維持）",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動 ホーム ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 Global Site 検索 メニュー 閉じる ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 新着・更新 広報・報道 大臣等会見 組織情報 政策 会議等 法令 採用 資料 申請・届出 調達情報 関連リンク Global Site サイトポリシー SNSポリシー コピーライトポリシー ご意見・ご要望 サイトマップ ホーム 政策 子ども・子育て支援制度 児童手当 Q&A 児童手当Q&…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-cfa-go-jp-laws",
+      "url": "https://www.cfa.go.jp/laws",
+      "title": "こども家庭庁 関連法令",
+      "organization": "こども家庭庁",
+      "programIds": [
+        "mock-child-allowance"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "根拠法令の法令名・法令番号・施行日の裏付け用（2026-10-16承認 P1-4）",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:24:50.131Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:24:50.131Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "legalBasis.lawName"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:42頃・取得直後）: 「児童手当法（昭和四十六年律第七十三号）（e-Gov）」の記載を確認（原文ママ・脱字の可能性、e-Gov リンク ID 346AC0000000073）。施行令・施行規則は ordinanceName の単一文字列では政令/省令を区別表現できないため記録しない。法令番号・施行日は確認済みにしない",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動 ホーム ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 Global Site 検索 メニュー 閉じる ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 新着・更新 広報・報道 大臣等会見 組織情報 政策 会議等 法令 採用 資料 申請・届出 調達情報 関連リンク Global Site サイトポリシー SNSポリシー コピーライトポリシー ご意見・ご要望 サイトマップ ホーム 法令 法令 こども家庭庁が所管する主な法律、政令、省令等に関…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-kingaku-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/kingaku.html",
+      "title": "給付奨学金の支給額",
+      "organization": "日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "給付月額の裏付け用（2026-10-16承認 P2-5）",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:24:53.169Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:24:53.169Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "name",
+          "summary",
+          "amountBands"
+        ],
+        "note": "人手照合（日本時間2026-10-17・取得直後の本文を精読）: 給付月額表を支援区分（第1〜第4区分）×学校種（大学・短期大学・専修学校（専門課程）/高等専門学校（第4学年以上））×設置者（国公立〔独立行政法人・地方独立行政法人を含む〕/私立）×通学形態（自宅/自宅外）で照合し、通常課程の各月額とカッコ内（生活保護受給の生計維持者と同居、又は児童養護施設等から通学）の対応を確認。通信教育課程は年額（年1回・区分4段階）。第4区分は多子世帯に限る。大学院は表に記載なし。第一種併給時の支給調整は調整額が別掲のため記録しない。適用年度の記載なし。セル対応が曖昧な値は記録しない",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-kakei-yoyaku-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/kakei/yoyaku.html",
+      "title": "給付奨学金の家計基準（予約採用）",
+      "organization": "日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "家計基準の裏付け用（2026-10-16承認 P2-6）",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:24:55.048Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:24:55.048Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "conditions.incomeLimit",
+          "conditions.other"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: 予約採用（2027年度進学予定・2026年度住民税情報）の家計基準。収入基準=支給額算定基準額の合計（100円未満/25,600円/51,300円/154,500円の各区分）、資産基準=申込日時点で資産合計5,000万円未満。年間収入額とは別の指標（混同しない）。在学採用とは別記録",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-kakei-zaigaku-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/kakei/zaigaku.html",
+      "title": "給付奨学金の家計基準（在学採用）",
+      "organization": "日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "家計基準の裏付け用（2026-10-16承認 P2-7）",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:24:56.864Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:24:56.864Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "conditions.incomeLimit",
+          "conditions.other"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: 在学採用の家計基準。収入基準=支給額算定基準額の合計（100円未満/25,600円/51,300円/154,500円の各区分）、資産基準=資産合計5,000万円未満。年間収入額とは別の指標。予約採用とは別記録",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-gakuryoku-yoyaku-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/gakuryoku/yoyaku.html",
+      "title": "給付奨学金の学力基準（予約採用）",
+      "organization": "日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "学力基準の裏付け用（2026-10-16承認 P2-8）",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:25:11.934Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:25:11.934Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "conditions.other"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: 予約採用の学力基準「高等学校等における第1学年から申込時までの全履修科目の評定平均値が5段階評価で3.5以上」。在学採用とは別記録。受給資格の自動判定には使用しない",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-gakuryoku-zaigaku-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/gakuryoku/zaigaku.html",
+      "title": "給付奨学金の学力基準（在学採用）",
+      "organization": "日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "学力基準の裏付け用（2026-10-16承認 P2-9）",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:25:13.747Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:25:13.747Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "conditions.other"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: 在学採用の学力基準「評定平均値が3.5以上、又は入学者選抜試験の成績が上位2分の1」「GPAが上位2分の1」。予約採用とは別記録。受給資格の自動判定には使用しない",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-shikaku-index-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/shikaku/index.html",
+      "title": "給付奨学金の申込資格",
+      "organization": "日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "申込資格の裏付け用（2026-10-16承認 P2-10）",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:25:15.544Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:25:15.544Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "name"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: name のみ。本ページは予約/在学の下層リンク集であり、申込資格の具体条件は未確認（下層ページが要追加承認）",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-shienkubun-index-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/shienkubun/index.html",
+      "title": "給付奨学金の支援区分（第1〜4区分）",
+      "organization": "日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "支援区分・適用年度の裏付け用（2026-10-16承認 P2-11）",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:25:17.597Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:25:17.597Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 検索 窓を開きます 閉じる グローバルナビゲーションを開く 奨学金 サブメニューを開く 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学校担当者ページ 給付奨学生支援区分データ提供ページ 留学生支援 サ…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-kakei-daiyonkubun-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/kakei/daiyonkubun.html",
+      "title": "給付奨学金の家計基準（第4区分・令和6年度拡大）",
+      "organization": "日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "適用年度の裏付け用（2026-10-16承認 P2-12）",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:25:19.402Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:25:19.402Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "conditions.other"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: 令和6年度から第4区分を確認（支給額算定基準額の合計51,300円以上154,500円未満・多子世帯属するか私立理工農系在籍が採用条件）。第4区分は給付奨学金（現金給付）0円・授業料等減免のみ第1区分満額の4分の1。減免と現金給付を混同しない",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-kakei-r7tashikakudai-index-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/kakei/r7tashikakudai/index.html",
+      "title": "給付奨学金の家計基準（多子世帯の拡大・令和7年度）",
+      "organization": "日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "適用年度の裏付け用（2026-10-16承認 P2-13）",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:25:41.840Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:25:41.840Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "conditions.other"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: 令和7年度から多子世帯は所得制限なく授業料等減免の対象（給付奨学金の支給額は令和6年度以前と同様）。資産合計5,000万円以上3億円未満の多子世帯は減免のみで給付奨学金は支給されない。減免と現金給付を混同しない",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-taiyo-taiyo-1shu-kingaku-index-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/taiyo/taiyo_1shu/kingaku/index.html",
+      "title": "第一種奨学金（無利子）の貸与月額",
+      "organization": "日本学生支援機構",
+      "programIds": [
+        "official-jasso-taiyo-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "貸与月額の裏付け用（2026-10-16承認 P3-15）",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:25:43.683Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:25:43.683Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "name",
+          "summary"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: name/summary のみ。月額は入学年度別下層ページ（要追加承認）未取得のため未確認。併給調整の記述は確認済み",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-taiyo-taiyo-2shu-kingaku-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/taiyo/taiyo_2shu/kingaku.html",
+      "title": "第二種奨学金（有利子）の貸与月額",
+      "organization": "日本学生支援機構",
+      "programIds": [
+        "official-jasso-taiyo-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "貸与月額の裏付け用（2026-10-16承認 P3-16）",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:25:45.574Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:25:45.574Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "amountBands"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: amountBands のみ。大学・短大・専修=月額20,000〜120,000円（10,000円刻み）/私立医歯は120,000円に40,000円増額/薬獣は20,000円増額/大学院=月額50,000・80,000・100,000・130,000・150,000円（法科大学院は150,000円に40,000円または70,000円増額）/高専本科4,5年・専攻科=20,000〜120,000円。学校種と増額条件の対応を目視確認",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-taiyo-taiyo-2shu-riritsu-2007ikou-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/taiyo/taiyo_2shu/riritsu/2007ikou.html",
+      "title": "貸与利率の推移（平成19年4月以降採用者）",
+      "organization": "日本学生支援機構",
+      "programIds": [
+        "official-jasso-taiyo-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "貸与利率の裏付け用（2026-10-16承認 P3-19）",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:25:47.342Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:25:47.342Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "name",
+          "summary"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: name/summary のみ。利率の具体値（令和8年度 年利% など）は貸与終了月・利率固定/利率見直しとの対応が確定するまで保留（未確認維持）",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-henkan-index-html",
+      "url": "https://www.jasso.go.jp/shogakukin/henkan/index.html",
+      "title": "貸与奨学金の返還",
+      "organization": "日本学生支援機構",
+      "programIds": [
+        "official-jasso-taiyo-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "返済条件の裏付け用（2026-10-16承認 P3-20）",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:25:49.197Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:25:49.197Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "name",
+          "summary"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: name/summary のみ。返還方法・返還期限・据置期間などの返済条件は下層ページ（要追加承認）未取得のため未確認維持",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    }
+  ]
+}

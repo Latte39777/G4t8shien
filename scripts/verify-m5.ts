@@ -25,6 +25,7 @@ import { buildMockReply, mockConsultProvider } from '../lib/consult/mockAdvisor'
 import { getConsultProvider } from '../lib/consult/provider'
 import type { ConsultRequest } from '../lib/consult/types'
 import { MOCK_SUPPORT_PROGRAMS } from '../lib/supports/mockPrograms'
+import { getSupportPrograms } from '../lib/supports/registry'
 
 let failed = 0
 function check(name: string, cond: boolean, detail = ''): void {
@@ -64,13 +65,16 @@ check(
   freeReply.isMock && freeReply.text.length > 0,
 )
 check(
-  '自由相談: 全モック制度の名前を案内',
-  MOCK_SUPPORT_PROGRAMS.every((p) => freeReply.text.includes(p.name)),
+  '自由相談: 全登録制度の名前を案内',
+  getSupportPrograms().every((p) => freeReply.text.includes(p.name)),
 )
 check(
-  '自由相談: 関連制度はすべてモック（未確認）として区別',
-  freeReply.relatedPrograms.length === MOCK_SUPPORT_PROGRAMS.length &&
-    freeReply.relatedPrograms.every((p) => p.sourceType === 'mock'),
+  '自由相談: 関連制度は確認済み/未確認として区別',
+  freeReply.relatedPrograms.length === getSupportPrograms().length &&
+    freeReply.relatedPrograms.every(
+      (p, i) =>
+        p.sourceType === (getSupportPrograms()[i].mock ? 'mock' : 'verified'),
+    ),
 )
 check(
   '自由相談: 回答が開発用モックサンプルであることを明示',
@@ -110,12 +114,12 @@ const applicationReply = buildMockReply(
 )
 check(
   '引き継ぎ: 選択した制度の申請情報が回答に反映',
-  applicationReply.text.includes('児童手当（モック）') &&
+  applicationReply.text.includes('児童手当') &&
     applicationReply.text.includes('市区町村'),
 )
 check(
   '引き継ぎ: 申請先・期限・必要書類はすべて「要確認」を明示',
-  applicationReply.text.includes('申請先：市区町村（要確認）') &&
+  applicationReply.text.includes('申請先：お住まいの市区町村（公務員の場合は勤務先）（要確認）') &&
     applicationReply.text.includes('（要確認）') &&
     applicationReply.text.includes('必要書類'),
 )
@@ -130,8 +134,8 @@ const otherReply = buildMockReply(
 )
 check(
   '他制度の質問: 別の制度を案内（選択制度以外）',
-  otherReply.text.includes('高校生等奨学給付金（モック）') &&
-    otherReply.text.includes('児童手当（モック）」以外にも'),
+  otherReply.text.includes('高校生等奨学給付金') &&
+    otherReply.text.includes('児童手当」以外にも'),
 )
 check(
   '他制度の質問: 関連制度に選択制度以外が含まれる',
@@ -142,8 +146,8 @@ const crossReply = buildMockReply(
 )
 check(
   '他制度の質問: 質問文で名指しした制度が優先される',
-  crossReply.text.includes('高校生等奨学給付金（モック）') &&
-    !crossReply.text.includes('児童手当（モック）」の対象条件'),
+  crossReply.text.includes('高校生等奨学給付金') &&
+    !crossReply.text.includes('児童手当」の対象条件'),
 )
 check(
   '他制度の質問: モックデータにない制度もある旨を明示',
@@ -167,9 +171,12 @@ check(
   aidDetail.text.includes('【未確認】'),
 )
 check(
-  'モック/未確認の区別: 関連制度の注記に未確認が明記される',
+  'モック/未確認の区別: 関連制度の注記で確認状況が区別される',
   detailReply.relatedPrograms.every(
-    (p) => p.sourceType === 'mock' && p.note.includes('未確認'),
+    (p) =>
+      p.sourceType === 'mock'
+        ? p.note.includes('未確認')
+        : p.note.includes('確認済み'),
   ),
 )
 check(
@@ -191,7 +198,11 @@ check(
 check(
   '未対応の質問: 制度情報を生成しない（制度名・金額・申請先を出さない）',
   unsupportedReply.relatedPrograms.length === 0 &&
-    !MOCK_SUPPORT_PROGRAMS.some((p) => unsupportedReply.text.includes(p.name)) &&
+    // 「例：児童手当」の例示のみ許容（それ以外の制度名を生成しない）
+    !getSupportPrograms().some(
+      (p) =>
+        p.id !== 'mock-child-allowance' && unsupportedReply.text.includes(p.name),
+    ) &&
     !unsupportedReply.text.includes('市区町村') &&
     !/120[,，]?000|118[,，]?800/.test(unsupportedReply.text),
 )

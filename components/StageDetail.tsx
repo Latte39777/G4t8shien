@@ -12,7 +12,8 @@
  * - 段階を選ぶと、費用の内訳・対象年数・公立/私立などの計算条件と、
  *   自前資金・支援・不足額の資金配分（前提・要確認事項つき）を確認できる
  * - 大学は国立・公立・私立を区別して表示する
- * - 子ども別の費用と世帯全体の合計をタブで切り替えて表示する
+ * - 子ども別の費用と世帯全体の合計をタブで切り替えて表示し、切り替え先の
+ *   金額・教育方針・計算対象外の注意は ScopeSummary で確認できる
  */
 import { useState } from "react";
 import type {
@@ -120,6 +121,102 @@ function tickValues(maxYen: number): number[] {
   return ticks;
 }
 
+/**
+ * 表示対象（世帯全体 / 子ども1人）のサマリー。
+ * 子ども別の金額・教育方針・計算対象外の注意は、この切り替え側で確認する
+ * （独立した子ども別セクションは持たず、重複表示を避ける）。
+ */
+export function ScopeSummary({
+  activeChild,
+  householdTotalYen,
+  childCount,
+}: {
+  activeChild: ChildResult | null;
+  householdTotalYen: number;
+  childCount: number;
+}) {
+  if (activeChild === null) {
+    return (
+      <div
+        className="mt-3 rounded-2xl border border-indigo-100 bg-indigo-50 p-4"
+        data-testid="scope-summary-household"
+      >
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <p className="text-xs font-semibold text-indigo-800">世帯全体の合計</p>
+          <p
+            className="text-base font-bold text-indigo-900"
+            data-testid="household-total"
+          >
+            {formatYen(householdTotalYen)}
+          </p>
+        </div>
+        {childCount === 0 ? (
+          <p className="mt-2 rounded-lg bg-white px-3 py-2 text-[11px] leading-4 text-slate-600">
+            子どもが0人のため、子ども費用の計算対象はありません。
+            費用の試算には、子どもの情報を入力してください。
+          </p>
+        ) : (
+          <p className="mt-1 text-[11px] leading-4 text-indigo-700">
+            各子どもの費用の合計＝世帯全体の合計（{formatYen(householdTotalYen)}
+            ）です。費用は 0〜22歳のうち、これからかかる分を含みます
+            （同じ費用を重ねて計上することはありません）。
+          </p>
+        )}
+      </div>
+    );
+  }
+  return (
+    <div
+      className="mt-3 rounded-2xl border border-slate-100 bg-slate-50 p-4"
+      data-testid={`scope-summary-${activeChild.childId}`}
+    >
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-indigo-100 text-xs font-bold text-indigo-600">
+          {activeChild.label}
+        </span>
+        <p className="text-xs text-slate-500">{activeChild.statusText}</p>
+        {activeChild.excludedFromCalc && (
+          <span className="rounded-full bg-slate-200 px-2 py-0.5 text-[10px] font-bold text-slate-600">
+            計算対象外
+          </span>
+        )}
+      </div>
+      <p className="mt-1 text-[11px] text-slate-400">
+        教育方針：{activeChild.courseLabel}／大学：{activeChild.universityLabel}
+      </p>
+      <dl className="mt-2 space-y-1 text-xs">
+        <div className="flex justify-between gap-3">
+          <dt className="text-slate-500">費用の合計（0〜22歳のうち未経過分）</dt>
+          <dd
+            className="font-bold text-slate-900"
+            data-testid={`child-total-${activeChild.childId}`}
+          >
+            {formatYen(activeChild.totalYen)}
+          </dd>
+        </div>
+        <div className="flex justify-between gap-3">
+          <dt className="text-slate-500">うち確認済み出典／仮定値</dt>
+          <dd className="text-slate-600">
+            {formatYen(activeChild.referenceYen)}／{formatYen(activeChild.assumedYen)}
+          </dd>
+        </div>
+        <div className="flex justify-between gap-3">
+          <dt className="text-slate-500">支援の見込額（確定／推定）</dt>
+          <dd className="text-slate-600">
+            {formatYen(activeChild.supportConfirmedYen)}／
+            {formatYen(activeChild.supportEstimatedYen)}
+          </dd>
+        </div>
+      </dl>
+      {activeChild.excludedFromCalc && (
+        <p className="mt-2 rounded-lg bg-white px-3 py-2 text-[11px] leading-4 text-slate-600">
+          出産予定時期が未定のため、この子は計算対象外です（0円扱い・要確認）。
+        </p>
+      )}
+    </div>
+  );
+}
+
 export default function StageDetail({
   childResults,
   householdStages,
@@ -142,6 +239,8 @@ export default function StageDetail({
   );
   const ticks = tickValues(maxTotal);
   const selectedStage = stages.find((s) => s.key === selected) ?? null;
+  const activeChild = childResults.find((c) => c.childId === scope) ?? null;
+  const householdTotalYen = householdStages.reduce((s, st) => s + st.totalYen, 0);
 
   return (
     <div>
@@ -176,6 +275,13 @@ export default function StageDetail({
           </button>
         ))}
       </div>
+
+      {/* 表示対象のサマリー（子ども別の金額・教育方針・計算対象外の注意） */}
+      <ScopeSummary
+        activeChild={activeChild}
+        householdTotalYen={householdTotalYen}
+        childCount={childResults.length}
+      />
 
       {/* 支援のON/OFF（切り替えても最大値・目盛り・計算の対象は変わらない） */}
       <div className="mt-3 rounded-2xl border border-slate-200 bg-slate-50 p-3">

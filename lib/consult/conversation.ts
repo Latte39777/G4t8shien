@@ -127,6 +127,8 @@ export function appendAssistantReply(
       hasUnverified: reply.hasUnverified,
       relatedPrograms: reply.relatedPrograms,
       sourceType: reply.sourceType,
+      // 出典（KB由来）は UI 表示用にそのまま引き継ぐ（本文から拾い直さない）
+      citations: reply.citations,
     },
   ]
 }

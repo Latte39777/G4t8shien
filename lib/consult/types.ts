@@ -6,7 +6,20 @@
  *   差し替えられるよう ConsultProvider インターフェースを用意する
  * - 会話履歴はブラウザのメモリ上（React の state）のみで保持し、
  *   localStorage / sessionStorage / DB には保存しない
+ *
+ * 【公式情報KBとの接続（M6-G）】
+ * - KB（lib/supports/kb.ts）から機械的に導いた出典・確認状態を optional で保持する
+ *   （lib/consult/kbContext.ts の純関数が付与する。AI 生成文からは採用しない）
+ * - 既存の ConsultRequest 入力・必須フィールド・sourceType の意味は変更しない
  */
+
+import type {
+  ProgramVerification,
+  SupportCategory,
+  UnconfirmedItem,
+} from '../types/support'
+import type { KbConsultContext } from './kbContext'
+import type { KbProvenance } from '../supports/kb'
 
 export type ChatRole = 'user' | 'assistant'
 
@@ -37,6 +50,34 @@ export type ChatMessage = {
   relatedPrograms: ConsultRelatedProgram[]
   /** 応答の出所（M6 で追加。M5 以前のメッセージは未設定でもよい） */
   sourceType?: ConsultReplySource
+  /**
+   * 応答の出典（公式情報KB由来。P3 で追加。未設定・空でもよい）。
+   * UI はこの配列に含まれる情報だけを出典として表示する
+   * （回答本文から URL・機関名を抽出して出典にしない）
+   */
+  citations?: ConsultCitation[]
+}
+
+/**
+ * 公式情報KB由来の出典（根拠）表示。
+ * - URL の検証状態は URL 台帳の状態をそのまま引き継ぐ（未検証 URL を検証済みに昇格させない）
+ * - urlVerified=true のみをリンクとして扱ってよい（false は「URL未確認」と表示する）
+ * - provenance は既存の KbProvenance（転記・実取得・人手照合の区別）をそのまま保持する
+ *   （実績を混同しない。独自の表現に読み替えない）
+ */
+export type ConsultCitation = {
+  title: string
+  organization: string
+  /** URL（台帳未登録・未取得でも掲載可。推測で補完しない） */
+  url: string | null
+  /** URL の実在・内容確認済み（false のまま扱い、アクセス可否等で昇格させない） */
+  urlVerified: boolean
+  /** 確認日 YYYY-MM-DD（人手照合日を優先し無ければ取得日。確認記録が無ければ null） */
+  checkedAt: string | null
+  /** 出典の状態の provenance（既存の KbProvenance） */
+  provenance?: KbProvenance
+  /** 再取得後のため照合が古い（= 再確認が必要） */
+  reviewOutdated?: boolean
 }
 
 /** 応答で案内する関連制度 */
@@ -50,6 +91,14 @@ export type ConsultRelatedProgram = {
    */
   sourceType: 'mock' | 'verified'
   note: string
+  /** 制度区分（給付/授業料減免/貸与/税。区分の混同防止に使い分ける） */
+  category?: SupportCategory
+  /** 公式情報KBの確認状態（項目の確度から機械的に導出） */
+  verification?: ProgramVerification['status']
+  /** 情報確認日 YYYY-MM-DD（未確認は null） */
+  checkedAt?: string | null
+  /** 出典（公式情報KB由来。urlVerified=true のみリンク扱いにしてよい） */
+  sources?: ConsultCitation[]
 }
 
 /**
@@ -70,6 +119,14 @@ export type ConsultContextProgram = {
   missingInformation: string[]
   /** モックデータかどうか */
   mock: boolean
+  /** 制度区分（給付/授業料減免/貸与/税。区分の混同防止に使い分ける） */
+  category?: SupportCategory
+  /** 公式情報KBの確認状態（項目の確度から機械的に導出） */
+  verification?: ProgramVerification['status']
+  /** 情報確認日 YYYY-MM-DD（未確認は null） */
+  checkedAt?: string | null
+  /** 未確認項目の概要（項目と理由） */
+  unconfirmedItems?: UnconfirmedItem[]
 }
 
 /**
@@ -110,6 +167,12 @@ export type ConsultReply = {
    * （検証済みナレッジベース未整備のため）
    */
   checkedAt?: string | null
+  /**
+   * 公式情報KB由来の出典（根拠）。
+   * AI 生成文の URL・制度名・金額は採用せず、KB から機械的に導いたものだけを入れる
+   * （lib/consult/kbContext.ts の enrichReplyWithKb が付与する）
+   */
+  citations?: ConsultCitation[]
 }
 
 /**
@@ -122,5 +185,8 @@ export type ConsultProvider = {
   /** 表示用ラベル（モックであることが分かる名称にする） */
   readonly label: string
   readonly isMock: boolean
-  respond(request: ConsultRequest): Promise<ConsultReply>
+  /** 応答の生成。kbContext はサーバー側で解決済みの KB 文脈（任意）。
+   *  AI へ提供する KB 情報はこの値から組み立てる（クライアント入力は使わない）。
+   *  引数を取らない既存のモック・テスト用実装とも互換（省略可）。 */
+  respond(request: ConsultRequest, kbContext?: KbConsultContext | null): Promise<ConsultReply>
 }

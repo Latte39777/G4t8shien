@@ -18,7 +18,7 @@ import {
   WORK_AFTER_BIRTH_OPTIONS,
   formatYen,
 } from "@/lib/simulation";
-import { MOCK_SUPPORT_PROGRAMS } from "@/lib/supports/mockPrograms";
+import { getSupportPrograms } from "@/lib/supports/registry";
 import { listMunicipalities, listPrefectures } from "@/lib/regions";
 import {
   MAX_CHILDREN,
@@ -1060,10 +1060,10 @@ export default function Form({ onSubmit, onBack, initial }: FormProps) {
                 <OptionalBadge />
               </p>
               <p className="mt-1 text-xs leading-5 text-slate-500">
-                受けている制度を選ぶと、支給見込みの重複を防ぎます（モック制度の一覧です）。
+                受けている制度を選ぶと、支給見込みの重複を防ぎます（結果画面の制度一覧と同じ内容です。確認状況は結果画面の制度カードに表示されます）。
               </p>
               <div className="mt-3 space-y-2">
-                {MOCK_SUPPORT_PROGRAMS.map((program) => {
+                {getSupportPrograms().map((program) => {
                   const checked = form.usedSupportProgramIds.includes(
                     program.id,
                   );

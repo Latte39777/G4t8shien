@@ -1,5 +1,5 @@
 /**
- * POST /api/consult のリクエスト処理（M6 フェーズ1）
+ * POST /api/consult のリクエスト処理（M6 フェーズ1 / M6-G P2）
  *
  * - Route Handler（app/api/consult/route.ts）はこの関数に処理を委ねる
  *   （テストでは resolveProvider / rateLimiter / env を注入して検証する）
@@ -7,16 +7,28 @@
  * - 通信障害は原則エラー表示＋再試行。モックへの自動フォールバックは
  *   CONSULT_FALLBACK_TO_MOCK=1 のときのみ（既定 0）。フォールバック時は
  *   必ず「モック応答に切り替えました」と障害原因を明示する
+ * - 【M6-G P2】応答生成後、lib/consult/kbContext.ts の純関数で公式情報KB
+ *   （lib/supports/kb.ts）から決定論的に出典・確認状態を付与する。
+ *   KB 情報はサーバー側の既存 KB から取得し、クライアント入力や AI 生成文
+ *   の URL・金額・制度名は根拠として採用しない（外部通信なし）
  */
 import { z } from 'zod'
 import {
+  enrichReplyWithKb,
+  resolveKbConsultContext,
+  type KbConsultContext,
+  type KbConsultContextInput,
+} from './kbContext'
+import {
   ConsultSendError,
   reasonLabelForKind,
+  safeErrorInfo,
   statusForKind,
   userMessageForKind,
   type ConsultErrorKind,
 } from './errors'
 import { buildMockReply } from './mockAdvisor'
+import { isLiveConsultEnabled } from './provider'
 import {
   getDefaultRateLimiter,
   resolveClientKey,
@@ -31,7 +43,12 @@ export type ConsultApiDeps = {
   /** レートリミッタ（未指定ならメモリ既定実装） */
   rateLimiter?: RateLimiter
   now?: () => number
-  logger?: Pick<Console, 'warn' | 'error'>
+  logger?: Pick<Console, 'warn' | 'error'> & Partial<Pick<Console, 'info'>>
+  /**
+   * KB 文脈の解決（M6-G）。既定: resolveKbConsultContext（既存 KB から解決）。
+   * テストで KB 不能時のフォールバックを検証するために差し替え可能
+   */
+  resolveKbContext?: (input: KbConsultContextInput) => KbConsultContext
 }
 
 /** 質問の最大文字数（env で変更可・1〜1000 を想定） */
@@ -134,9 +151,24 @@ export function isFallbackToMockEnabled(
   return env.CONSULT_FALLBACK_TO_MOCK === '1'
 }
 
-function errorResponse(kind: ConsultErrorKind, message?: string): Response {
+/** Retry-After 秒数の正規化（正の整数。判定値が無い/不正な場合は既定 30 秒） */
+function normalizeRetryAfterSec(retryAfterSec: number | undefined): number {
+  if (retryAfterSec === undefined || !Number.isFinite(retryAfterSec)) {
+    return 30
+  }
+  return Math.max(1, Math.ceil(retryAfterSec))
+}
+
+function errorResponse(
+  kind: ConsultErrorKind,
+  message?: string,
+  retryAfterSec?: number,
+): Response {
   const headers: Record<string, string> = { 'content-type': 'application/json' }
-  if (kind === 'rate_limit') headers['retry-after'] = '30'
+  if (kind === 'rate_limit') {
+    // レート制限の拒否時のみ、判定結果の待機秒数を Retry-After に反映する（P9-1）
+    headers['retry-after'] = String(normalizeRetryAfterSec(retryAfterSec))
+  }
   return Response.json(
     { error: { kind, message: message ?? userMessageForKind(kind) } },
     { status: statusForKind(kind), headers },
@@ -157,6 +189,50 @@ export function buildMockFallbackReply(
     hasUnverified: true,
     sourceType: 'mock-fallback',
   }
+}
+
+/**
+ * KB 文脈の解決と出典・確認状態の付与（M6-G P2・外部通信なし）。
+ *
+/**
+ * サーバー側 KB 文脈の解決（1 リクエストにつき 1 回だけ呼び出す）。
+ * - 解決に使う入力は request.program の ID と質問文のみ。KB の内容（事実・
+ *   出典・確認状態）はサーバー側の既存 KB から取得し、クライアント入力や
+ *   AI 生成文の URL・金額・制度名は根拠として採用しない
+ * - 解決に失敗した場合は null を返す（応答はそのまま、出典・金額を捏造しない）。
+ *   ここで得た同じ結果を AI への KB プロンプト供給と出典付与の両方に使う
+ */
+function resolveKbContextSafe(
+  request: ConsultRequest,
+  deps: ConsultApiDeps,
+): KbConsultContext | null {
+  const resolveKb = deps.resolveKbContext ?? resolveKbConsultContext
+  try {
+    return resolveKb({
+      programId: request.program?.id ?? null,
+      message: request.message,
+    })
+  } catch (error) {
+    deps.logger?.warn(
+      '[consult] KB 文脈の解決に失敗したため出典の付与を省略（応答はそのまま返す）',
+      safeErrorInfo(error),
+    )
+    return null
+  }
+}
+
+/**
+ * 応答への KB 出典・確認状態の付与（M6-G P2。resolveKbContextSafe で解決済みの
+ * 同一コンテキストを使用する）
+ * - 付与は enrichReplyWithKb の決定論的な処理のみ（既存フィールドは変更しない）
+ * - KB が利用できない場合（null）は応答をそのまま返し、既存の安全な応答を
+ *   維持する（出典・金額を捏造しない）
+ */
+function attachKbContext(
+  reply: ConsultReply,
+  kbContext: KbConsultContext | null,
+): ConsultReply {
+  return kbContext === null ? reply : enrichReplyWithKb(reply, kbContext)
 }
 
 /** POST /api/consult 本体（リクエスト検証・レート制限・応答生成） */
@@ -184,7 +260,7 @@ export async function handleConsultRequest(
   try {
     provider = deps.resolveProvider()
   } catch (error) {
-    deps.logger?.error('[consult] プロバイダの解決に失敗', error)
+    deps.logger?.error('[consult] プロバイダの解決に失敗', safeErrorInfo(error))
     return errorResponse('server')
   }
 
@@ -193,30 +269,67 @@ export async function handleConsultRequest(
     const clientKey = resolveClientKey(request.headers, env)
     const decision = limiter.check(clientKey.key, now())
     if (!decision.allowed) {
-      return errorResponse('rate_limit')
+      return errorResponse('rate_limit', undefined, decision.retryAfterSec)
     }
   }
 
+  // 実行モードの確認用ログ（P11-1）。非機密メタデータ（モード名と乱数の
+  // リクエスト ID）のみを出す（質問文・会話履歴・回答本文・API キーは出さない）
+  const requestId = Math.random().toString(36).slice(2, 10)
+  deps.logger?.info?.(
+    `[consult] 実行モード: ${provider.isMock ? 'mock' : 'live'}（request_id=${requestId}）`,
+  )
+
   // 3. 応答生成（障害時は原則エラー表示＋再試行）
+  //    KB 文脈はここで 1 回だけ解決し、AI へのプロンプト供給と出典付与の
+  //    両方に同じ解決結果を使う（M6-G P2）。失敗時は KB なしで応答する
+  const kbContext = resolveKbContextSafe(parsed.value, deps)
   try {
-    const reply = await provider.respond(parsed.value)
-    return Response.json(reply, { status: 200 })
+    const reply = await provider.respond(parsed.value, kbContext)
+    return Response.json(attachKbContext(reply, kbContext), {
+      status: 200,
+    })
   } catch (error) {
     const kind: ConsultErrorKind =
       error instanceof ConsultSendError ? error.kind : 'server'
     deps.logger?.error(
       `[consult] AI 応答の取得に失敗（kind=${kind}）`,
-      error instanceof Error ? error.message : error,
+      safeErrorInfo(error),
     )
     if (isFallbackToMockEnabled(env)) {
       // 明示設定時のみモックへ切り替え（必ずラベル付き）
       deps.logger?.warn(
         `[consult] CONSULT_FALLBACK_TO_MOCK=1 のためモック応答へ切り替え（kind=${kind}）`,
       )
-      return Response.json(buildMockFallbackReply(parsed.value, kind), {
-        status: 200,
-      })
+      return Response.json(
+        attachKbContext(
+          buildMockFallbackReply(parsed.value, kind),
+          kbContext,
+        ),
+        {
+          status: 200,
+        },
+      )
     }
     return errorResponse(kind)
   }
+}
+
+/**
+ * GET /api/consult のリクエスト処理（P10-1）
+ *
+ * - 相談画面の送信前注意表示用に「外部 AI（ライブ）が有効か」の真偽値だけを返す
+ * - 判定は POST と同じ isLiveConsultEnabled（CONSULT_LIVE_AI=1 かつ
+ *   INIAD_API_KEY 設定の両方が揃ったときのみ true）を使い、表示と実際の
+ *   動作が必ず一致するようにする
+ * - API キーなどの秘密情報・環境変数の値はレスポンスに含めない
+ */
+export function handleConsultStatusRequest(
+  deps: { env?: Record<string, string | undefined> } = {},
+): Response {
+  const env = deps.env ?? process.env
+  return Response.json(
+    { liveAiEnabled: isLiveConsultEnabled(env) },
+    { headers: { 'cache-control': 'no-store' } },
+  )
 }

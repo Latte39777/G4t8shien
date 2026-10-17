@@ -93,15 +93,25 @@ export function rateLimitError(): ConsultSendError {
   return new ConsultSendError('rate_limit')
 }
 
+const MINUTE_MS = 60_000
+const DAY_MS = 86_400_000
+/** 掃除（sweepExpired）の実行間隔の下限。全キー走査のコストをこの間隔で間引く */
+const SWEEP_INTERVAL_MS = 60_000
+
 /**
  * メモリ内スライディングウィンドウ実装（開発・単一インスタンス専用）。
  * - キー単位: perMinute / perDay
  * - 全体セーフシーリング: globalPerMinute（共有バケット誤爆時の全体暴発防止）
+ * - 期限切れ記録の掃除（P9-1）: check() の呼び出し時に SWEEP_INTERVAL_MS 以上
+ *   間隔で全キーを走査し、ウィンドウが期限切れになった記録だけを削除する
+ *   （クエリされなくなったキーが Map に残り続けないため。有効な記録は保持）
  */
 export class MemoryRateLimiter implements RateLimiter {
   private readonly minuteBuckets = new Map<string, number[]>()
   private readonly dayBuckets = new Map<string, number[]>()
   private readonly globalMinute: number[] = []
+  /** 最後に sweepExpired を実行した時刻（未実行は null） */
+  private lastSweepAt: number | null = null
 
   constructor(
     private readonly config: RateLimitConfig = {
@@ -112,8 +122,7 @@ export class MemoryRateLimiter implements RateLimiter {
   ) {}
 
   check(key: string, now: number): RateLimitDecision {
-    const MINUTE_MS = 60_000
-    const DAY_MS = 86_400_000
+    this.sweepExpired(now)
 
     const minute = this.prune(this.minuteBuckets.get(key) ?? [], now - MINUTE_MS)
     const day = this.prune(this.dayBuckets.get(key) ?? [], now - DAY_MS)
@@ -143,6 +152,43 @@ export class MemoryRateLimiter implements RateLimiter {
     this.minuteBuckets.set(key, minute)
     this.dayBuckets.set(key, day)
     return { allowed: true, retryAfterSec: 0 }
+  }
+
+  /**
+   * 期限切れ記録の掃除（P9-1）。
+   * - SWEEP_INTERVAL_MS につき最大 1 回だけ全キーを走査する（走査コストを間引く）。
+   *   タイマーは使わず check() の now で判定するため、時計注入・テストが壊れない。
+   * - 削除条件はウィンドウ判定と同じ prune（t > cutoff を保持）であり、
+   *   現在有効な制限記録を誤って削除しない（境界の t == cutoff は期限切れ扱い）。
+   * - キーが参照されなくなっても、ウィンドウ期限切れ後に次回 sweep で Map から
+   *   削除される（共有バケット・IP バケット双方でメモリ増加を防ぐ）。
+   * - 時刻が巻き戻った場合は間隔判定によりスキップされる（何も削除しない安全側）。
+   */
+  private sweepExpired(now: number): void {
+    if (
+      this.lastSweepAt !== null &&
+      now - this.lastSweepAt < SWEEP_INTERVAL_MS
+    ) {
+      return
+    }
+    this.lastSweepAt = now
+    for (const [key, list] of this.minuteBuckets) {
+      const kept = this.prune(list, now - MINUTE_MS)
+      if (kept.length === 0) {
+        this.minuteBuckets.delete(key)
+      } else if (kept.length !== list.length) {
+        this.minuteBuckets.set(key, kept)
+      }
+    }
+    for (const [key, list] of this.dayBuckets) {
+      const kept = this.prune(list, now - DAY_MS)
+      if (kept.length === 0) {
+        this.dayBuckets.delete(key)
+      } else if (kept.length !== list.length) {
+        this.dayBuckets.set(key, kept)
+      }
+    }
+    this.pruneGlobal(now - MINUTE_MS)
   }
 
   private prune(list: number[], cutoff: number): number[] {

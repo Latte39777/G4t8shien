@@ -11,10 +11,20 @@
  *     → 明示的な許可を得た URL 候補を台帳に登録する（状態1・外部通信なし）。
  *       登録だけを行い、実取得は --url で別途実行する（未許可の URL を登録しない）。
  *   npx tsx scripts/retrieve-official-sources.ts --url <URL> [--force]
- *     → 台帳に登録済みの公式 URL だけを取得（許可ホスト以外は拒否）。
+ *     → 台帳に登録済みの URL だけを取得（未登録 URL は拒否）。
+ *       取得対象の検証（HTTPS 必須・内部ネットワーク禁止・robots.txt・
+ *       サイズ/形式制限・リダイレクト検証）は sourceFetch が強制する。
+ *       台帳への登録は「その URL への明示的な許可」なので、登録済み URL の
+ *       取得に限りその URL のホストへのアクセスを許可する（新規ホストの
+ *       初回取得＝状態2の記録が可能になる。台帳に無い URL は対象外のまま）。
  *       取得結果（URL・タイトル・取得日時・結果/失敗理由）を
  *       data/source-retrievals.json（取得ログ）に記録し、台帳の状態を
  *       data/source-ledger.json（台帳スナップショット）に保存する。
+ *   npx tsx scripts/retrieve-official-sources.ts --confirm-official <URL> \
+ *     --note "確認メモ" [--reviewed-at YYYY-MM-DD]
+ *     → 到達記録のある URL を公式情報源と人手確認した記録（状態3）を台帳に
+ *       保存する（外部通信なし）。この状態になって初めて許可ホストに加わり、
+ *       発見パイプライン（scan / fetch）の取得対象になる。
  *   npx tsx scripts/retrieve-official-sources.ts --record-review <URL> \
  *     --fields <項目パス,...> [--note "メモ"] [--reviewed-at YYYY-MM-DD]
  *     → 制度内容の人手照合結果（状態6）を台帳に記録して保存する（外部通信なし）。
@@ -43,6 +53,7 @@ import {
   buildInitialLedger,
   createLedgerStore,
   markContentRetrieved,
+  markOfficialConfirmed,
   markUrlReachable,
   needsContentRecheck,
   recordManualContentReview,
@@ -72,12 +83,16 @@ const registerTitle = argValue('--title')
 const registerOrganization = argValue('--organization')
 const programIdsCsv = argValue('--program-ids')
 const targetUrl = argValue('--url')
+const confirmUrl = argValue('--confirm-official')
 const reviewUrl = argValue('--record-review')
 const fieldsCsv = argValue('--fields')
 const reviewNote = argValue('--note') ?? ''
 const reviewedAt = argValue('--reviewed-at') ?? new Date().toISOString().slice(0, 10)
 const dryRun =
-  targetUrl === undefined && reviewUrl === undefined && registerUrl === undefined
+  targetUrl === undefined &&
+  reviewUrl === undefined &&
+  registerUrl === undefined &&
+  confirmUrl === undefined
 
 const RETRIEVAL_LOG_PATH = resolve(process.cwd(), 'data/source-retrievals.json')
 const LEDGER_SNAPSHOT_PATH = resolve(process.cwd(), 'data/source-ledger.json')
@@ -170,6 +185,35 @@ async function main(): Promise<void> {
     return
   }
 
+  // 公式情報源の確認（状態3・外部通信なし。到達記録のある URL のみ）
+  if (confirmUrl !== undefined) {
+    const entry = store.getByUrl(confirmUrl)
+    if (entry === null) {
+      console.error(`台帳に未登録の URL は公式確認の対象外です: ${confirmUrl}`)
+      process.exitCode = 1
+      return
+    }
+    if (reviewNote === '') {
+      console.error('--confirm-official には --note で確認内容を指定してください')
+      process.exitCode = 1
+      return
+    }
+    store.update(entry.urlId, (e) =>
+      markOfficialConfirmed(e, { confirmedAt: reviewedAt, note: reviewNote }),
+    )
+    saveLedgerEntries(store.list())
+    const updated = store.get(entry.urlId)
+    console.log(
+      [
+        `公式情報源と確認しました: ${confirmUrl}`,
+        `  URL状態: ${updated?.urlState} / 確認日: ${updated?.officialConfirmedAt ?? ''}`,
+        `  確認メモ: ${updated?.officialConfirmNote ?? ''}`,
+        `  許可ホスト: ${store.allowedHosts().join(', ')}`,
+      ].join('\n'),
+    )
+    return
+  }
+
   // 人手照合の記録（外部通信なし。台帳スナップショットに保存する）
   if (reviewUrl !== undefined) {
     const entry = store.getByUrl(reviewUrl)
@@ -208,10 +252,10 @@ async function main(): Promise<void> {
   }
 
   // transport を明示的に注入（グローバル fetch を暗黙に使わない）
-  const fetcher = createSourceFetcher({
-    transport: fetchTransport(globalThis.fetch),
-    allowedHosts,
-  })
+  // ※ 取得対象の検証（HTTPS・内部ネットワーク禁止・robots.txt 等）は
+  //   createSourceFetcher 側が強制する。台帳に登録済み（明示的に許可を得た）
+  //   URL の取得に限り、その URL のホストへのアクセスを許可する。
+  //   未登録 URL・未確認ホストのリンク探索は引き続き拒否される。
 
   if (dryRun) {
     console.log('=== 公式情報 URL 台帳（外部通信なし・dry-run） ===')
@@ -230,7 +274,7 @@ async function main(): Promise<void> {
     }
     console.log(`\n許可ホスト（公式確認済みのみ）: ${allowedHosts.join(', ') || '（なし）'}`)
     console.log(
-      'URL 候補の登録は --register <URL> --title <タイトル> --organization <運営機関> --program-ids <制度ID,...>、実取得は --url <URL>、人手照合の記録は --record-review <URL> --fields <項目,...> を指定してください。',
+      'URL 候補の登録は --register <URL> --title <タイトル> --organization <運営機関> --program-ids <制度ID,...>、実取得は --url <URL>、公式情報源の確認は --confirm-official <URL> --note <確認メモ>、人手照合の記録は --record-review <URL> --fields <項目,...> を指定してください。',
     )
     return
   }
@@ -246,6 +290,13 @@ async function main(): Promise<void> {
     process.exitCode = 1
     return
   }
+  const fetcher = createSourceFetcher({
+    transport: fetchTransport(globalThis.fetch),
+    allowedHosts: new Set([
+      ...allowedHosts,
+      new URL(entry.url).hostname.toLowerCase(),
+    ]),
+  })
 
   console.log(`取得を実行します（${force ? '強制再取得' : 'キャッシュ優先'}）: ${targetUrl}`)
   const result = await fetcher.fetchUrl(targetUrl, { force })

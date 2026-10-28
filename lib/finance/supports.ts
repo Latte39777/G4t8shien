@@ -131,19 +131,26 @@ function perChildYearly(
   }
   return yearly
 }
+/** 受付期限（YYYY-MM-DD）が今日より前なら期限切れ（M7-G） */
+function isDeadlineExpired(program: SupportProgram, today: string): boolean {
+  const deadline = program.application.deadlineDate ?? null
+  return deadline !== null && deadline < today
+}
 /**
  * 入力内容と制度データから支援の効果を計算する（純関数）
  *
  * options.excludeProgramIds: 現在利用中など、見込み額に含めない制度 ID。
  * 現在の家計（手取り収入）に反映済みの制度を二重に見込まないための除外指定。
+ * options.today: 期限切れ判定の基準日（YYYY-MM-DD。既定はシステム日付。テスト用）
  */
 export function calculateSupportEffects(
   plan: FamilyPlan,
   programs: SupportProgram[],
-  options?: { excludeProgramIds?: string[] },
+  options?: { excludeProgramIds?: string[]; today?: string },
 ): SupportCalcResult {
   const horizon = projectionHorizon(plan)
   const excludeIds = options?.excludeProgramIds ?? []
+  const today = options?.today ?? new Date().toISOString().slice(0, 10)
 
   const effects: SupportEffect[] = programs.map((program) => {
     const { eligibility, missing } = recomputeEligibility(plan, program)
@@ -167,6 +174,10 @@ export function calculateSupportEffects(
     if (program.category === 'loan') {
       includedInTotal = false
       excludedReason = '貸付制度のため合計対象外'
+    } else if (isDeadlineExpired(program, today)) {
+      // 受付期限が過ぎた制度を利用可能として案内しない（M7-G）
+      includedInTotal = false
+      excludedReason = `受付期限（${program.application.deadlineDate}）が過ぎているため合計対象外（次年度の受付は要確認）`
     } else if (program.amount.basis === 'unknown' || !computable) {
       includedInTotal = false
       excludedReason = '金額が未確認のため合計対象外'

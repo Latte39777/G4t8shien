@@ -1,24 +1,26 @@
 /**
- * 支援制度レジストリ（M6-C）— モックと公式確認済みデータの段階的な統合
+ * 支援制度レジストリ（M6-C / M7-B）— 制度データ保存基盤からの提供
  *
  * 責務:
- * - 公式情報を確認できた制度から順に、確認済みデータでモックを更新する
- *   （同一 ID で置き換え。一度にモックを全削除しない）
- * - 未確認の制度は既存のモックデータ（mockPrograms.ts）のまま提供する
- *   （安全なモック表示を維持）
+ * - 制度データの供給元は data/programs/programs.json（制度データ保存基盤、
+ *   M7-B）。lib/supports/programStore.ts 経由で検証済みの SupportProgram[] を
+ *   提供する（型・ID・金額・検証状態は保存データそのまま。推測で補完しない）
  * - 確認済み制度と未確認モック制度は、program.mock / program.verification で
  *   常に区別できる（画面上でもバッジで区別する）
+ * - 制度の追加・更新は JSON の編集のみで完結する（TypeScript ファイルの編集に
+ *   依存しない）。検証状態を勝手に格上げしないこと
  *
- * 【外部通信なし】fetch や AI API は行わない（公式照合の結果は
- * lib/supports/officialPrograms.ts の調査ログとして保持する）。
+ * 【外部通信なし】fetch や AI API は行わない（公式照合の結果は情報源台帳
+ * lib/supports/sourceLedger.ts 側が保持し、制度データは sources[].sourceRecordId
+ * で紐付け口を持つ）。
+ *
+ * ※ M6-C までの「モック＋公式確認済みデータのマージ」は M7-B の移行で完了し、
+ *   統合結果が data/programs/programs.json に保存されている。移行前のデータは
+ *   scripts/fixtures/m7b-pre-migration.json（テスト用スナップショット）に記録。
  */
-import { z } from 'zod'
-import { supportProgramSchema, type SupportProgram } from '../types/support'
-import {
-  MOCK_SUPPORT_PROGRAMS,
-  MOCK_DISCLAIMER,
-} from './mockPrograms'
-import { buildOfficialPrograms } from './officialPrograms'
+import type { SupportProgram } from '../types/support'
+import { MOCK_DISCLAIMER } from './mockPrograms'
+import { getProgramStore } from './programStore'
 
 /**
  * レジストリ全体の免責（確認済み・未確認が混在することを明示する）。
@@ -29,40 +31,14 @@ export const REGISTRY_DISCLAIMER =
   'この制度情報には、公式ページと照合済みの情報（確認日を明記）と、未確認のモック・仮データが含まれます。確認済み・未確認の区別は各制度カードのバッジと要確認項目をご確認ください。金額・受給資格は確定情報ではなく、実際の申請は自治体・公式窓口で確認してください。'
 
 /**
- * 確認済みデータと未確認モックを統合した制度一覧を返す（純関数）。
+ * 制度データ保存基盤（data/programs/programs.json）の制度一覧を返す。
  *
- * - 公式調査データがある ID の制度は、確認済みデータで更新する
- *   （未確認の項目は公式側の「未確認」表現のまま残す＝推測で補完しない）
- * - 公式調査データが無い ID のモックはそのまま残す
- * - 新規の確認済み制度（モックに対応しない ID）は末尾に追加する
- * - 全件を supportProgramSchema で検証してから返す
+ * - 各制度は supportProgramSchema で検証済み（不正データは ProgramStoreError）
+ * - 未確認の項目は「未確認」表現のまま返す（推測で補完しない）
+ * - 返り値の配列は呼び出し元が並べ替えてもキャッシュに影響しない
  */
 export function getSupportPrograms(): SupportProgram[] {
-  const officialPrograms = buildOfficialPrograms()
-  const officialById = new Map(officialPrograms.map((p) => [p.id, p]))
-  const merged: SupportProgram[] = []
-  const consumedIds = new Set<string>()
-  for (const mock of MOCK_SUPPORT_PROGRAMS) {
-    const updated = officialById.get(mock.id)
-    if (updated !== undefined) {
-      merged.push(updated)
-      consumedIds.add(mock.id)
-    } else {
-      merged.push(mock)
-    }
-  }
-  for (const program of officialPrograms) {
-    if (!consumedIds.has(program.id)) merged.push(program)
-  }
-  const parsed = z.array(supportProgramSchema).safeParse(merged)
-  if (!parsed.success) {
-    throw new Error(
-      `支援制度レジストリの検証に失敗しました: ${parsed.error.issues
-        .map((i) => `${i.path.join('.')}: ${i.message}`)
-        .join(' / ')}`,
-    )
-  }
-  return parsed.data
+  return [...getProgramStore()]
 }
 
 /** まだモック（未確認）のまま残っている制度 ID（未確認＝確認が済んでいない制度） */

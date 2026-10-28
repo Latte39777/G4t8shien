@@ -1,0 +1,1214 @@
+{
+  "formatVersion": 1,
+  "savedAt": "2026-10-27T11:44:21.774Z",
+  "candidates": [
+    {
+      "candidateId": "cand-524889568224",
+      "taskId": "nation/pregnancy-birth",
+      "regionId": "nation",
+      "fieldId": "pregnancy-birth",
+      "name": "妊婦のための支援給付",
+      "summary": "妊娠期からの伴走型相談支援と組み合わせて実施する経済的支援。",
+      "implementer": "こども家庭庁",
+      "regionScope": null,
+      "kind": "cash_benefit",
+      "eligibility": {
+        "ageNote": null,
+        "householdNote": null,
+        "incomeNote": null,
+        "other": []
+      },
+      "amount": {
+        "value": null,
+        "unit": null,
+        "description": null
+      },
+      "application": {
+        "how": null,
+        "deadlineNote": null,
+        "documents": []
+      },
+      "fiscalYear": "令和7年度",
+      "validPeriod": null,
+      "sourceUrl": "https://www.cfa.go.jp/policies/shussan-kosodate",
+      "sourceRecordId": "src-www-cfa-go-jp-policies-shussan-kosodate",
+      "retrievedAt": "2026-10-27T11:09:55.443Z",
+      "contentHash": "685736264f07ce23823637a129df89e8aa8109e567bf239598a70a9ade7e0ca1",
+      "evidenceQuotes": [
+        {
+          "field": "summary",
+          "quote": "妊娠期から面談を通じて出産・子育ての相談に応じ、様々なニーズに即した必要な支援につなぐ伴走型の相談支援と妊婦のための支援給付による経済的支援を組み合わせて実施します。"
+        },
+        {
+          "field": "fiscalYear",
+          "quote": "令和4年度補正予算から始まった「出産・子育て応援交付金事業」を令和7年度から法律に基づく制度として実施します。"
+        },
+        {
+          "field": "implementer",
+          "quote": "妊産婦への伴走型相談支援と経済的支援の一体的実施（妊婦等包括相談支援事業・妊婦のための支援給付）｜こども家庭庁"
+        }
+      ],
+      "unknownItems": [
+        "regionScope",
+        "eligibility.ageNote",
+        "eligibility.householdNote",
+        "eligibility.incomeNote",
+        "amount",
+        "application.how",
+        "application.deadlineNote",
+        "application.documents",
+        "validPeriod"
+      ],
+      "unconfirmedItems": [],
+      "discoveryMethod": "ai-extraction",
+      "extractionModel": "iniad:gpt-5.4",
+      "firstExtractedAt": "2026-10-27T11:12:08.588Z",
+      "extractedAt": "2026-10-27T11:12:08.588Z",
+      "status": "approved",
+      "dedupeKey": "nation|こども家庭庁|妊婦のための支援給付|令和7年度|https://www.cfa.go.jp/policies/shussan-kosodate",
+      "recheckReason": null,
+      "fieldVerifications": [
+        {
+          "field": "amount.value",
+          "value": "（記載なし）",
+          "evidenceQuote": "妊娠期から面談を通じて出産・子育ての相談に応じ、様々なニーズに即した必要な支援につなぐ伴走型の相談支援と妊婦のための支援給付による経済的支援を組み合わせて実施します。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:32:28.879Z",
+          "contentHash": "685736264f07ce23823637a129df89e8aa8109e567bf239598a70a9ade7e0ca1"
+        },
+        {
+          "field": "eligibility.age",
+          "value": "（記載なし）",
+          "evidenceQuote": "妊娠期から面談を通じて出産・子育ての相談に応じ、様々なニーズに即した必要な支援につなぐ伴走型の相談支援と妊婦のための支援給付による経済的支援を組み合わせて実施します。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:32:30.031Z",
+          "contentHash": "685736264f07ce23823637a129df89e8aa8109e567bf239598a70a9ade7e0ca1"
+        },
+        {
+          "field": "eligibility.household",
+          "value": "（記載なし）",
+          "evidenceQuote": "妊娠期から面談を通じて出産・子育ての相談に応じ、様々なニーズに即した必要な支援につなぐ伴走型の相談支援と妊婦のための支援給付による経済的支援を組み合わせて実施します。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:32:31.168Z",
+          "contentHash": "685736264f07ce23823637a129df89e8aa8109e567bf239598a70a9ade7e0ca1"
+        },
+        {
+          "field": "eligibility.income",
+          "value": "（記載なし）",
+          "evidenceQuote": "妊娠期から面談を通じて出産・子育ての相談に応じ、様々なニーズに即した必要な支援につなぐ伴走型の相談支援と妊婦のための支援給付による経済的支援を組み合わせて実施します。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:32:32.321Z",
+          "contentHash": "685736264f07ce23823637a129df89e8aa8109e567bf239598a70a9ade7e0ca1"
+        },
+        {
+          "field": "application.deadline",
+          "value": "（記載なし）",
+          "evidenceQuote": "妊娠期から面談を通じて出産・子育ての相談に応じ、様々なニーズに即した必要な支援につなぐ伴走型の相談支援と妊婦のための支援給付による経済的支援を組み合わせて実施します。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:32:33.462Z",
+          "contentHash": "685736264f07ce23823637a129df89e8aa8109e567bf239598a70a9ade7e0ca1"
+        },
+        {
+          "field": "regionScope",
+          "value": "（記載なし）",
+          "evidenceQuote": "妊娠期から面談を通じて出産・子育ての相談に応じ、様々なニーズに即した必要な支援につなぐ伴走型の相談支援と妊婦のための支援給付による経済的支援を組み合わせて実施します。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:32:34.607Z",
+          "contentHash": "685736264f07ce23823637a129df89e8aa8109e567bf239598a70a9ade7e0ca1"
+        },
+        {
+          "field": "validPeriod",
+          "value": "（記載なし）",
+          "evidenceQuote": "妊娠期から面談を通じて出産・子育ての相談に応じ、様々なニーズに即した必要な支援につなぐ伴走型の相談支援と妊婦のための支援給付による経済的支援を組み合わせて実施します。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:32:35.756Z",
+          "contentHash": "685736264f07ce23823637a129df89e8aa8109e567bf239598a70a9ade7e0ca1"
+        },
+        {
+          "field": "fiscalYear",
+          "value": "令和7年度",
+          "evidenceQuote": "令和4年度補正予算から始まった「出産・子育て応援交付金事業」を令和7年度から法律に基づく制度として実施します。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:32:36.906Z",
+          "contentHash": "685736264f07ce23823637a129df89e8aa8109e567bf239598a70a9ade7e0ca1"
+        }
+      ],
+      "publication": {
+        "programId": "disc-524889568224",
+        "publishedAt": "2026-10-27T11:33:20.928Z",
+        "mode": "new",
+        "supersedesProgramIds": []
+      }
+    },
+    {
+      "candidateId": "cand-f1e367aebeed",
+      "taskId": "nation/single-parent-support",
+      "regionId": "nation",
+      "fieldId": "single-parent-support",
+      "name": "母子家庭等対策総合支援事業",
+      "summary": "都道府県等が実施するひとり親家庭等に対する事業の実施に要する経費に対し、補助金を交付し、地域におけるひとり親家庭等対策の一層の普及促進を図る事業。",
+      "implementer": "都道府県等",
+      "regionScope": null,
+      "kind": "other",
+      "eligibility": {
+        "ageNote": null,
+        "householdNote": "ひとり親家庭等",
+        "incomeNote": null,
+        "other": []
+      },
+      "amount": {
+        "value": null,
+        "unit": null,
+        "description": "補助金を交付"
+      },
+      "application": {
+        "how": null,
+        "deadlineNote": null,
+        "documents": []
+      },
+      "fiscalYear": null,
+      "validPeriod": null,
+      "sourceUrl": "https://www.cfa.go.jp/policies/hitori-oya",
+      "sourceRecordId": "src-www-cfa-go-jp-policies-hitori-oya",
+      "retrievedAt": "2026-10-27T11:13:54.602Z",
+      "contentHash": "d746297c5477b453dc9c397838b264bb350186e958d19d7047b76ad4d8bf8206",
+      "evidenceQuotes": [
+        {
+          "field": "summary",
+          "quote": "本事業は、都道府県等が実施するひとり親家庭等に対する事業の実施に要する経費に対し、補助金を交付し、地域におけるひとり親家庭等対策の一層の普及促進を図る事業です。"
+        },
+        {
+          "field": "implementer",
+          "quote": "本事業は、都道府県等が実施するひとり親家庭等に対する事業の実施に要する経費に対し、補助金を交付し、地域におけるひとり親家庭等対策の一層の普及促進を図る事業です。"
+        },
+        {
+          "field": "eligibility.householdNote",
+          "quote": "本事業は、都道府県等が実施するひとり親家庭等に対する事業の実施に要する経費に対し、補助金を交付し、地域におけるひとり親家庭等対策の一層の普及促進を図る事業です。"
+        },
+        {
+          "field": "amount.description",
+          "quote": "本事業は、都道府県等が実施するひとり親家庭等に対する事業の実施に要する経費に対し、補助金を交付し、地域におけるひとり親家庭等対策の一層の普及促進を図る事業です。"
+        }
+      ],
+      "unknownItems": [
+        "ageNote",
+        "incomeNote",
+        "amount.value",
+        "amount.unit",
+        "application.how",
+        "application.deadlineNote",
+        "application.documents",
+        "fiscalYear",
+        "validPeriod"
+      ],
+      "unconfirmedItems": [
+        {
+          "field": "regionScope",
+          "reason": "本文の根拠抜粋がないため確定扱いにしません（要検証）"
+        }
+      ],
+      "discoveryMethod": "ai-extraction",
+      "extractionModel": "iniad:gpt-5.4",
+      "firstExtractedAt": "2026-10-27T11:13:55.864Z",
+      "extractedAt": "2026-10-27T11:13:55.864Z",
+      "status": "discarded",
+      "dedupeKey": "nation|都道府県等|母子家庭等対策総合支援事業|unknown|https://www.cfa.go.jp/policies/hitori-oya",
+      "recheckReason": null
+    },
+    {
+      "candidateId": "cand-5e49e6b60a59",
+      "taskId": "tokyo/higher-education",
+      "regionId": "tokyo",
+      "fieldId": "higher-education",
+      "name": "奨学金返還支援制度",
+      "summary": "東京都では、奨学金の貸与を受けていた大学生等が、都内で勤務する教員、都市の強靭化に携わる技術系公務員、首都東京の治安維持・強靭化を支える警察人材や消防人材になった場合に、奨学金の返還を支援する取組を実施しています。",
+      "implementer": "東京都",
+      "regionScope": "都内",
+      "kind": "other",
+      "eligibility": {
+        "ageNote": null,
+        "householdNote": null,
+        "incomeNote": null,
+        "other": [
+          "奨学金の貸与を受けていた大学生等",
+          "都内の公立・私立の幼稚園～高校等に採用された教員",
+          "東京都や都内区市町村に技術職（土木・建築・機械・電気）として採用された職員",
+          "警視庁に採用された職員",
+          "東京消防庁及び稲城市・大島町・三宅村・八丈町消防本部に採用された職員",
+          "日本学生支援機構の貸与型奨学金のほか、本人以外の第三者による代理での返還を認めている公的機関等が実施する貸与型奨学金も支援の対象となる場合がある",
+          "本人以外が貸与を受けた場合や、教育ローン等は対象にならない"
+        ]
+      },
+      "amount": {
+        "value": 1500000,
+        "unit": "other",
+        "description": "大学等の在学時に貸与を受けた奨学金について、奨学金返還総額（採用時の返還残額）の1/2の額を都が本人に代わって返還。上限額150万円。技術系公務員・警察職員・消防職員で大学院でも貸与を受けていた場合は225万円。"
+      },
+      "application": {
+        "how": "事前の申請は不要。就職後、奨学金の残額を証明する書類などと合わせて申請。",
+        "deadlineNote": null,
+        "documents": [
+          "奨学金の残額を証明する書類"
+        ]
+      },
+      "fiscalYear": "令和8年度",
+      "validPeriod": "採用2年目から11年目までの10年間（最長）",
+      "sourceUrl": "https://www.kodomoseisaku.metro.tokyo.lg.jp/syougakukinhenkansien",
+      "sourceRecordId": "src-www-kodomoseisaku-metro-tokyo-lg-jp-syougakukinhenkansien",
+      "retrievedAt": "2026-10-27T11:15:15.765Z",
+      "contentHash": "3f1cda8ee18860afe294ea3948b31b860d0730ec75b646b482459ced09769954",
+      "evidenceQuotes": [
+        {
+          "field": "summary",
+          "quote": "東京都では、奨学金の貸与を受けていた大学生等が、「都内で勤務する教員」や「都市の強靭化に携わる技術系公務員」「首都東京の治安維持・強靭化を支える警察人材や消防人材」になった場合に、奨学金の返還を支援する取組を実施しています。"
+        },
+        {
+          "field": "implementer",
+          "quote": "東京都では、奨学金の貸与を受けていた大学生等が、「都内で勤務する教員」や「都市の強靭化に携わる技術系公務員」「首都東京の治安維持・強靭化を支える警察人材や消防人材」になった場合に、奨学金の返還を支援する取組を実施しています。"
+        },
+        {
+          "field": "regionScope",
+          "quote": "東京都では、奨学金の貸与を受けていた大学生等が、「都内で勤務する教員」や「都市の強靭化に携わる技術系公務員」「首都東京の治安維持・強靭化を支える警察人材や消防人材」になった場合に、奨学金の返還を支援する取組を実施しています。"
+        },
+        {
+          "field": "eligibility.other",
+          "quote": "１.対象者 （教員） ・都内の公立・私立の幼稚園～高校等に採用された教員 （技術系公務員） ・東京都や都内区市町村に技術職（土木・建築・機械・電気）として採用された職員 （警察職員） ・警視庁に採用された職員 （消防職員） ・東京消防庁及び稲城市・大島町・三宅村・八丈町消防本部に採用された職員"
+        },
+        {
+          "field": "amount",
+          "quote": "２.支援内容 大学等の在学時に貸与を受けた奨学金について、奨学金返還総額（採用時の返還残額）の1/2の額を都が本人に代わって返還します（上限額150万円。技術系公務員・警察職員・消防職員で大学院でも貸与を受けていた場合は225万円）。"
+        },
+        {
+          "field": "validPeriod",
+          "quote": "返還支援を行う期間は採用２年目から11年目までの10年間（最長）です。"
+        },
+        {
+          "field": "application.how",
+          "quote": "Q.在学中や就職前の申請は必要でしょうか。 A.事前の申請は不要です。就職後、奨学金の残額を証明する書類などと合わせて申請をしていただきます。"
+        },
+        {
+          "field": "application.documents",
+          "quote": "Q.在学中や就職前の申請は必要でしょうか。 A.事前の申請は不要です。就職後、奨学金の残額を証明する書類などと合わせて申請をしていただきます。"
+        },
+        {
+          "field": "eligibility.other",
+          "quote": "Q.支援の対象となる奨学金を教えてください。 A.日本学生支援機構の貸与型奨学金のほか、本人以外の第三者による代理での返還を認めている公的機関等が実施する貸与型奨学金も支援の対象となる場合があります。 第三者による代理での返還を認めているかどうかは、貸与を受けた団体にお問い合わせください。 ※本人以外が貸与を受けた場合や、教育ローン等は対象になりません。"
+        },
+        {
+          "field": "fiscalYear",
+          "quote": "奨学金返還支援制度｜令和8年度 警視庁採用サイト"
+        }
+      ],
+      "unknownItems": [
+        "制度の正式名称の明記",
+        "対象年齢",
+        "世帯要件",
+        "所得要件",
+        "申請期限",
+        "支給開始時期",
+        "問い合わせ先の具体的連絡先"
+      ],
+      "unconfirmedItems": [],
+      "discoveryMethod": "ai-extraction",
+      "extractionModel": "iniad:gpt-5.4",
+      "firstExtractedAt": "2026-10-27T11:15:16.939Z",
+      "extractedAt": "2026-10-27T11:15:16.939Z",
+      "status": "approved",
+      "dedupeKey": "tokyo|東京都|奨学金返還支援制度|令和8年度|https://www.kodomoseisaku.metro.tokyo.lg.jp/syougakukinhenkansien",
+      "recheckReason": null,
+      "fieldVerifications": [
+        {
+          "field": "amount.value",
+          "value": "大学等の在学時に貸与を受けた奨学金について、奨学金返還総額（採用時の返還残額）の1/2の額を都が本人に代わって返還。上限額150万円。技術系公務員・警察職員・消防職員で大学院でも貸与を受けていた場合は225万円。",
+          "evidenceQuote": "２.支援内容 大学等の在学時に貸与を受けた奨学金について、奨学金返還総額（採用時の返還残額）の1/2の額を都が本人に代わって返還します（上限額150万円。技術系公務員・警察職員・消防職員で大学院でも貸与を受けていた場合は225万円）。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:42:10.726Z",
+          "contentHash": "3f1cda8ee18860afe294ea3948b31b860d0730ec75b646b482459ced09769954"
+        },
+        {
+          "field": "eligibility.age",
+          "value": "（記載なし）",
+          "evidenceQuote": "東京都では、奨学金の貸与を受けていた大学生等が、「都内で勤務する教員」や「都市の強靭化に携わる技術系公務員」「首都東京の治安維持・強靭化を支える警察人材や消防人材」になった場合に、奨学金の返還を支援する取組を実施しています。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:42:11.875Z",
+          "contentHash": "3f1cda8ee18860afe294ea3948b31b860d0730ec75b646b482459ced09769954"
+        },
+        {
+          "field": "eligibility.household",
+          "value": "（記載なし）",
+          "evidenceQuote": "東京都では、奨学金の貸与を受けていた大学生等が、「都内で勤務する教員」や「都市の強靭化に携わる技術系公務員」「首都東京の治安維持・強靭化を支える警察人材や消防人材」になった場合に、奨学金の返還を支援する取組を実施しています。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:42:13.037Z",
+          "contentHash": "3f1cda8ee18860afe294ea3948b31b860d0730ec75b646b482459ced09769954"
+        },
+        {
+          "field": "eligibility.income",
+          "value": "（記載なし）",
+          "evidenceQuote": "東京都では、奨学金の貸与を受けていた大学生等が、「都内で勤務する教員」や「都市の強靭化に携わる技術系公務員」「首都東京の治安維持・強靭化を支える警察人材や消防人材」になった場合に、奨学金の返還を支援する取組を実施しています。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:42:14.165Z",
+          "contentHash": "3f1cda8ee18860afe294ea3948b31b860d0730ec75b646b482459ced09769954"
+        },
+        {
+          "field": "application.deadline",
+          "value": "（記載なし）",
+          "evidenceQuote": "東京都では、奨学金の貸与を受けていた大学生等が、「都内で勤務する教員」や「都市の強靭化に携わる技術系公務員」「首都東京の治安維持・強靭化を支える警察人材や消防人材」になった場合に、奨学金の返還を支援する取組を実施しています。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:43:37.340Z",
+          "contentHash": "3f1cda8ee18860afe294ea3948b31b860d0730ec75b646b482459ced09769954"
+        },
+        {
+          "field": "regionScope",
+          "value": "都内",
+          "evidenceQuote": "東京都では、奨学金の貸与を受けていた大学生等が、「都内で勤務する教員」や「都市の強靭化に携わる技術系公務員」「首都東京の治安維持・強靭化を支える警察人材や消防人材」になった場合に、奨学金の返還を支援する取組を実施しています。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:43:38.499Z",
+          "contentHash": "3f1cda8ee18860afe294ea3948b31b860d0730ec75b646b482459ced09769954"
+        },
+        {
+          "field": "fiscalYear",
+          "value": "令和8年度",
+          "evidenceQuote": "奨学金返還支援制度｜令和8年度 警視庁採用サイト",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:43:39.640Z",
+          "contentHash": "3f1cda8ee18860afe294ea3948b31b860d0730ec75b646b482459ced09769954"
+        },
+        {
+          "field": "validPeriod",
+          "value": "採用2年目から11年目までの10年間（最長）",
+          "evidenceQuote": "返還支援を行う期間は採用２年目から11年目までの10年間（最長）です。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:43:40.817Z",
+          "contentHash": "3f1cda8ee18860afe294ea3948b31b860d0730ec75b646b482459ced09769954"
+        }
+      ]
+    },
+    {
+      "candidateId": "cand-8ee179e3b51b",
+      "taskId": "shinjuku-ku/child-allowance-cash",
+      "regionId": "shinjuku-ku",
+      "fieldId": "child-allowance-cash",
+      "name": "新宿区子育て応援臨時給付金",
+      "summary": "物価高の影響が長期化する中、特にその影響を強く受けている子育て世帯を応援し、子どもたちの健やかな成長を応援する観点から、国の重点支援地方交付金を活用して新宿区が支給する臨時給付金。",
+      "implementer": "新宿区",
+      "regionScope": "新宿区",
+      "kind": "cash_benefit",
+      "eligibility": {
+        "ageNote": null,
+        "householdNote": "子育て世帯",
+        "incomeNote": null,
+        "other": [
+          "令和8年9月分の児童手当を受給している方（公務員を除く）",
+          "所属庁から令和8年9月分の児童手当を受給している公務員の方",
+          "令和8年9月分の児童手当を受給していないが、受給要件を満たす方",
+          "対象児童は「令和8年9月分の児童手当の支給対象となる児童」",
+          "公務員の方は「新宿区に令和8年9月17日時点で住民登録があり」が必要",
+          "児童手当を受給していないが要件を満たす方は「令和8年9月17日時点において新宿区に住民登録があり、請求すれば令和8年9月分の児童手当を受給できる状態であったことが確認できる方」",
+          "児童手当を受給していない方は、併せて児童手当を請求し、認定されることが必要"
+        ]
+      },
+      "amount": {
+        "value": 10000,
+        "unit": "yen_one_time",
+        "description": "対象児童1人につき、1回限り"
+      },
+      "application": {
+        "how": "令和8年9月分の児童手当を新宿区から受給している方（公務員を除く）は申請不要。所属庁から令和8年9月分の児童手当を受給している公務員の方、および令和8年9月分の児童手当を受給していないが受給要件を満たす方は、申請用紙に必要事項を記入の上、郵送又は直接提出。",
+        "deadlineNote": "公務員の方、および令和8年9月分の児童手当を受給していないが受給要件を満たす方の受付期間は令和8年11月2日（月）～令和9年1月29日（金）（必着）。令和8年10月9日（金）に児童手当が入金された方の受給拒否届出は令和8年10月23日（金）（必着）まで。",
+        "documents": [
+          "新宿区子育て応援臨時給付金申請書（公務員支給対象者・その他用）（様式第3号）",
+          "所属庁から令和8年9月分の児童手当を受給している証明（児童手当の支給決定通知書や振込通知書、給与明細書や児童手当振込口座の通帳の写し（児童手当の入金記録が分かるもの））",
+          "（公務員用）児童手当受給状況証明書（任意様式）",
+          "本人確認書類（マイナンバーカード（表面）、運転免許証等。郵送の場合は写し）",
+          "振込先金融機関口座を確認できる書類の写し"
+        ]
+      },
+      "fiscalYear": "令和8年度",
+      "validPeriod": null,
+      "sourceUrl": "https://www.city.shinjuku.lg.jp/kodomo/jidoikusei01_000001_00008.html",
+      "sourceRecordId": "src-www-city-shinjuku-lg-jp-kodomo-jidoikusei01-000001-00008-html",
+      "retrievedAt": "2026-10-27T11:15:36.488Z",
+      "contentHash": "c121fed563da4b4c37fcb0e87f9c317b71e406b1483fff2326c448b7d189388b",
+      "evidenceQuotes": [
+        {
+          "field": "name",
+          "quote": "下記のとおり区独自の子育て応援臨時給付金（以下「応援臨時給付金」といいます。）を支給します。"
+        },
+        {
+          "field": "summary",
+          "quote": "物価高の影響が長期化する中、特に、その影響を強く受けている子育て世帯を応援し、子どもたちの健やかな成長を応援する観点から、国の重点支援地方交付金を活用し、下記のとおり区独自の子育て応援臨時給付金（以下「応援臨時給付金」といいます。）を支給します。"
+        },
+        {
+          "field": "implementer",
+          "quote": "新宿区子育て応援臨時給付金"
+        },
+        {
+          "field": "regionScope",
+          "quote": "新宿区に令和8年9月17日時点で住民登録があり、所属庁から令和8年9月分の児童手当を受給している公務員の方は、申請が必要です。"
+        },
+        {
+          "field": "kind",
+          "quote": "区独自の子育て応援臨時給付金（以下「応援臨時給付金」といいます。）を支給します。"
+        },
+        {
+          "field": "eligibility.householdNote",
+          "quote": "特に、その影響を強く受けている子育て世帯を応援し"
+        },
+        {
+          "field": "eligibility.other",
+          "quote": "支給対象者 1 令和8年9月分の児童手当を受給している方（公務員を除く）"
+        },
+        {
+          "field": "eligibility.other",
+          "quote": "2 所属庁から令和8年9月分の児童手当を受給している公務員の方"
+        },
+        {
+          "field": "eligibility.other",
+          "quote": "3 令和8年9月分の児童手当を受給していないが、受給要件を満たす方"
+        },
+        {
+          "field": "eligibility.other",
+          "quote": "対象児童 令和8年9月分の児童手当の支給対象となる児童"
+        },
+        {
+          "field": "eligibility.other",
+          "quote": "新宿区に令和8年9月17日時点で住民登録があり、所属庁から令和8年9月分の児童手当を受給している公務員の方は、申請が必要です。"
+        },
+        {
+          "field": "eligibility.other",
+          "quote": "令和8年9月分の児童手当を受給していないが、令和8年9月17日時点において新宿区に住民登録があり、請求すれば令和8年9月分の児童手当を受給できる状態であったことが確認できる方（児童手当の請求が遅れたために、令和8年9月分を受給できなかった方等）は、申請することで応援臨時給付金を受給できます。"
+        },
+        {
+          "field": "eligibility.other",
+          "quote": "※児童手当を受給していない方は、併せて児童手当を請求し、認定されることが必要です。"
+        },
+        {
+          "field": "amount",
+          "quote": "支給額 対象児童1人につき、 10,000円 （1回限り）です。"
+        },
+        {
+          "field": "application.how",
+          "quote": "新宿区から令和8年9月分の児童手当を受給している方は、 申請不要 です。"
+        },
+        {
+          "field": "application.how",
+          "quote": "申請用紙に必要事項をご記入の上、郵送又は直接、下記の提出先までご提出ください。"
+        },
+        {
+          "field": "application.deadlineNote",
+          "quote": "【受付期間】 令和8年11月2日（月）～令和9年1月29日（金）（必着）"
+        },
+        {
+          "field": "application.deadlineNote",
+          "quote": "「新宿区子育て応援臨時給付金 受給拒否の届出書（様式第1号）」 に必要事項をご記入の上、令和8年10月23日（金）（必着）までに郵送又は直接、下記の提出先までご提出ください。"
+        },
+        {
+          "field": "application.documents",
+          "quote": "【提出書類】 ・ 新宿区子育て応援臨時給付金申請書（公務員支給対象者・その他用）（様式第3号） ・所属庁から令和8年9月分の児童手当を受給している証明（児童手当の支給決定通知書や振込通知書、給与明細書や児童手当振込口座の通帳の写し（児童手当の入金記録が分かるもの））"
+        },
+        {
+          "field": "application.documents",
+          "quote": "※これらの用意が難しい場合は、 「（公務員用）児童手当受給状況証明書」（任意様式） の作成を人事担当部署に依頼してください。"
+        },
+        {
+          "field": "application.documents",
+          "quote": "・本人確認書類（マイナンバーカード（表面）、運転免許証等。郵送の場合は写しをご提出ください。）"
+        },
+        {
+          "field": "application.documents",
+          "quote": "・振込先金融機関口座を確認できる書類の写し"
+        },
+        {
+          "field": "fiscalYear",
+          "quote": "対象者 支給対象者 1 令和8年9月分の児童手当を受給している方"
+        }
+      ],
+      "unknownItems": [
+        "eligibility.ageNote",
+        "eligibility.incomeNote",
+        "validPeriod"
+      ],
+      "unconfirmedItems": [],
+      "discoveryMethod": "ai-extraction",
+      "extractionModel": "iniad:gpt-5.4",
+      "firstExtractedAt": "2026-10-27T11:15:37.659Z",
+      "extractedAt": "2026-10-27T11:15:37.659Z",
+      "status": "approved",
+      "dedupeKey": "shinjuku-ku|新宿区|新宿区子育て応援臨時給付金|令和8年度|https://www.city.shinjuku.lg.jp/kodomo/jidoikusei01_000001_00008.html",
+      "recheckReason": null,
+      "fieldVerifications": [
+        {
+          "field": "amount.value",
+          "value": "10000",
+          "evidenceQuote": "支給額 対象児童1人につき、 10,000円 （1回限り）です。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:34:21.526Z",
+          "contentHash": "c121fed563da4b4c37fcb0e87f9c317b71e406b1483fff2326c448b7d189388b"
+        },
+        {
+          "field": "eligibility.age",
+          "value": "（記載なし）",
+          "evidenceQuote": "物価高の影響が長期化する中、特に、その影響を強く受けている子育て世帯を応援し、子どもたちの健やかな成長を応援する観点から、国の重点支援地方交付金を活用し、下記のとおり区独自の子育て応援臨時給付金（以下「応援臨時給付金」といいます。）を支給します。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:34:22.672Z",
+          "contentHash": "c121fed563da4b4c37fcb0e87f9c317b71e406b1483fff2326c448b7d189388b"
+        },
+        {
+          "field": "eligibility.household",
+          "value": "子育て世帯",
+          "evidenceQuote": "特に、その影響を強く受けている子育て世帯を応援し",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:34:23.814Z",
+          "contentHash": "c121fed563da4b4c37fcb0e87f9c317b71e406b1483fff2326c448b7d189388b"
+        },
+        {
+          "field": "eligibility.income",
+          "value": "（記載なし）",
+          "evidenceQuote": "物価高の影響が長期化する中、特に、その影響を強く受けている子育て世帯を応援し、子どもたちの健やかな成長を応援する観点から、国の重点支援地方交付金を活用し、下記のとおり区独自の子育て応援臨時給付金（以下「応援臨時給付金」といいます。）を支給します。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:34:24.948Z",
+          "contentHash": "c121fed563da4b4c37fcb0e87f9c317b71e406b1483fff2326c448b7d189388b"
+        },
+        {
+          "field": "application.deadline",
+          "value": "公務員の方、および令和8年9月分の児童手当を受給していないが受給要件を満たす方の受付期間は令和8年11月2日（月）～令和9年1月29日（金）（必着）。令和8年10月9日（金）に児童手当が入金された方の受給拒否届出は令和8年10月23日（金）（必着）まで。",
+          "evidenceQuote": "【受付期間】 令和8年11月2日（月）～令和9年1月29日（金）（必着）",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:34:56.080Z",
+          "contentHash": "c121fed563da4b4c37fcb0e87f9c317b71e406b1483fff2326c448b7d189388b"
+        },
+        {
+          "field": "regionScope",
+          "value": "新宿区",
+          "evidenceQuote": "新宿区子育て応援臨時給付金",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:34:57.237Z",
+          "contentHash": "c121fed563da4b4c37fcb0e87f9c317b71e406b1483fff2326c448b7d189388b"
+        },
+        {
+          "field": "fiscalYear",
+          "value": "令和8年度",
+          "evidenceQuote": "対象者 支給対象者 1 令和8年9月分の児童手当を受給している方",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:34:58.403Z",
+          "contentHash": "c121fed563da4b4c37fcb0e87f9c317b71e406b1483fff2326c448b7d189388b"
+        },
+        {
+          "field": "validPeriod",
+          "value": "（記載なし）",
+          "evidenceQuote": "物価高の影響が長期化する中、特に、その影響を強く受けている子育て世帯を応援し、子どもたちの健やかな成長を応援する観点から、国の重点支援地方交付金を活用し、下記のとおり区独自の子育て応援臨時給付金（以下「応援臨時給付金」といいます。）を支給します。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:34:59.574Z",
+          "contentHash": "c121fed563da4b4c37fcb0e87f9c317b71e406b1483fff2326c448b7d189388b"
+        }
+      ],
+      "publication": {
+        "programId": "disc-8ee179e3b51b",
+        "publishedAt": "2026-10-27T11:35:48.424Z",
+        "mode": "new",
+        "supersedesProgramIds": []
+      }
+    },
+    {
+      "candidateId": "cand-31aebe48dfd2",
+      "taskId": "setagaya-ku/childcare-early-education",
+      "regionId": "setagaya-ku",
+      "fieldId": "childcare-early-education",
+      "name": "世田谷版こども誰でも通園制度（乳児等通園支援事業）",
+      "summary": "保護者の就労等の有無にかかわらず、保育園や幼稚園などを利用していない子どもを一定期間、定期的に預かる制度。国の月10時間の利用枠に加え、世田谷区が利用枠を上乗せし、区内施設では最大月48時間まで利用可能。世田谷区民が区内施設を利用する場合の利用料金は無償。",
+      "implementer": "世田谷区",
+      "regionScope": null,
+      "kind": "fee_reduction",
+      "eligibility": {
+        "ageNote": "認可保育園、地域型保育事業、認定こども園、幼稚園、企業主導型保育施設のいずれの保育施設にも在籍していない、生後6か月～2歳児クラス年齢（3歳の誕生日を迎えた年度末）のお子さん（対象年齢は施設種別により異なります）。",
+        "householdNote": null,
+        "incomeNote": null,
+        "other": [
+          "認可保育園、地域型保育事業、認定こども園、幼稚園、企業主導型保育施設のいずれの保育施設にも在籍していないこと",
+          "世田谷区民の方が区内の施設を利用した場合に無償",
+          "事前に乳児等支援給付認定を受けること",
+          "世田谷区内の施設では「定期利用」のみを実施"
+        ]
+      },
+      "amount": {
+        "value": 0,
+        "unit": "other",
+        "description": "世田谷区民の方が区内の施設を利用した場合は無償（世田谷区が負担）。利用可能時間は最大月48時間（国制度10時間＋区上乗せ枠38時間）。"
+      },
+      "application": {
+        "how": "事前に乳児等支援給付認定を受けた上で、国の「こども誰でも通園制度総合支援システム」から利用申込を行う。認定に関するページからオンライン申請フォームにアクセスして申請し、その後システムで希望施設を検索して初回面談を申し込む。",
+        "deadlineNote": "私立保育園、私立認定こども園、地域型保育事業は、令和8年（2026年）4月利用申込は令和8年（2026年）3月5日より受付開始。それ以降は利用希望月の前月1日以降申込み可能。認証保育所、私立幼稚園は令和8年（2026年）4月利用申込は令和8年（2026年）3月5日より受付開始し、それ以降は施設により異なる。",
+        "documents": []
+      },
+      "fiscalYear": "令和8年度（2026年度）",
+      "validPeriod": "施設種別ごとに利用期間が異なり、私立認可保育園・私立認定こども園・地域型保育事業は2か月、認証保育所・私立幼稚園は2か月以上。",
+      "sourceUrl": "https://www.city.setagaya.lg.jp/02243/29576.html",
+      "sourceRecordId": "src-www-city-setagaya-lg-jp-02243-29576-html",
+      "retrievedAt": "2026-10-27T11:16:27.568Z",
+      "contentHash": "4d900845c016be8ec836ea6ccc2829dc06b9a086ab65b7a2e0a30cb324103e36",
+      "evidenceQuotes": [
+        {
+          "field": "summary",
+          "quote": "世田谷区では、「世田谷版こども誰でも通園制度」として、保育園や幼稚園などを利用していないお子さんを一定期間、定期的にお預かりし、友だちや保育士との関わりの中でお子さんの健やかな成長を促すとともに、保護者の方の孤立感や育児不安の軽減を図ります。"
+        },
+        {
+          "field": "amount",
+          "quote": "そのため、国が「乳児等のための支援給付」として定める全国で利用可能な月10時間の利用枠に加え、区内で定期的な預かりに利用できる利用枠の上乗せを行い、最大で月48時間まで利用可能とします。"
+        },
+        {
+          "field": "eligibility.ageNote",
+          "quote": "対象 認可保育園、地域型保育事業、認定こども園、幼稚園、企業主導型保育施設のいずれの保育施設にも在籍していない、生後6か月～2歳児クラス年齢（3歳の誕生日を迎えた年度末）のお子さん（対象年齢は施設種別により異なります）。"
+        },
+        {
+          "field": "amount",
+          "quote": "利用料金 世田谷区民の方 区内の施設を利用した場合 無償（世田谷区が負担）"
+        },
+        {
+          "field": "amount",
+          "quote": "利用可能時間 世田谷区民の方は、最大月48時間（国制度10時間＋区上乗せ枠38時間）の範囲で利用が可能です。"
+        },
+        {
+          "field": "application.how",
+          "quote": "利用までの流れ 事前に乳児等支援給付認定を受けた上で、国の「こども誰でも通園制度総合支援システム」（以下、「システム」といいます。）から利用申込を行います。"
+        },
+        {
+          "field": "application.how",
+          "quote": "１ 認定申請 こちらの認定に関するページ から、利用認定のオンライン申請フォームにアクセスし、申請してください。"
+        },
+        {
+          "field": "application.how",
+          "quote": "２ 初回面談の申込 世田谷区内の施設 令和8年（2026年）4月の利用申込は、令和8年（2026年）3月5日より、準備ができた施設から順次システム内で受付を開始します。システムで希望の施設を検索し、初回面談（定期的な利用）を申込んでください。"
+        },
+        {
+          "field": "application.deadlineNote",
+          "quote": "私立保育園、私立認定こども園、地域型保育事業 令和8年（2026年）4月の利用申込は、令和8年（2026年）3月5日より、準備ができた施設から順次システム内で受付を開始します。 それ以降は、利用希望月の前月1日（土日祝日や年末年始も含まれます。）以降、申込みが可能です。"
+        },
+        {
+          "field": "application.deadlineNote",
+          "quote": "認証保育所、私立幼稚園 令和8年（2026年）4月の利用申込は、令和8年（2026年）3月5日より、準備ができた施設から順次システム内で受付を開始します。 それ以降は、施設により異なります。"
+        },
+        {
+          "field": "fiscalYear",
+          "quote": "令和8年度（2026年度） 世田谷版こども誰でも通園制度 事業実施施設（予定）一覧（PDF：78KB）"
+        },
+        {
+          "field": "validPeriod",
+          "quote": "施設種別 実施方法 対象年齢（クラス年齢※） 利用期間 私立認可保育園 私立認定こども園 地域型保育事業 一般型（専用室実施型） 1歳児～2歳児 2か月 余裕活用型（空き定員を活用） 0歳児（生後6か月以上）～2歳児 認証保育所 一般型（在園児合同型） 0歳児（生後6か月以上）～2歳児 2か月以上 私立幼稚園 一般型（専用室実施型） 2歳児 2か月以上"
+        },
+        {
+          "field": "eligibility.other",
+          "quote": "世田谷区内の施設では「定期利用」のみを実施します。"
+        }
+      ],
+      "unknownItems": [
+        "householdNote",
+        "incomeNote",
+        "documents"
+      ],
+      "unconfirmedItems": [
+        {
+          "field": "regionScope",
+          "reason": "本文の根拠抜粋がないため確定扱いにしません（要検証）"
+        }
+      ],
+      "discoveryMethod": "ai-extraction",
+      "extractionModel": "iniad:gpt-5.4",
+      "firstExtractedAt": "2026-10-27T11:16:28.767Z",
+      "extractedAt": "2026-10-27T11:16:28.767Z",
+      "status": "approved",
+      "dedupeKey": "setagaya-ku|世田谷区|世田谷版こども誰でも通園制度(乳児等通園支援事業)|令和8年度（2026年度）|https://www.city.setagaya.lg.jp/02243/29576.html",
+      "recheckReason": null,
+      "fieldVerifications": [
+        {
+          "field": "amount.value",
+          "value": "世田谷区民の方が区内の施設を利用した場合は無償（世田谷区が負担）。利用可能時間は最大月48時間（国制度10時間＋区上乗せ枠38時間）。",
+          "evidenceQuote": "利用料金 世田谷区民の方 区内の施設を利用した場合 無償（世田谷区が負担）",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:36:21.857Z",
+          "contentHash": "4d900845c016be8ec836ea6ccc2829dc06b9a086ab65b7a2e0a30cb324103e36"
+        },
+        {
+          "field": "eligibility.age",
+          "value": "認可保育園、地域型保育事業、認定こども園、幼稚園、企業主導型保育施設のいずれの保育施設にも在籍していない、生後6か月～2歳児クラス年齢（3歳の誕生日を迎えた年度末）のお子さん（対象年齢は施設種別により異なります）。",
+          "evidenceQuote": "対象 認可保育園、地域型保育事業、認定こども園、幼稚園、企業主導型保育施設のいずれの保育施設にも在籍していない、生後6か月～2歳児クラス年齢（3歳の誕生日を迎えた年度末）のお子さん（対象年齢は施設種別により異なります）。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:36:23.007Z",
+          "contentHash": "4d900845c016be8ec836ea6ccc2829dc06b9a086ab65b7a2e0a30cb324103e36"
+        },
+        {
+          "field": "eligibility.household",
+          "value": "（記載なし）",
+          "evidenceQuote": "世田谷区では、「世田谷版こども誰でも通園制度」として、保育園や幼稚園などを利用していないお子さんを一定期間、定期的にお預かりし、友だちや保育士との関わりの中でお子さんの健やかな成長を促すとともに、保護者の方の孤立感や育児不安の軽減を図ります。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:36:24.162Z",
+          "contentHash": "4d900845c016be8ec836ea6ccc2829dc06b9a086ab65b7a2e0a30cb324103e36"
+        },
+        {
+          "field": "eligibility.income",
+          "value": "（記載なし）",
+          "evidenceQuote": "世田谷区では、「世田谷版こども誰でも通園制度」として、保育園や幼稚園などを利用していないお子さんを一定期間、定期的にお預かりし、友だちや保育士との関わりの中でお子さんの健やかな成長を促すとともに、保護者の方の孤立感や育児不安の軽減を図ります。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:36:25.315Z",
+          "contentHash": "4d900845c016be8ec836ea6ccc2829dc06b9a086ab65b7a2e0a30cb324103e36"
+        },
+        {
+          "field": "application.deadline",
+          "value": "私立保育園、私立認定こども園、地域型保育事業は、令和8年（2026年）4月利用申込は令和8年（2026年）3月5日より受付開始。それ以降は利用希望月の前月1日以降申込み可能。認証保育所、私立幼稚園は令和8年（2026年）4月利用申込は令和8年（2026年）3月5日より受付開始し、それ以降は施設により異なる。",
+          "evidenceQuote": "私立保育園、私立認定こども園、地域型保育事業 令和8年（2026年）4月の利用申込は、令和8年（2026年）3月5日より、準備ができた施設から順次システム内で受付を開始します。 それ以降は、利用希望月の前月1日（土日祝日や年末年始も含まれます。）以降、申込みが可能です。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:37:18.260Z",
+          "contentHash": "4d900845c016be8ec836ea6ccc2829dc06b9a086ab65b7a2e0a30cb324103e36"
+        },
+        {
+          "field": "regionScope",
+          "value": "（記載なし）",
+          "evidenceQuote": "世田谷区では、「世田谷版こども誰でも通園制度」として、保育園や幼稚園などを利用していないお子さんを一定期間、定期的にお預かりし、友だちや保育士との関わりの中でお子さんの健やかな成長を促すとともに、保護者の方の孤立感や育児不安の軽減を図ります。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:37:19.394Z",
+          "contentHash": "4d900845c016be8ec836ea6ccc2829dc06b9a086ab65b7a2e0a30cb324103e36"
+        },
+        {
+          "field": "fiscalYear",
+          "value": "令和8年度（2026年度）",
+          "evidenceQuote": "令和8年度（2026年度） 世田谷版こども誰でも通園制度 事業実施施設（予定）一覧（PDF：78KB）",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:37:20.544Z",
+          "contentHash": "4d900845c016be8ec836ea6ccc2829dc06b9a086ab65b7a2e0a30cb324103e36"
+        },
+        {
+          "field": "validPeriod",
+          "value": "施設種別ごとに利用期間が異なり、私立認可保育園・私立認定こども園・地域型保育事業は2か月、認証保育所・私立幼稚園は2か月以上。",
+          "evidenceQuote": "施設種別 実施方法 対象年齢（クラス年齢※） 利用期間 私立認可保育園 私立認定こども園 地域型保育事業 一般型（専用室実施型） 1歳児～2歳児 2か月 余裕活用型（空き定員を活用） 0歳児（生後6か月以上）～2歳児 認証保育所 一般型（在園児合同型） 0歳児（生後6か月以上）～2歳児 2か月以上 私立幼稚園 一般型（専用室実施型） 2歳児 2か月以上",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:37:21.709Z",
+          "contentHash": "4d900845c016be8ec836ea6ccc2829dc06b9a086ab65b7a2e0a30cb324103e36"
+        }
+      ],
+      "publication": {
+        "programId": "disc-31aebe48dfd2",
+        "publishedAt": "2026-10-27T11:38:45.005Z",
+        "mode": "new",
+        "supersedesProgramIds": []
+      }
+    },
+    {
+      "candidateId": "cand-a774a5cf4134",
+      "taskId": "taito-ku/child-allowance-cash",
+      "regionId": "taito-ku",
+      "fieldId": "child-allowance-cash",
+      "name": "子育て世帯住宅リフォーム支援制度",
+      "summary": "子育て世帯の居住環境の向上を目的としたリフォーム工事を行う方に対し、予算の範囲内で助成金を交付する制度。",
+      "implementer": "台東区",
+      "regionScope": "区内の住宅",
+      "kind": "cash_benefit",
+      "eligibility": {
+        "ageNote": "18歳に達する日以後の最初の3月31日までの間にある者（高校生以下の子供）を扶養し同居していること、又は、申請者本人もしくは同居の配偶者が出産前で母子健康手帳の交付を受けていること。",
+        "householdNote": "申請者本人が居住する区内の住宅、又はリフォーム工事後に居住予定の区内の住宅が対象。同居予定の場合は、リフォーム工事完了日から30日以内、又は令和9年3月31日のいずれか早い日までに同居し、住民登録を行うこと。",
+        "incomeNote": "申請者本人、配偶者及び申請者と同居する方全員の前年の総所得金額の合計が1,200万円以下（1月から6月に申請する場合は前々年の総所得金額の合計が1,200万円以下）。",
+        "other": [
+          "リフォーム工事について、国、東京都又は台東区で実施している他制度による助成金等を受けていないこと。",
+          "申請者本人、配偶者及び申請者と同居する方全員が同一住宅において過去にこの制度による助成金を受けていないこと。",
+          "申請者本人、配偶者及び申請者と同居する方全員が住民税を滞納していないこと。",
+          "リフォーム工事着手前に申請が必要。"
+        ]
+      },
+      "amount": {
+        "value": 200000,
+        "unit": "yen_one_time",
+        "description": "対象工事費（消費税を除く）の3分の1（千円未満切り捨て）、上限20万円"
+      },
+      "application": {
+        "how": "交付申請書等を提出し、区の審査後、「交付決定通知書」を受け取った後に工事着手する。",
+        "deadlineNote": "リフォーム工事着手前に申請が必要。居住予定・同居予定の場合は、リフォーム工事完了日から30日以内、又は令和9年3月31日のいずれか早い日までに居住・同居し、住民登録を行うこと。",
+        "documents": [
+          "台東区子育て世帯住宅リフォーム支援制度助成金交付申請書（第1号様式）",
+          "誓約書（第2号様式）",
+          "設計計画書（第3号様式）",
+          "工事着手前の写真",
+          "同意書（参考様式）"
+        ]
+      },
+      "fiscalYear": null,
+      "validPeriod": "令和9年3月31日までに居住・同居及び住民登録（該当する場合）",
+      "sourceUrl": "https://www.city.taito.lg.jp/kenchiku/jutaku/sumai/yachinhojo/kosodatereform.html",
+      "sourceRecordId": "src-www-city-taito-lg-jp-kenchiku-jutaku-sumai-yachinhojo-kosodatereform-html",
+      "retrievedAt": "2026-10-27T11:23:15.611Z",
+      "contentHash": "619598ddd0712588b6b99a744c54800706a36423994417b4406e2919cf14108e",
+      "evidenceQuotes": [
+        {
+          "field": "name",
+          "quote": "子育て世帯住宅リフォーム支援制度"
+        },
+        {
+          "field": "summary",
+          "quote": "子育て世帯の居住環境の向上を目的としたリフォーム工事を行う方に対し、予算の範囲内で助成金を交付します。"
+        },
+        {
+          "field": "implementer",
+          "quote": "台東区ホームページ"
+        },
+        {
+          "field": "regionScope",
+          "quote": "●申請者本人が居住する区内の住宅であること。 ●リフォーム工事後に居住予定の区内の住宅であること。"
+        },
+        {
+          "field": "eligibility.ageNote",
+          "quote": "18歳に達する日以後の最初の3月31日までの間にある者（高校生以下の子供）を扶養し同居していること、又は、申請者本人もしくは同居の配偶者が出産前で母子健康手帳の交付を受けていること 。"
+        },
+        {
+          "field": "eligibility.householdNote",
+          "quote": "●申請者本人が居住する区内の住宅であること。 ●リフォーム工事後に居住予定の区内の住宅であること。居住予定の場合は、リフォーム工事完了日から30日以内、又は令和9年3月31日のいずれか早い日までに居住し、住民登録を行うこと。"
+        },
+        {
+          "field": "eligibility.householdNote",
+          "quote": "同居予定の場合は、リフォーム工事完了日から30日以内、又は令和9年3月31日のいずれか早い日までに同居し、住民登録を行うこと。"
+        },
+        {
+          "field": "eligibility.incomeNote",
+          "quote": "申請者本人、配偶者 及び申請者 と同居する方 ※ 全員の前年の総所得金額の合計が1,200万円以下であること。（1月から6月に申請する場合は前々年の総所得金額の合計が1,200万円以下であること。）"
+        },
+        {
+          "field": "eligibility.other",
+          "quote": "リフォーム工事について、国、東京都又は台東区で実施している他制度による助成金等を受けていないこと。"
+        },
+        {
+          "field": "eligibility.other",
+          "quote": "申請者本人、配偶者 及び申請者 と同居する方 ※ 全員が同一住宅において過去にこの制度による助成金を受けていないこと。"
+        },
+        {
+          "field": "eligibility.other",
+          "quote": "申請者本人、配偶者 及び申請者 と同居する方 ※ 全員が住民税を滞納していないこと。"
+        },
+        {
+          "field": "amount",
+          "quote": "対象工事費（消費税を除く）の3分の1 （千円未満切り捨て） 上限20万円"
+        },
+        {
+          "field": "application.how",
+          "quote": "交付申請書提出後に区による審査を行い、「交付（ 不交付）決定通知書」をお渡しします。その後工事に着手していただきます。「交付決定通知書」をお渡しする前に着工することはできません。"
+        },
+        {
+          "field": "application.deadlineNote",
+          "quote": "※リフォーム工事着手前に申請が必要になります。"
+        },
+        {
+          "field": "application.deadlineNote",
+          "quote": "居住予定の場合は、リフォーム工事完了日から30日以内、又は令和9年3月31日のいずれか早い日までに居住し、住民登録を行うこと。"
+        },
+        {
+          "field": "application.deadlineNote",
+          "quote": "同居予定の場合は、リフォーム工事完了日から30日以内、又は令和9年3月31日のいずれか早い日までに同居し、住民登録を行うこと。"
+        },
+        {
+          "field": "application.documents",
+          "quote": "台東区子育て世帯住宅リフォーム支援制度助成金交付申請書（第1号様式）"
+        },
+        {
+          "field": "application.documents",
+          "quote": "誓約書（第2号様式）"
+        },
+        {
+          "field": "application.documents",
+          "quote": "設計計画書（第3号様式）"
+        },
+        {
+          "field": "application.documents",
+          "quote": "工事着手前の写真"
+        },
+        {
+          "field": "application.documents",
+          "quote": "同意書（参考様式）"
+        },
+        {
+          "field": "validPeriod",
+          "quote": "居住予定の場合は、リフォーム工事完了日から30日以内、又は令和9年3月31日のいずれか早い日までに居住し、住民登録を行うこと。"
+        },
+        {
+          "field": "validPeriod",
+          "quote": "同居予定の場合は、リフォーム工事完了日から30日以内、又は令和9年3月31日のいずれか早い日までに同居し、住民登録を行うこと。"
+        }
+      ],
+      "unknownItems": [
+        "fiscalYear"
+      ],
+      "unconfirmedItems": [],
+      "discoveryMethod": "ai-extraction",
+      "extractionModel": "iniad:gpt-5.4",
+      "firstExtractedAt": "2026-10-27T11:23:16.862Z",
+      "extractedAt": "2026-10-27T11:23:16.862Z",
+      "status": "approved",
+      "dedupeKey": "taito-ku|台東区|子育て世帯住宅リフォーム支援制度|unknown|https://www.city.taito.lg.jp/kenchiku/jutaku/sumai/yachinhojo/kosodatereform.html",
+      "recheckReason": null,
+      "fieldVerifications": [
+        {
+          "field": "amount.value",
+          "value": "対象工事費（消費税を除く）の3分の1（千円未満切り捨て）、上限20万円",
+          "evidenceQuote": "対象工事費（消費税を除く）の3分の1 （千円未満切り捨て） 上限20万円",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:40:46.901Z",
+          "contentHash": "619598ddd0712588b6b99a744c54800706a36423994417b4406e2919cf14108e"
+        },
+        {
+          "field": "eligibility.age",
+          "value": "18歳に達する日以後の最初の3月31日までの間にある者（高校生以下の子供）を扶養し同居していること、又は、申請者本人もしくは同居の配偶者が出産前で母子健康手帳の交付を受けていること。",
+          "evidenceQuote": "18歳に達する日以後の最初の3月31日までの間にある者（高校生以下の子供）を扶養し同居していること、又は、申請者本人もしくは同居の配偶者が出産前で母子健康手帳の交付を受けていること 。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:40:48.040Z",
+          "contentHash": "619598ddd0712588b6b99a744c54800706a36423994417b4406e2919cf14108e"
+        },
+        {
+          "field": "eligibility.household",
+          "value": "申請者本人が居住する区内の住宅、又はリフォーム工事後に居住予定の区内の住宅が対象。同居予定の場合は、リフォーム工事完了日から30日以内、又は令和9年3月31日のいずれか早い日までに同居し、住民登録を行うこと。",
+          "evidenceQuote": "●申請者本人が居住する区内の住宅であること。 ●リフォーム工事後に居住予定の区内の住宅であること。居住予定の場合は、リフォーム工事完了日から30日以内、又は令和9年3月31日のいずれか早い日までに居住し、住民登録を行うこと。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:40:49.206Z",
+          "contentHash": "619598ddd0712588b6b99a744c54800706a36423994417b4406e2919cf14108e"
+        },
+        {
+          "field": "eligibility.income",
+          "value": "申請者本人、配偶者及び申請者と同居する方全員の前年の総所得金額の合計が1,200万円以下（1月から6月に申請する場合は前々年の総所得金額の合計が1,200万円以下）。",
+          "evidenceQuote": "申請者本人、配偶者 及び申請者 と同居する方 ※ 全員の前年の総所得金額の合計が1,200万円以下であること。（1月から6月に申請する場合は前々年の総所得金額の合計が1,200万円以下であること。）",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:40:50.359Z",
+          "contentHash": "619598ddd0712588b6b99a744c54800706a36423994417b4406e2919cf14108e"
+        },
+        {
+          "field": "application.deadline",
+          "value": "リフォーム工事着手前に申請が必要。居住予定・同居予定の場合は、リフォーム工事完了日から30日以内、又は令和9年3月31日のいずれか早い日までに居住・同居し、住民登録を行うこと。",
+          "evidenceQuote": "※リフォーム工事着手前に申請が必要になります。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:41:36.109Z",
+          "contentHash": "619598ddd0712588b6b99a744c54800706a36423994417b4406e2919cf14108e"
+        },
+        {
+          "field": "regionScope",
+          "value": "区内の住宅",
+          "evidenceQuote": "●申請者本人が居住する区内の住宅であること。 ●リフォーム工事後に居住予定の区内の住宅であること。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:41:37.260Z",
+          "contentHash": "619598ddd0712588b6b99a744c54800706a36423994417b4406e2919cf14108e"
+        },
+        {
+          "field": "fiscalYear",
+          "value": "（記載なし）",
+          "evidenceQuote": "子育て世帯の居住環境の向上を目的としたリフォーム工事を行う方に対し、予算の範囲内で助成金を交付します。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:41:38.427Z",
+          "contentHash": "619598ddd0712588b6b99a744c54800706a36423994417b4406e2919cf14108e"
+        },
+        {
+          "field": "validPeriod",
+          "value": "令和9年3月31日までに居住・同居及び住民登録（該当する場合）",
+          "evidenceQuote": "居住予定の場合は、リフォーム工事完了日から30日以内、又は令和9年3月31日のいずれか早い日までに居住し、住民登録を行うこと。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:41:39.558Z",
+          "contentHash": "619598ddd0712588b6b99a744c54800706a36423994417b4406e2919cf14108e"
+        }
+      ],
+      "publication": {
+        "programId": "disc-a774a5cf4134",
+        "publishedAt": "2026-10-27T11:43:03.984Z",
+        "mode": "new",
+        "supersedesProgramIds": []
+      }
+    },
+    {
+      "candidateId": "cand-3a40c8701d68",
+      "taskId": "minato-ku/other-childcare-support",
+      "regionId": "minato-ku",
+      "fieldId": "other-childcare-support",
+      "name": "子ども医療費助成",
+      "summary": "18歳に達する日以後の最初の3月31日までの子どもが、医療機関等で健康保険による診療・調剤を受けたときに、医療費の自己負担分を港区が助成する制度。入院時の食事療養標準負担額も助成対象。",
+      "implementer": "港区",
+      "regionScope": "港区",
+      "kind": "fee_reduction",
+      "eligibility": {
+        "ageNote": "18歳に達する日以後の最初の3月31日までの子ども",
+        "householdNote": "保護者と子どもが港区に住民登録があり、日本の公的な健康保険に加入していること。生活保護法による保護を受けている人、児童福祉施設に入所している児童、里親に委託されている人は対象外。",
+        "incomeNote": null,
+        "other": [
+          "高校生相当世代の児童が父母の監護を離れている場合には、児童自身が保護者となり助成を受けることができる。"
+        ]
+      },
+      "amount": {
+        "value": null,
+        "unit": null,
+        "description": "医療費の自己負担分を助成。通院・入院にかかる保険診療の自己負担分及び入院時の食事療養標準負担額が対象。"
+      },
+      "application": {
+        "how": "出生、転入日から15日以内に子ども給付係へ郵送、各総合支所区民課保健福祉係へ持参、またはマイナポータルによる電子申請。",
+        "deadlineNote": "出生、転入日から15日以内。",
+        "documents": [
+          "乳幼児・子ども・高校生等医療証交付申請書",
+          "子どもが加入している健康保険の資格情報が分かるもの",
+          "本人確認書類"
+        ]
+      },
+      "fiscalYear": "令和5年4月から対象を高校生等まで拡大",
+      "validPeriod": "出生・転入日から15日以内に申請した場合は出生・転入日から資格が発生。子ども医療証は毎年10月1日に更新。",
+      "sourceUrl": "https://www.city.minato.tokyo.jp/kosodatesien/kodomo/kate/kodomoiryo.html",
+      "sourceRecordId": "src-www-city-minato-tokyo-jp-kosodatesien-kodomo-kate-kodomoiryo-html",
+      "retrievedAt": "2026-10-27T11:23:48.866Z",
+      "contentHash": "a7c783521fa169d3c5dc4b7d4c6b27a111f2cefe4d0c23f43718f615ea6f723b",
+      "evidenceQuotes": [
+        {
+          "field": "summary",
+          "quote": "18歳に達する日以後の最初の3月31日までの子どもが、医療機関等で健康保険による診療・調剤を受けたときに、医療費の自己負担分を港区が助成する制度です。"
+        },
+        {
+          "field": "implementer",
+          "quote": "医療費の自己負担分を港区が助成する制度です。"
+        },
+        {
+          "field": "regionScope",
+          "quote": "対象 保護者と子どもが港区に住民登録があり、日本の公的な健康保険に加入していること。"
+        },
+        {
+          "field": "kind",
+          "quote": "東京都内の医療機関や薬局等の窓口で、子どもの健康保険資格確認書等※と子ども医療証を提示すると、保険診療の自己負担分を区が助成するため、自己負担分を支払わずに診療・調剤を受けることができます。"
+        },
+        {
+          "field": "eligibility.ageNote",
+          "quote": "18歳に達する日以後の最初の3月31日までの子ども"
+        },
+        {
+          "field": "eligibility.householdNote",
+          "quote": "対象 保護者と子どもが港区に住民登録があり、日本の公的な健康保険に加入していること。"
+        },
+        {
+          "field": "eligibility.householdNote",
+          "quote": "※生活保護法による保護を受けている人や、児童福祉施設に入所している児童、里親に委託されている人は対象になりません。"
+        },
+        {
+          "field": "eligibility.other",
+          "quote": "当制度では、高校生相当世代の児童が父母の監護（児童の生活についての通常必要とされる監督・保護を指します）を離れている場合には、児童自身が保護者となり助成を受けることができます。"
+        },
+        {
+          "field": "amount.description",
+          "quote": "医療費の自己負担分を港区が助成する制度です。"
+        },
+        {
+          "field": "amount.description",
+          "quote": "助成の範囲は、通院・入院にかかる保険診療の自己負担分及び、入院時の食事療養標準負担額（入院時の食事代）です。"
+        },
+        {
+          "field": "application.how",
+          "quote": "出生、転入日から15日以内に子ども給付係へ郵送、各総合支所区民課保健福祉係へ持参、マイナポータルによる電子申請のいずれかで申請してください。"
+        },
+        {
+          "field": "application.deadlineNote",
+          "quote": "出生、転入日から15日以内に子ども給付係へ郵送、各総合支所区民課保健福祉係へ持参、マイナポータルによる電子申請のいずれかで申請してください。"
+        },
+        {
+          "field": "application.documents",
+          "quote": "申請に必要なもの 乳幼児・子ども・高校生等医療証交付申請書"
+        },
+        {
+          "field": "application.documents",
+          "quote": "子どもが加入している健康保険の資格情報が分かるもの"
+        },
+        {
+          "field": "application.documents",
+          "quote": "本人確認書類"
+        },
+        {
+          "field": "fiscalYear",
+          "quote": "※令和5年4月から、子ども医療費助成の対象を高校生等まで拡大しました。"
+        },
+        {
+          "field": "validPeriod",
+          "quote": "出生・転入日から15日以内に申請した場合は、出生・転入日から資格が発生します。"
+        },
+        {
+          "field": "validPeriod",
+          "quote": "子ども医療証は、毎年10月1日に更新します。"
+        }
+      ],
+      "unknownItems": [
+        "eligibility.incomeNote",
+        "amount.value",
+        "amount.unit"
+      ],
+      "unconfirmedItems": [],
+      "discoveryMethod": "ai-extraction",
+      "extractionModel": "iniad:gpt-5.4",
+      "firstExtractedAt": "2026-10-27T11:23:50.068Z",
+      "extractedAt": "2026-10-27T11:23:50.068Z",
+      "status": "approved",
+      "dedupeKey": "minato-ku|港区|子ども医療費助成|令和5年4月から対象を高校生等まで拡大|https://www.city.minato.tokyo.jp/kosodatesien/kodomo/kate/kodomoiryo.html",
+      "recheckReason": null,
+      "fieldVerifications": [
+        {
+          "field": "amount.value",
+          "value": "医療費の自己負担分を助成。通院・入院にかかる保険診療の自己負担分及び入院時の食事療養標準負担額が対象。",
+          "evidenceQuote": "助成の範囲は、通院・入院にかかる保険診療の自己負担分及び、入院時の食事療養標準負担額（入院時の食事代）です。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:37:52.901Z",
+          "contentHash": "a7c783521fa169d3c5dc4b7d4c6b27a111f2cefe4d0c23f43718f615ea6f723b"
+        },
+        {
+          "field": "eligibility.age",
+          "value": "18歳に達する日以後の最初の3月31日までの子ども",
+          "evidenceQuote": "18歳に達する日以後の最初の3月31日までの子ども",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:37:54.031Z",
+          "contentHash": "a7c783521fa169d3c5dc4b7d4c6b27a111f2cefe4d0c23f43718f615ea6f723b"
+        },
+        {
+          "field": "eligibility.household",
+          "value": "保護者と子どもが港区に住民登録があり、日本の公的な健康保険に加入していること。生活保護法による保護を受けている人、児童福祉施設に入所している児童、里親に委託されている人は対象外。",
+          "evidenceQuote": "対象 保護者と子どもが港区に住民登録があり、日本の公的な健康保険に加入していること。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:37:55.201Z",
+          "contentHash": "a7c783521fa169d3c5dc4b7d4c6b27a111f2cefe4d0c23f43718f615ea6f723b"
+        },
+        {
+          "field": "eligibility.income",
+          "value": "（記載なし）",
+          "evidenceQuote": "18歳に達する日以後の最初の3月31日までの子どもが、医療機関等で健康保険による診療・調剤を受けたときに、医療費の自己負担分を港区が助成する制度です。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:37:56.361Z",
+          "contentHash": "a7c783521fa169d3c5dc4b7d4c6b27a111f2cefe4d0c23f43718f615ea6f723b"
+        },
+        {
+          "field": "application.deadline",
+          "value": "出生、転入日から15日以内。",
+          "evidenceQuote": "出生、転入日から15日以内に子ども給付係へ郵送、各総合支所区民課保健福祉係へ持参、マイナポータルによる電子申請のいずれかで申請してください。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:39:18.787Z",
+          "contentHash": "a7c783521fa169d3c5dc4b7d4c6b27a111f2cefe4d0c23f43718f615ea6f723b"
+        },
+        {
+          "field": "regionScope",
+          "value": "港区",
+          "evidenceQuote": "医療費の自己負担分を港区が助成する制度です。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:39:19.952Z",
+          "contentHash": "a7c783521fa169d3c5dc4b7d4c6b27a111f2cefe4d0c23f43718f615ea6f723b"
+        },
+        {
+          "field": "fiscalYear",
+          "value": "令和5年4月から対象を高校生等まで拡大",
+          "evidenceQuote": "※令和5年4月から、子ども医療費助成の対象を高校生等まで拡大しました。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:39:21.079Z",
+          "contentHash": "a7c783521fa169d3c5dc4b7d4c6b27a111f2cefe4d0c23f43718f615ea6f723b"
+        },
+        {
+          "field": "validPeriod",
+          "value": "出生・転入日から15日以内に申請した場合は出生・転入日から資格が発生。子ども医療証は毎年10月1日に更新。",
+          "evidenceQuote": "子ども医療証は、毎年10月1日に更新します。",
+          "reviewedBy": "manual",
+          "reviewedAt": "2026-10-27T11:39:22.277Z",
+          "contentHash": "a7c783521fa169d3c5dc4b7d4c6b27a111f2cefe4d0c23f43718f615ea6f723b"
+        }
+      ],
+      "publication": {
+        "programId": "disc-3a40c8701d68",
+        "publishedAt": "2026-10-27T11:40:12.910Z",
+        "mode": "new",
+        "supersedesProgramIds": []
+      }
+    }
+  ]
+}

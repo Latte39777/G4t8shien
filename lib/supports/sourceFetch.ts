@@ -91,6 +91,11 @@ export type FetchedPage = {
   text: string
   /** 必要最小限の引用用抜粋 */
   excerpt: string
+  /**
+   * ページ内リンクの href 属性値（生の値。実行・解決はしない。M7-D）。
+   * 相対 URL の解決と取得可否の判定は lib/discovery/linkScan.ts が行う。
+   */
+  hrefs: string[]
 }
 
 export type SourceFetchResult =
@@ -283,7 +288,7 @@ export function isPathAllowedByRobots(
 
 // ── HTML からの本文整理（script 等を実行・解釈せず除去するのみ）──────
 
-function decodeHtmlEntities(s: string): string {
+export function decodeHtmlEntities(s: string): string {
   return s
     .replace(/&nbsp;/gi, ' ')
     .replace(/&amp;/gi, '&')
@@ -299,6 +304,8 @@ function decodeHtmlEntities(s: string): string {
  * - script / style / noscript / template / iframe / svg とコメントを除去
  *   （JavaScript・埋め込みコードは一切実行しない。除去のみ）
  * - タグを除去してテキスト化し、空白を正規化する
+ * - ページ内リンク（<a href>）の href 属性値を hrefs に収集する（M7-D。
+ *   実行・解決はしない。解決と取得可否判定は linkScan / fetch ポリシー側）
  */
 export function extractHtmlPage(html: string): FetchedPage {
   const titleMatch = /<title[^>]*>([\s\S]*?)<\/title>/i.exec(html)
@@ -306,6 +313,17 @@ export function extractHtmlPage(html: string): FetchedPage {
     titleMatch !== null
       ? decodeHtmlEntities(titleMatch[1]).replace(/\s+/g, ' ').trim() || null
       : null
+  const hrefs: string[] = []
+  const seenHrefs = new Set<string>()
+  const anchorRe = /<a\b[^>]*?href\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi
+  let anchorMatch: RegExpExecArray | null
+  while ((anchorMatch = anchorRe.exec(html)) !== null) {
+    const href = (anchorMatch[1] ?? anchorMatch[2] ?? anchorMatch[3] ?? '').trim()
+    if (href === '' || seenHrefs.has(href)) continue
+    seenHrefs.add(href)
+    if (hrefs.length >= 1000) break
+    hrefs.push(href)
+  }
   let body = html
   const bodyMatch = /<body[^>]*>([\s\S]*?)<\/body>/i.exec(html)
   if (bodyMatch !== null) body = bodyMatch[1]
@@ -321,7 +339,7 @@ export function extractHtmlPage(html: string): FetchedPage {
     .replace(/\s+/g, ' ')
     .trim()
   const excerpt = text.length > 240 ? `${text.slice(0, 240)}…` : text
-  return { title, text, excerpt }
+  return { title, text, excerpt, hrefs }
 }
 
 // ── 取得エンジン（transport 注入・キャッシュ・記録）──────────────────

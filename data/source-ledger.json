@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "savedAt": "2026-10-16T16:34:17.807Z",
+  "savedAt": "2026-10-27T11:59:14.147Z",
   "entries": [
     {
       "urlId": "src-www-cfa-go-jp-policies-kokoseido-jidouteate",
@@ -226,6 +226,465 @@
           "conditions.other"
         ],
         "note": "実取得ページと照合: 制度名・概要（貸与/給付の区別）・カテゴリ・条件の概要。金額・申込資格詳細・適用年度は未確認のまま",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "research-log-transcribed",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-index-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/index.html",
+      "title": "独立行政法人日本学生支援機構の公式ページ",
+      "organization": "独立行政法人日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "M6-C 調査ログ（2026-10-16）から転記",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-16T00:41:36.795Z",
+      "officialConfirmedAt": "2026-10-16",
+      "officialConfirmNote": "公式ページを取得し、対象となる家計基準・予約採用の申込時期の記載と照合済み（2026-10-16）",
+      "contentRetrievedAt": "2026-10-16T00:41:36.795Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-16",
+        "reviewedFields": [
+          "name",
+          "summary",
+          "category",
+          "conditions.other",
+          "conditions.incomeLimit",
+          "amountBands"
+        ],
+        "note": "公式ページを取得し、対象となる家計基準・予約採用の申込時期の記載と照合済み（2026-10-16）",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "research-log-transcribed",
+        "retrieval": "research-log-transcribed",
+        "review": "research-log-transcribed"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "給付型奨学金＋授業料等減免（予約採用）: 対象となる家計基準・予約採用の申込時期の案内",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-cfa-go-jp-laws",
+      "url": "https://www.cfa.go.jp/laws",
+      "title": "こども家庭庁の公式ページ",
+      "organization": "こども家庭庁",
+      "programIds": [
+        "mock-child-allowance"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "M6-C 調査ログ（2026-10-17）から転記",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:24:50.131Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:24:50.131Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "legalBasis.lawName"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:42頃・取得直後）: 「児童手当法（昭和四十六年律第七十三号）（e-Gov）」の記載を確認（原文ママ・脱字の可能性、e-Gov リンク ID 346AC0000000073）。施行令・施行規則は ordinanceName の単一文字列では政令/省令を区別表現できないため記録しない。法令番号・施行日は確認済みにしない",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "research-log-transcribed",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動 ホーム ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 Global Site 検索 メニュー 閉じる ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 新着・更新 広報・報道 大臣等会見 組織情報 政策 会議等 法令 採用 資料 申請・届出 調達情報 関連リンク Global Site サイトポリシー SNSポリシー コピーライトポリシー ご意見・ご要望 サイトマップ ホーム 法令 法令 こども家庭庁が所管する主な法律、政令、省令等に関…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-kingaku-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/kingaku.html",
+      "title": "独立行政法人日本学生支援機構の公式ページ",
+      "organization": "独立行政法人日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "M6-C 調査ログ（2026-10-17）から転記",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:24:53.169Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:24:53.169Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "name",
+          "summary",
+          "amountBands"
+        ],
+        "note": "人手照合（日本時間2026-10-17・取得直後の本文を精読）: 給付月額表を支援区分（第1〜第4区分）×学校種（大学・短期大学・専修学校（専門課程）/高等専門学校（第4学年以上））×設置者（国公立〔独立行政法人・地方独立行政法人を含む〕/私立）×通学形態（自宅/自宅外）で照合し、通常課程の各月額とカッコ内（生活保護受給の生計維持者と同居、又は児童養護施設等から通学）の対応を確認。通信教育課程は年額（年1回・区分4段階）。第4区分は多子世帯に限る。大学院は表に記載なし。第一種併給時の支給調整は調整額が別掲のため記録しない。適用年度の記載なし。セル対応が曖昧な値は記録しない",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "research-log-transcribed",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-kakei-yoyaku-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/kakei/yoyaku.html",
+      "title": "独立行政法人日本学生支援機構の公式ページ",
+      "organization": "独立行政法人日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "M6-C 調査ログ（2026-10-17）から転記",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:24:55.048Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:24:55.048Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "conditions.incomeLimit",
+          "conditions.other"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: 予約採用（2027年度進学予定・2026年度住民税情報）の家計基準。収入基準=支給額算定基準額の合計（100円未満/25,600円/51,300円/154,500円の各区分）、資産基準=申込日時点で資産合計5,000万円未満。年間収入額とは別の指標（混同しない）。在学採用とは別記録",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "research-log-transcribed",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-kakei-zaigaku-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/kakei/zaigaku.html",
+      "title": "独立行政法人日本学生支援機構の公式ページ",
+      "organization": "独立行政法人日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "M6-C 調査ログ（2026-10-17）から転記",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:24:56.864Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:24:56.864Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "conditions.incomeLimit",
+          "conditions.other"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: 在学採用の家計基準。収入基準=支給額算定基準額の合計（100円未満/25,600円/51,300円/154,500円の各区分）、資産基準=資産合計5,000万円未満。年間収入額とは別の指標。予約採用とは別記録",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "research-log-transcribed",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-gakuryoku-yoyaku-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/gakuryoku/yoyaku.html",
+      "title": "独立行政法人日本学生支援機構の公式ページ",
+      "organization": "独立行政法人日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "M6-C 調査ログ（2026-10-17）から転記",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:25:11.934Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:25:11.934Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "conditions.other"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: 予約採用の学力基準「高等学校等における第1学年から申込時までの全履修科目の評定平均値が5段階評価で3.5以上」。在学採用とは別記録。受給資格の自動判定には使用しない",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "research-log-transcribed",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-gakuryoku-zaigaku-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/gakuryoku/zaigaku.html",
+      "title": "独立行政法人日本学生支援機構の公式ページ",
+      "organization": "独立行政法人日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "M6-C 調査ログ（2026-10-17）から転記",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:25:13.747Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:25:13.747Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "conditions.other"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: 在学採用の学力基準「評定平均値が3.5以上、又は入学者選抜試験の成績が上位2分の1」「GPAが上位2分の1」。予約採用とは別記録。受給資格の自動判定には使用しない",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "research-log-transcribed",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-kakei-daiyonkubun-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/kakei/daiyonkubun.html",
+      "title": "独立行政法人日本学生支援機構の公式ページ",
+      "organization": "独立行政法人日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "M6-C 調査ログ（2026-10-17）から転記",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:25:19.402Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:25:19.402Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "conditions.other"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: 令和6年度から第4区分を確認（支給額算定基準額の合計51,300円以上154,500円未満・多子世帯属するか私立理工農系在籍が採用条件）。第4区分は給付奨学金（現金給付）0円・授業料等減免のみ第1区分満額の4分の1。減免と現金給付を混同しない",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "research-log-transcribed",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-kakei-r7tashikakudai-index-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/kakei/r7tashikakudai/index.html",
+      "title": "独立行政法人日本学生支援機構の公式ページ",
+      "organization": "独立行政法人日本学生支援機構",
+      "programIds": [
+        "official-jasso-kyufu-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "M6-C 調査ログ（2026-10-17）から転記",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:25:41.840Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:25:41.840Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "conditions.other"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: 令和7年度から多子世帯は所得制限なく授業料等減免の対象（給付奨学金の支給額は令和6年度以前と同様）。資産合計5,000万円以上3億円未満の多子世帯は減免のみで給付奨学金は支給されない。減免と現金給付を混同しない",
+        "reviewer": "manual"
+      },
+      "provenance": {
+        "registered": "research-log-transcribed",
+        "retrieval": "fetch-run",
+        "review": "manual-review"
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-jasso-go-jp-shogakukin-about-taiyo-taiyo-2shu-kingaku-html",
+      "url": "https://www.jasso.go.jp/shogakukin/about/taiyo/taiyo_2shu/kingaku.html",
+      "title": "独立行政法人日本学生支援機構の公式ページ",
+      "organization": "独立行政法人日本学生支援機構",
+      "programIds": [
+        "official-jasso-taiyo-shogakukin"
+      ],
+      "registeredAt": "2026-10-16",
+      "registrationNote": "M6-C 調査ログ（2026-10-17）から転記",
+      "urlState": "reachable",
+      "reachableAt": "2026-10-16T15:25:45.574Z",
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": "2026-10-16T15:25:45.574Z",
+      "contentState": "reviewed",
+      "review": {
+        "reviewedAt": "2026-10-17",
+        "reviewedFields": [
+          "amountBands"
+        ],
+        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: amountBands のみ。大学・短大・専修=月額20,000〜120,000円（10,000円刻み）/私立医歯は120,000円に40,000円増額/薬獣は20,000円増額/大学院=月額50,000・80,000・100,000・130,000・150,000円（法科大学院は150,000円に40,000円または70,000円増額）/高専本科4,5年・専攻科=20,000〜120,000円。学校種と増額条件の対応を目視確認",
         "reviewer": "manual"
       },
       "provenance": {
@@ -627,280 +1086,6 @@
       }
     },
     {
-      "urlId": "src-www-cfa-go-jp-laws",
-      "url": "https://www.cfa.go.jp/laws",
-      "title": "こども家庭庁 関連法令",
-      "organization": "こども家庭庁",
-      "programIds": [
-        "mock-child-allowance"
-      ],
-      "registeredAt": "2026-10-16",
-      "registrationNote": "根拠法令の法令名・法令番号・施行日の裏付け用（2026-10-16承認 P1-4）",
-      "urlState": "reachable",
-      "reachableAt": "2026-10-16T15:24:50.131Z",
-      "officialConfirmedAt": null,
-      "officialConfirmNote": null,
-      "contentRetrievedAt": "2026-10-16T15:24:50.131Z",
-      "contentState": "reviewed",
-      "review": {
-        "reviewedAt": "2026-10-17",
-        "reviewedFields": [
-          "legalBasis.lawName"
-        ],
-        "note": "人手照合（日本時間2026-10-17 00:42頃・取得直後）: 「児童手当法（昭和四十六年律第七十三号）（e-Gov）」の記載を確認（原文ママ・脱字の可能性、e-Gov リンク ID 346AC0000000073）。施行令・施行規則は ordinanceName の単一文字列では政令/省令を区別表現できないため記録しない。法令番号・施行日は確認済みにしない",
-        "reviewer": "manual"
-      },
-      "provenance": {
-        "registered": "user-registered",
-        "retrieval": "fetch-run",
-        "review": "manual-review"
-      },
-      "lastFetchResult": "ok",
-      "lastFetchFailureReason": null,
-      "excerpt": "本文へ移動 ホーム ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 Global Site 検索 メニュー 閉じる ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 新着・更新 広報・報道 大臣等会見 組織情報 政策 会議等 法令 採用 資料 申請・届出 調達情報 関連リンク Global Site サイトポリシー SNSポリシー コピーライトポリシー ご意見・ご要望 サイトマップ ホーム 法令 法令 こども家庭庁が所管する主な法律、政令、省令等に関…",
-      "retrievalPolicy": {
-        "maxAgeDays": 30,
-        "note": "人手で実行する取得のみ。自動巡回はしない"
-      },
-      "robots": {
-        "checkedAt": null,
-        "note": "未確認（取得時に robots.txt を確認する）"
-      },
-      "terms": {
-        "acknowledgedAt": null,
-        "note": "未確認（サイトの利用条件は人手で要確認）"
-      }
-    },
-    {
-      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-kingaku-html",
-      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/kingaku.html",
-      "title": "給付奨学金の支給額",
-      "organization": "日本学生支援機構",
-      "programIds": [
-        "official-jasso-kyufu-shogakukin"
-      ],
-      "registeredAt": "2026-10-16",
-      "registrationNote": "給付月額の裏付け用（2026-10-16承認 P2-5）",
-      "urlState": "reachable",
-      "reachableAt": "2026-10-16T15:24:53.169Z",
-      "officialConfirmedAt": null,
-      "officialConfirmNote": null,
-      "contentRetrievedAt": "2026-10-16T15:24:53.169Z",
-      "contentState": "reviewed",
-      "review": {
-        "reviewedAt": "2026-10-17",
-        "reviewedFields": [
-          "name",
-          "summary",
-          "amountBands"
-        ],
-        "note": "人手照合（日本時間2026-10-17・取得直後の本文を精読）: 給付月額表を支援区分（第1〜第4区分）×学校種（大学・短期大学・専修学校（専門課程）/高等専門学校（第4学年以上））×設置者（国公立〔独立行政法人・地方独立行政法人を含む〕/私立）×通学形態（自宅/自宅外）で照合し、通常課程の各月額とカッコ内（生活保護受給の生計維持者と同居、又は児童養護施設等から通学）の対応を確認。通信教育課程は年額（年1回・区分4段階）。第4区分は多子世帯に限る。大学院は表に記載なし。第一種併給時の支給調整は調整額が別掲のため記録しない。適用年度の記載なし。セル対応が曖昧な値は記録しない",
-        "reviewer": "manual"
-      },
-      "provenance": {
-        "registered": "user-registered",
-        "retrieval": "fetch-run",
-        "review": "manual-review"
-      },
-      "lastFetchResult": "ok",
-      "lastFetchFailureReason": null,
-      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
-      "retrievalPolicy": {
-        "maxAgeDays": 30,
-        "note": "人手で実行する取得のみ。自動巡回はしない"
-      },
-      "robots": {
-        "checkedAt": null,
-        "note": "未確認（取得時に robots.txt を確認する）"
-      },
-      "terms": {
-        "acknowledgedAt": null,
-        "note": "未確認（サイトの利用条件は人手で要確認）"
-      }
-    },
-    {
-      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-kakei-yoyaku-html",
-      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/kakei/yoyaku.html",
-      "title": "給付奨学金の家計基準（予約採用）",
-      "organization": "日本学生支援機構",
-      "programIds": [
-        "official-jasso-kyufu-shogakukin"
-      ],
-      "registeredAt": "2026-10-16",
-      "registrationNote": "家計基準の裏付け用（2026-10-16承認 P2-6）",
-      "urlState": "reachable",
-      "reachableAt": "2026-10-16T15:24:55.048Z",
-      "officialConfirmedAt": null,
-      "officialConfirmNote": null,
-      "contentRetrievedAt": "2026-10-16T15:24:55.048Z",
-      "contentState": "reviewed",
-      "review": {
-        "reviewedAt": "2026-10-17",
-        "reviewedFields": [
-          "conditions.incomeLimit",
-          "conditions.other"
-        ],
-        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: 予約採用（2027年度進学予定・2026年度住民税情報）の家計基準。収入基準=支給額算定基準額の合計（100円未満/25,600円/51,300円/154,500円の各区分）、資産基準=申込日時点で資産合計5,000万円未満。年間収入額とは別の指標（混同しない）。在学採用とは別記録",
-        "reviewer": "manual"
-      },
-      "provenance": {
-        "registered": "user-registered",
-        "retrieval": "fetch-run",
-        "review": "manual-review"
-      },
-      "lastFetchResult": "ok",
-      "lastFetchFailureReason": null,
-      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
-      "retrievalPolicy": {
-        "maxAgeDays": 30,
-        "note": "人手で実行する取得のみ。自動巡回はしない"
-      },
-      "robots": {
-        "checkedAt": null,
-        "note": "未確認（取得時に robots.txt を確認する）"
-      },
-      "terms": {
-        "acknowledgedAt": null,
-        "note": "未確認（サイトの利用条件は人手で要確認）"
-      }
-    },
-    {
-      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-kakei-zaigaku-html",
-      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/kakei/zaigaku.html",
-      "title": "給付奨学金の家計基準（在学採用）",
-      "organization": "日本学生支援機構",
-      "programIds": [
-        "official-jasso-kyufu-shogakukin"
-      ],
-      "registeredAt": "2026-10-16",
-      "registrationNote": "家計基準の裏付け用（2026-10-16承認 P2-7）",
-      "urlState": "reachable",
-      "reachableAt": "2026-10-16T15:24:56.864Z",
-      "officialConfirmedAt": null,
-      "officialConfirmNote": null,
-      "contentRetrievedAt": "2026-10-16T15:24:56.864Z",
-      "contentState": "reviewed",
-      "review": {
-        "reviewedAt": "2026-10-17",
-        "reviewedFields": [
-          "conditions.incomeLimit",
-          "conditions.other"
-        ],
-        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: 在学採用の家計基準。収入基準=支給額算定基準額の合計（100円未満/25,600円/51,300円/154,500円の各区分）、資産基準=資産合計5,000万円未満。年間収入額とは別の指標。予約採用とは別記録",
-        "reviewer": "manual"
-      },
-      "provenance": {
-        "registered": "user-registered",
-        "retrieval": "fetch-run",
-        "review": "manual-review"
-      },
-      "lastFetchResult": "ok",
-      "lastFetchFailureReason": null,
-      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
-      "retrievalPolicy": {
-        "maxAgeDays": 30,
-        "note": "人手で実行する取得のみ。自動巡回はしない"
-      },
-      "robots": {
-        "checkedAt": null,
-        "note": "未確認（取得時に robots.txt を確認する）"
-      },
-      "terms": {
-        "acknowledgedAt": null,
-        "note": "未確認（サイトの利用条件は人手で要確認）"
-      }
-    },
-    {
-      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-gakuryoku-yoyaku-html",
-      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/gakuryoku/yoyaku.html",
-      "title": "給付奨学金の学力基準（予約採用）",
-      "organization": "日本学生支援機構",
-      "programIds": [
-        "official-jasso-kyufu-shogakukin"
-      ],
-      "registeredAt": "2026-10-16",
-      "registrationNote": "学力基準の裏付け用（2026-10-16承認 P2-8）",
-      "urlState": "reachable",
-      "reachableAt": "2026-10-16T15:25:11.934Z",
-      "officialConfirmedAt": null,
-      "officialConfirmNote": null,
-      "contentRetrievedAt": "2026-10-16T15:25:11.934Z",
-      "contentState": "reviewed",
-      "review": {
-        "reviewedAt": "2026-10-17",
-        "reviewedFields": [
-          "conditions.other"
-        ],
-        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: 予約採用の学力基準「高等学校等における第1学年から申込時までの全履修科目の評定平均値が5段階評価で3.5以上」。在学採用とは別記録。受給資格の自動判定には使用しない",
-        "reviewer": "manual"
-      },
-      "provenance": {
-        "registered": "user-registered",
-        "retrieval": "fetch-run",
-        "review": "manual-review"
-      },
-      "lastFetchResult": "ok",
-      "lastFetchFailureReason": null,
-      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
-      "retrievalPolicy": {
-        "maxAgeDays": 30,
-        "note": "人手で実行する取得のみ。自動巡回はしない"
-      },
-      "robots": {
-        "checkedAt": null,
-        "note": "未確認（取得時に robots.txt を確認する）"
-      },
-      "terms": {
-        "acknowledgedAt": null,
-        "note": "未確認（サイトの利用条件は人手で要確認）"
-      }
-    },
-    {
-      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-gakuryoku-zaigaku-html",
-      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/gakuryoku/zaigaku.html",
-      "title": "給付奨学金の学力基準（在学採用）",
-      "organization": "日本学生支援機構",
-      "programIds": [
-        "official-jasso-kyufu-shogakukin"
-      ],
-      "registeredAt": "2026-10-16",
-      "registrationNote": "学力基準の裏付け用（2026-10-16承認 P2-9）",
-      "urlState": "reachable",
-      "reachableAt": "2026-10-16T15:25:13.747Z",
-      "officialConfirmedAt": null,
-      "officialConfirmNote": null,
-      "contentRetrievedAt": "2026-10-16T15:25:13.747Z",
-      "contentState": "reviewed",
-      "review": {
-        "reviewedAt": "2026-10-17",
-        "reviewedFields": [
-          "conditions.other"
-        ],
-        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: 在学採用の学力基準「評定平均値が3.5以上、又は入学者選抜試験の成績が上位2分の1」「GPAが上位2分の1」。予約採用とは別記録。受給資格の自動判定には使用しない",
-        "reviewer": "manual"
-      },
-      "provenance": {
-        "registered": "user-registered",
-        "retrieval": "fetch-run",
-        "review": "manual-review"
-      },
-      "lastFetchResult": "ok",
-      "lastFetchFailureReason": null,
-      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
-      "retrievalPolicy": {
-        "maxAgeDays": 30,
-        "note": "人手で実行する取得のみ。自動巡回はしない"
-      },
-      "robots": {
-        "checkedAt": null,
-        "note": "未確認（取得時に robots.txt を確認する）"
-      },
-      "terms": {
-        "acknowledgedAt": null,
-        "note": "未確認（サイトの利用条件は人手で要確認）"
-      }
-    },
-    {
       "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-shikaku-index-html",
       "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/shikaku/index.html",
       "title": "給付奨学金の申込資格",
@@ -989,96 +1174,6 @@
       }
     },
     {
-      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-kakei-daiyonkubun-html",
-      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/kakei/daiyonkubun.html",
-      "title": "給付奨学金の家計基準（第4区分・令和6年度拡大）",
-      "organization": "日本学生支援機構",
-      "programIds": [
-        "official-jasso-kyufu-shogakukin"
-      ],
-      "registeredAt": "2026-10-16",
-      "registrationNote": "適用年度の裏付け用（2026-10-16承認 P2-12）",
-      "urlState": "reachable",
-      "reachableAt": "2026-10-16T15:25:19.402Z",
-      "officialConfirmedAt": null,
-      "officialConfirmNote": null,
-      "contentRetrievedAt": "2026-10-16T15:25:19.402Z",
-      "contentState": "reviewed",
-      "review": {
-        "reviewedAt": "2026-10-17",
-        "reviewedFields": [
-          "conditions.other"
-        ],
-        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: 令和6年度から第4区分を確認（支給額算定基準額の合計51,300円以上154,500円未満・多子世帯属するか私立理工農系在籍が採用条件）。第4区分は給付奨学金（現金給付）0円・授業料等減免のみ第1区分満額の4分の1。減免と現金給付を混同しない",
-        "reviewer": "manual"
-      },
-      "provenance": {
-        "registered": "user-registered",
-        "retrieval": "fetch-run",
-        "review": "manual-review"
-      },
-      "lastFetchResult": "ok",
-      "lastFetchFailureReason": null,
-      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
-      "retrievalPolicy": {
-        "maxAgeDays": 30,
-        "note": "人手で実行する取得のみ。自動巡回はしない"
-      },
-      "robots": {
-        "checkedAt": null,
-        "note": "未確認（取得時に robots.txt を確認する）"
-      },
-      "terms": {
-        "acknowledgedAt": null,
-        "note": "未確認（サイトの利用条件は人手で要確認）"
-      }
-    },
-    {
-      "urlId": "src-www-jasso-go-jp-shogakukin-about-kyufu-kakei-r7tashikakudai-index-html",
-      "url": "https://www.jasso.go.jp/shogakukin/about/kyufu/kakei/r7tashikakudai/index.html",
-      "title": "給付奨学金の家計基準（多子世帯の拡大・令和7年度）",
-      "organization": "日本学生支援機構",
-      "programIds": [
-        "official-jasso-kyufu-shogakukin"
-      ],
-      "registeredAt": "2026-10-16",
-      "registrationNote": "適用年度の裏付け用（2026-10-16承認 P2-13）",
-      "urlState": "reachable",
-      "reachableAt": "2026-10-16T15:25:41.840Z",
-      "officialConfirmedAt": null,
-      "officialConfirmNote": null,
-      "contentRetrievedAt": "2026-10-16T15:25:41.840Z",
-      "contentState": "reviewed",
-      "review": {
-        "reviewedAt": "2026-10-17",
-        "reviewedFields": [
-          "conditions.other"
-        ],
-        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: 令和7年度から多子世帯は所得制限なく授業料等減免の対象（給付奨学金の支給額は令和6年度以前と同様）。資産合計5,000万円以上3億円未満の多子世帯は減免のみで給付奨学金は支給されない。減免と現金給付を混同しない",
-        "reviewer": "manual"
-      },
-      "provenance": {
-        "registered": "user-registered",
-        "retrieval": "fetch-run",
-        "review": "manual-review"
-      },
-      "lastFetchResult": "ok",
-      "lastFetchFailureReason": null,
-      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
-      "retrievalPolicy": {
-        "maxAgeDays": 30,
-        "note": "人手で実行する取得のみ。自動巡回はしない"
-      },
-      "robots": {
-        "checkedAt": null,
-        "note": "未確認（取得時に robots.txt を確認する）"
-      },
-      "terms": {
-        "acknowledgedAt": null,
-        "note": "未確認（サイトの利用条件は人手で要確認）"
-      }
-    },
-    {
       "urlId": "src-www-jasso-go-jp-shogakukin-about-taiyo-taiyo-1shu-kingaku-index-html",
       "url": "https://www.jasso.go.jp/shogakukin/about/taiyo/taiyo_1shu/kingaku/index.html",
       "title": "第一種奨学金（無利子）の貸与月額",
@@ -1101,51 +1196,6 @@
           "summary"
         ],
         "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: name/summary のみ。月額は入学年度別下層ページ（要追加承認）未取得のため未確認。併給調整の記述は確認済み",
-        "reviewer": "manual"
-      },
-      "provenance": {
-        "registered": "user-registered",
-        "retrieval": "fetch-run",
-        "review": "manual-review"
-      },
-      "lastFetchResult": "ok",
-      "lastFetchFailureReason": null,
-      "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
-      "retrievalPolicy": {
-        "maxAgeDays": 30,
-        "note": "人手で実行する取得のみ。自動巡回はしない"
-      },
-      "robots": {
-        "checkedAt": null,
-        "note": "未確認（取得時に robots.txt を確認する）"
-      },
-      "terms": {
-        "acknowledgedAt": null,
-        "note": "未確認（サイトの利用条件は人手で要確認）"
-      }
-    },
-    {
-      "urlId": "src-www-jasso-go-jp-shogakukin-about-taiyo-taiyo-2shu-kingaku-html",
-      "url": "https://www.jasso.go.jp/shogakukin/about/taiyo/taiyo_2shu/kingaku.html",
-      "title": "第二種奨学金（有利子）の貸与月額",
-      "organization": "日本学生支援機構",
-      "programIds": [
-        "official-jasso-taiyo-shogakukin"
-      ],
-      "registeredAt": "2026-10-16",
-      "registrationNote": "貸与月額の裏付け用（2026-10-16承認 P3-16）",
-      "urlState": "reachable",
-      "reachableAt": "2026-10-16T15:25:45.574Z",
-      "officialConfirmedAt": null,
-      "officialConfirmNote": null,
-      "contentRetrievedAt": "2026-10-16T15:25:45.574Z",
-      "contentState": "reviewed",
-      "review": {
-        "reviewedAt": "2026-10-17",
-        "reviewedFields": [
-          "amountBands"
-        ],
-        "note": "人手照合（日本時間2026-10-17 00:41頃・取得直後）: amountBands のみ。大学・短大・専修=月額20,000〜120,000円（10,000円刻み）/私立医歯は120,000円に40,000円増額/薬獣は20,000円増額/大学院=月額50,000・80,000・100,000・130,000・150,000円（法科大学院は150,000円に40,000円または70,000円増額）/高専本科4,5年・専攻科=20,000〜120,000円。学校種と増額条件の対応を目視確認",
         "reviewer": "manual"
       },
       "provenance": {
@@ -1248,6 +1298,949 @@
       "lastFetchResult": "ok",
       "lastFetchFailureReason": null,
       "excerpt": "本文へ移動します フッターへ移動します 閉じる 調査・データ お問い合わせ先一覧 背景色 白 黒 文字サイズ 標準 大 English 検索 窓を開きます 閉じる ホーム 奨学金 奨学金 トップを見る 奨学金制度の種類と概要 申込みに関する手続き 在学中の手続き 卒業後の返還 返還が難しくなった場合 延滞した場合 地方公共団体の返還支援制度 企業等の奨学金返還支援(代理返還)制度 スカラシップ・アドバイザー派遣事業 その他お役立ち情報 大学・地方公共団体等が行う奨学金制度 学…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-cfa-go-jp-policies",
+      "url": "https://www.cfa.go.jp/policies",
+      "title": "こども家庭庁 政策一覧",
+      "organization": "こども家庭庁",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F で公式サイトの実在を確認し登録（推測URLではない）",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-27T10:48:29.142Z",
+      "officialConfirmedAt": "2026-10-27",
+      "officialConfirmNote": "こども家庭庁（cfa.go.jp）の政策一覧ページ。go.jp ドメインかつ内容をWeb確認（M7-F・AIエージェントによる確認）",
+      "contentRetrievedAt": "2026-10-27T10:48:29.142Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動 ホーム ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 Global Site 検索 メニュー 閉じる ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 新着・更新 広報・報道 大臣等会見 組織情報 政策 会議等 法令 採用 資料 申請・届出 調達情報 関連リンク Global Site サイトポリシー SNSポリシー コピーライトポリシー ご意見・ご要望 サイトマップ ホーム 政策 政策 政策分野 こどもまんなか社会の実現のため、各分野…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-fukushi-metro-tokyo-lg-jp",
+      "url": "https://www.fukushi.metro.tokyo.lg.jp/",
+      "title": "東京都福祉局 トップページ",
+      "organization": "東京都福祉局",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F で公式サイトの実在を確認し登録（推測URLではない）",
+      "urlState": "candidate-registered",
+      "reachableAt": null,
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": null,
+      "contentState": "no-content",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": null,
+        "review": null
+      },
+      "lastFetchResult": "too-large",
+      "lastFetchFailureReason": "本文サイズが上限（500000 bytes）を超えています",
+      "excerpt": null,
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-city-setagaya-lg-jp",
+      "url": "https://www.city.setagaya.lg.jp/",
+      "title": "世田谷区公式ホームページ",
+      "organization": "世田谷区",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F で公式サイトの実在を確認し登録（推測URLではない）",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-27T10:49:16.662Z",
+      "officialConfirmedAt": "2026-10-27",
+      "officialConfirmNote": "世田谷区（city.setagaya.lg.jp）の公式サイト。lg.jp ドメインかつ内容をWeb確認（M7-F・AIエージェントによる確認）",
+      "contentRetrievedAt": "2026-10-27T10:49:16.662Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へスキップします。 世田谷区 閲覧支援 閲覧支援 文字サイズ・色合い変更 音声読み上げ ふりがな表示 閉じる Foreign Language Foreign Language 外国人住民の方へ For foreign residents 閉じる アクセス・施設案内 窓口混雑状況 このページに知りたい情報がない場合は 緊急情報 緊急情報 お知らせ 緊急メンテナンスに伴う各種サービスの停止状況について（令和8年10月27日13時更新） お知らせ一覧を見る 気象警報 気象注意…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-city-minato-tokyo-jp",
+      "url": "https://www.city.minato.tokyo.jp/",
+      "title": "港区ホームページ",
+      "organization": "港区",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F で公式サイトの実在を確認し登録（推測URLではない）",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-27T10:49:17.864Z",
+      "officialConfirmedAt": "2026-10-27",
+      "officialConfirmNote": "港区（city.minato.tokyo.jp）の公式サイト。lg.jp ドメインかつ内容をWeb確認（M7-F・AIエージェントによる確認）",
+      "contentRetrievedAt": "2026-10-27T10:49:17.864Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へスキップします。 港区 緊急情報 文字・音声支援 文字サイズ・色合い変更 音声読み上げ ふりがなON 閉じる やさしい日本語ON Language 日本語 すべての言語を見る 閉じる AI検索 キーワードから探す ページIDから探す 検索 暮らし・手続き 防災・安全 健康・福祉 子育て・教育 観光・スポーツ・文化 環境・まちづくり 産業・ビジネス 区政情報 トップ ページ Pick up Pick up 検索 検索 キーワードから探す 「単語」のみの検索ではなく「単語 …",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-city-shinjuku-lg-jp",
+      "url": "https://www.city.shinjuku.lg.jp/",
+      "title": "新宿区公式ホームページ",
+      "organization": "新宿区",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F で公式サイトの実在を確認し登録（推測URLではない）",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-27T10:49:49.969Z",
+      "officialConfirmedAt": "2026-10-27",
+      "officialConfirmNote": "新宿区（city.shinjuku.lg.jp）の公式サイト。lg.jp ドメインかつ内容をWeb確認（M7-F・AIエージェントによる確認）",
+      "contentRetrievedAt": "2026-10-27T10:49:49.969Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "チャットを閉じる Language 本文へ サイトマップ アクセス等 問い合わせ 携帯サイト 文字サイズ： 標準 拡大 音声読み上げ Language メニュー 閉じる ホーム くらし 戸籍・住民票・印鑑登録 ・マイナンバーカード 電子申請サービス 保険・年金・税金 出産・子ども・教育 福祉・介護 健康・医療・衛生 ごみ・資源・環境 住まい まちづくり・都市計画 道路・交通・自転車 みどり・河川・公園 地域共生・区民活動 多文化共生・国際交流 消費生活・相談 社会保障・税番号…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-city-bunkyo-lg-jp",
+      "url": "https://www.city.bunkyo.lg.jp/",
+      "title": "文京区公式ホームページ",
+      "organization": "文京区",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F で公式サイトの実在を確認し登録（推測URLではない）",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-27T10:49:51.226Z",
+      "officialConfirmedAt": "2026-10-27",
+      "officialConfirmNote": "文京区（city.bunkyo.lg.jp）の公式サイト。lg.jp ドメインかつ内容をWeb確認（M7-F・AIエージェントによる確認）",
+      "contentRetrievedAt": "2026-10-27T10:49:51.226Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へスキップします。 文京区 やさしい日本語ON みえかたサポート 文字サイズ・色合い変更 音声読み上げ 閉じる Language 日本語 English 한국어 简体中文 繁體中文 閉じる 緊急情報 検索 検索 メニュー 分類別 閉じる ホーム お役立ちリンク 閉じる 検索 閉じる 観光案内 緊急情報 現在、情報はありません。 文京区防災ポータル AED（自動体外式除細動器） 休日・夜間診療 緊急情報一覧 閉じる 防災・安全 手続き・くらし 子育て・教育 健康・医療・福祉…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-city-taito-lg-jp",
+      "url": "https://www.city.taito.lg.jp/",
+      "title": "台東区ホームページ",
+      "organization": "台東区",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F で公式サイトの実在を確認し登録（推測URLではない）",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-27T10:49:52.456Z",
+      "officialConfirmedAt": "2026-10-27",
+      "officialConfirmNote": "台東区（city.taito.lg.jp）の公式サイト。lg.jp ドメインかつ内容をWeb確認（M7-F・AIエージェントによる確認）",
+      "contentRetrievedAt": "2026-10-27T10:49:52.456Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "このページの先頭です このページの本文へ移動 音声読み上げ・文字拡大 Foreign Language アクセス 現在、重要なお知らせはありません。 閉じる 検索 よくある質問 イベント検索 本文ここから お知らせ 緊急メンテナンス等に伴い、一部のWebサイト・サービスが停止しています 【令和8年10月27日(火曜日)15時更新】 台東区障害者支援アプリ「ささえ～る」運営委託事業者への不正アクセスによる個人情報の流出【令和8年10月26日（月曜日）19時更新】 台東区大河ドラ…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-cfa-go-jp-policies-shussan-kosodate",
+      "url": "https://www.cfa.go.jp/policies/shussan-kosodate",
+      "title": "こども家庭庁 妊娠期からの伴走型相談支援（出産・子育て応援交付金）",
+      "organization": "こども家庭庁",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F: 公式ポータルのリンクから到達した個別制度ページ（推測URLではない）",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-27T11:01:38.163Z",
+      "officialConfirmedAt": "2026-10-27",
+      "officialConfirmNote": "こども家庭庁（cfa.go.jp）の個別政策ページ。内容をWeb確認（M7-F・AIエージェントによる確認）",
+      "contentRetrievedAt": "2026-10-27T11:01:38.163Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動 ホーム ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 Global Site 検索 メニュー 閉じる ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 新着・更新 広報・報道 大臣等会見 組織情報 政策 会議等 法令 採用 資料 申請・届出 調達情報 関連リンク Global Site サイトポリシー SNSポリシー コピーライトポリシー ご意見・ご要望 サイトマップ ホーム 政策 妊産婦への伴走型相談支援と経済的支援の一体的実施（妊婦…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-cfa-go-jp-policies-hitori-oya",
+      "url": "https://www.cfa.go.jp/policies/hitori-oya",
+      "title": "こども家庭庁 ひとり親家庭等関係",
+      "organization": "こども家庭庁",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F: 公式ポータルのリンクから到達した個別制度ページ（推測URLではない）",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-27T11:01:39.334Z",
+      "officialConfirmedAt": "2026-10-27",
+      "officialConfirmNote": "こども家庭庁（cfa.go.jp）の個別政策ページ。内容をWeb確認（M7-F・AIエージェントによる確認）",
+      "contentRetrievedAt": "2026-10-27T11:01:39.334Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動 ホーム ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 Global Site 検索 メニュー 閉じる ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 新着・更新 広報・報道 大臣等会見 組織情報 政策 会議等 法令 採用 資料 申請・届出 調達情報 関連リンク Global Site サイトポリシー SNSポリシー コピーライトポリシー ご意見・ご要望 サイトマップ ホーム 政策 ひとり親家庭等関係 ひとり親家庭等関係 ひとり親家庭等…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-cfa-go-jp-policies-shougaijishien",
+      "url": "https://www.cfa.go.jp/policies/shougaijishien",
+      "title": "こども家庭庁 障害児支援",
+      "organization": "こども家庭庁",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F: 公式ポータルのリンクから到達した個別制度ページ（推測URLではない）",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-27T11:01:40.517Z",
+      "officialConfirmedAt": "2026-10-27",
+      "officialConfirmNote": "こども家庭庁（cfa.go.jp）の個別政策ページ。内容をWeb確認（M7-F・AIエージェントによる確認）",
+      "contentRetrievedAt": "2026-10-27T11:01:40.517Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へ移動 ホーム ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 Global Site 検索 メニュー 閉じる ホーム こども向け 相談窓口 子育て中の皆さんへ 自治体の方 新着・更新 広報・報道 大臣等会見 組織情報 政策 会議等 法令 採用 資料 申請・届出 調達情報 関連リンク Global Site サイトポリシー SNSポリシー コピーライトポリシー ご意見・ご要望 サイトマップ ホーム 政策 障害児支援 障害児支援 障害児の健やかな育成を支援する…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-fukushi-metro-tokyo-lg-jp-kodomo-kosodate-018",
+      "url": "https://www.fukushi.metro.tokyo.lg.jp/kodomo/kosodate/018",
+      "title": "東京都 018サポート（こども医療費助成）",
+      "organization": "東京都福祉局",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F: 公式ポータルのリンクから到達した個別制度ページ（推測URLではない）",
+      "urlState": "candidate-registered",
+      "reachableAt": null,
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": null,
+      "contentState": "no-content",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": null,
+        "review": null
+      },
+      "lastFetchResult": "too-large",
+      "lastFetchFailureReason": "本文サイズが上限（500000 bytes）を超えています",
+      "excerpt": null,
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-fukushi-metro-tokyo-lg-jp-kodomo-shussan-tokyo-shussankosodateouen",
+      "url": "https://www.fukushi.metro.tokyo.lg.jp/kodomo/shussan/tokyo_shussankosodateouen",
+      "title": "東京都出産・子育て応援事業 ～赤ちゃんファースト～",
+      "organization": "東京都福祉局",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F: 公式ポータルのリンクから到達した個別制度ページ（推測URLではない）",
+      "urlState": "candidate-registered",
+      "reachableAt": null,
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": null,
+      "contentState": "no-content",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": null,
+        "review": null
+      },
+      "lastFetchResult": "too-large",
+      "lastFetchFailureReason": "本文サイズが上限（500000 bytes）を超えています",
+      "excerpt": null,
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-fukushi-metro-tokyo-lg-jp-kodomo-hoiku-mushouka",
+      "url": "https://www.fukushi.metro.tokyo.lg.jp/kodomo/hoiku/mushouka",
+      "title": "東京都 保育料等の無償化について",
+      "organization": "東京都福祉局",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F: 公式ポータルのリンクから到達した個別制度ページ（推測URLではない）",
+      "urlState": "candidate-registered",
+      "reachableAt": null,
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": null,
+      "contentState": "no-content",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": null,
+        "review": null
+      },
+      "lastFetchResult": "too-large",
+      "lastFetchFailureReason": "本文サイズが上限（500000 bytes）を超えています",
+      "excerpt": null,
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-fukushi-metro-tokyo-lg-jp-kodomo-hitorioya-shien",
+      "url": "https://www.fukushi.metro.tokyo.lg.jp/kodomo/hitorioya_shien",
+      "title": "東京都 ひとり親家庭・離婚前後家庭の支援",
+      "organization": "東京都福祉局",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F: 公式ポータルのリンクから到達した個別制度ページ（推測URLではない）",
+      "urlState": "candidate-registered",
+      "reachableAt": null,
+      "officialConfirmedAt": null,
+      "officialConfirmNote": null,
+      "contentRetrievedAt": null,
+      "contentState": "no-content",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": null,
+        "review": null
+      },
+      "lastFetchResult": "too-large",
+      "lastFetchFailureReason": "本文サイズが上限（500000 bytes）を超えています",
+      "excerpt": null,
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-city-shinjuku-lg-jp-kodomo-jidoikusei01-000001-00008-html",
+      "url": "https://www.city.shinjuku.lg.jp/kodomo/jidoikusei01_000001_00008.html",
+      "title": "新宿区子育て応援臨時給付金",
+      "organization": "新宿区",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F: 公式ポータルのリンクから到達した個別制度ページ（推測URLではない）",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-27T11:03:50.208Z",
+      "officialConfirmedAt": "2026-10-27",
+      "officialConfirmNote": "新宿区公式サイトの個別制度ページ（子育て応援臨時給付金）。内容をWeb確認（M7-F・AIエージェントによる確認）",
+      "contentRetrievedAt": "2026-10-27T11:03:50.208Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "チャットを閉じる 本文へ サイトマップ アクセス等 問い合わせ 携帯サイト 検索の方法 文字サイズ : 標準 拡大 音声読み上げ Language ホーム くらし 戸籍・住民票・印鑑登録 ・マイナンバーカード 電子申請サービス 保険・年金・税金 出産・子ども・教育 福祉・介護 健康・医療・衛生 ごみ・資源・環境 住まい まちづくり・都市計画 道路・交通・自転車 みどり・河川・公園 地域共生・区民活動 多文化共生・国際交流 消費生活・相談 社会保障・税番号（マイナンバー）制度 …",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-city-setagaya-lg-jp-02243-29576-html",
+      "url": "https://www.city.setagaya.lg.jp/02243/29576.html",
+      "title": "世田谷版こども誰でも通園制度（乳児等通園支援事業）",
+      "organization": "世田谷区",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F: 公式ポータルのリンクから到達した個別制度ページ（推測URLではない）",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-27T11:06:35.432Z",
+      "officialConfirmedAt": "2026-10-27",
+      "officialConfirmNote": "世田谷区（city.setagaya.lg.jp）の個別制度ページ。区公式サイトのリンクから到達し内容を確認（M7-F・AIエージェントによる確認）",
+      "contentRetrievedAt": "2026-10-27T11:06:35.432Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へスキップします。 世田谷区 閲覧支援 閲覧支援 文字サイズ・色合い変更 音声読み上げ ふりがな表示 閉じる Foreign Language Foreign Language 外国人住民の方へ For foreign residents 閉じる アクセス・施設案内 窓口混雑状況 このページに知りたい情報がない場合は 緊急情報 緊急情報 災害に関する情報については、 世田谷区防災ポータル をご覧ください。 閉じる Emergency ShiftJIS 検索 メニュー 検索…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-city-taito-lg-jp-benri-teate-josei-html",
+      "url": "https://www.city.taito.lg.jp/benri/teate-josei.html",
+      "title": "台東区 手当・助成",
+      "organization": "台東区",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F: 公式ポータルのリンクから到達した個別制度ページ（推測URLではない）",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-27T11:06:36.834Z",
+      "officialConfirmedAt": "2026-10-27",
+      "officialConfirmNote": "台東区（city.taito.lg.jp）の手当・助成ページ。区公式サイトのリンクから到達し内容を確認（M7-F・AIエージェントによる確認）",
+      "contentRetrievedAt": "2026-10-27T11:06:36.834Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "このページの先頭です このページの本文へ移動 音声読み上げ・文字拡大 Foreign Language アクセス 閉じる 現在のページ トップページ 便利情報 手当・助成 本文ここから 手当・助成 ページID：733264061 更新日：2026年3月19日 印刷 子育て 教育 安心安全 障害のある方 医療・健康 住まい 環境・まちづくり 福祉 道路 地域協働 事業者向け 子育て 手当 児童手当 児童扶養手当 児童育成手当 児童育成手当（障害手当） 特別児童扶養手当 医療・健…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-city-minato-tokyo-jp-kosodatesien-kosodate-index-html",
+      "url": "https://www.city.minato.tokyo.jp/kosodatesien/kosodate/index.html",
+      "title": "港区 子育て支援（子育てページ）",
+      "organization": "港区",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F: 公式ポータルのリンクから到達した個別制度ページ（推測URLではない）",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-27T11:06:38.175Z",
+      "officialConfirmedAt": "2026-10-27",
+      "officialConfirmNote": "港区（city.minato.tokyo.jp）の子育てページ。区公式サイトのリンクから到達し内容を確認（M7-F・AIエージェントによる確認）",
+      "contentRetrievedAt": "2026-10-27T11:06:38.175Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へスキップします。 港区 緊急情報 文字・音声支援 文字サイズ・色合い変更 音声読み上げ ふりがなON 閉じる やさしい日本語ON Language 日本語 すべての言語を見る 閉じる AI検索 キーワードから探す ページIDから探す 検索 暮らし・手続き 防災・安全 健康・福祉 子育て・教育 観光・スポーツ・文化 環境・まちづくり 産業・ビジネス 区政情報 トップ ページ Pick up Pick up 検索 検索 キーワードから探す 「単語」のみの検索ではなく「単語 …",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-city-bunkyo-lg-jp-kosodatekyouiku-index-html",
+      "url": "https://www.city.bunkyo.lg.jp/kosodatekyouiku/index.html",
+      "title": "文京区 子育て・教育",
+      "organization": "文京区",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F: 公式ポータルのリンクから到達した個別制度ページ（推測URLではない）",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-27T11:06:39.451Z",
+      "officialConfirmedAt": "2026-10-27",
+      "officialConfirmNote": "文京区（city.bunkyo.lg.jp）の子育て・教育ページ。区公式サイトのリンクから到達し内容を確認（M7-F・AIエージェントによる確認）",
+      "contentRetrievedAt": "2026-10-27T11:06:39.451Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へスキップします。 文京区 やさしい日本語ON みえかたサポート 文字サイズ・色合い変更 音声読み上げ 閉じる Language 日本語 English 한국어 简体中文 繁體中文 閉じる 緊急情報 検索 検索 メニュー 分類別 閉じる ホーム お役立ちリンク 閉じる 検索 閉じる 観光案内 緊急情報 現在、情報はありません。 文京区防災ポータル AED（自動体外式除細動器） 休日・夜間診療 緊急情報一覧 閉じる 防災・安全 手続き・くらし 子育て・教育 健康・医療・福祉…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-kodomoseisaku-metro-tokyo-lg-jp-syougakukinhenkansien",
+      "url": "https://www.kodomoseisaku.metro.tokyo.lg.jp/syougakukinhenkansien",
+      "title": "奨学金の返還を支援する取組みについて（東京都 子供政策連携室）",
+      "organization": "東京都子供政策連携室",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F: 東京都福祉局公式サイトのリンクから到達したページ。469KBで既存サイズ制限（500KB）内で取得可能",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-27T11:06:43.117Z",
+      "officialConfirmedAt": "2026-10-27",
+      "officialConfirmNote": "東京都子供政策連携室（kodomoseisaku.metro.tokyo.lg.jp）のページ。東京都福祉局公式のリンクから到達し内容を確認（M7-F・AIエージェントによる確認）",
+      "contentRetrievedAt": "2026-10-27T11:06:43.117Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "コンテンツにスキップ 都全体で探す 閉じる 都全体で探す 都全体で探す 防災・緊急情報 防災・緊急情報 防災情報 東京都防災ホームページ Disaster Prevention Information 避難情報 Evacuation Information 東京都防災マップ 東京アメッシュ 降水量・河川水位・高潮情報 土砂災害警戒情報 東京都防災 公式X 東京都防災アプリ 緊急時 警視庁 東京消防庁 カテゴリ別 カテゴリ別 防災 くらし・住まい 健康・医療 高齢者・福祉 子供…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-city-minato-tokyo-jp-kosodatesien-kodomo-kate-kodomoiryo-html",
+      "url": "https://www.city.minato.tokyo.jp/kosodatesien/kodomo/kate/kodomoiryo.html",
+      "title": "港区 子ども医療助成",
+      "organization": "港区",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F: 公式ポータルのリンクから到達した個別制度ページ",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-27T11:20:16.820Z",
+      "officialConfirmedAt": "2026-10-27",
+      "officialConfirmNote": "港区公式サイトの個別制度ページ。内容をWeb確認（M7-F・AIエージェントによる確認）",
+      "contentRetrievedAt": "2026-10-27T11:20:16.820Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へスキップします。 港区 緊急情報 文字・音声支援 文字サイズ・色合い変更 音声読み上げ ふりがなON 閉じる やさしい日本語ON Language 日本語 すべての言語を見る 閉じる AI検索 キーワードから探す ページIDから探す 検索 暮らし・手続き 防災・安全 健康・福祉 子育て・教育 観光・スポーツ・文化 環境・まちづくり 産業・ビジネス 区政情報 トップ ページ Pick up Pick up 検索 検索 キーワードから探す 「単語」のみの検索ではなく「単語 …",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-city-taito-lg-jp-kenchiku-jutaku-sumai-yachinhojo-kosodatereform-html",
+      "url": "https://www.city.taito.lg.jp/kenchiku/jutaku/sumai/yachinhojo/kosodatereform.html",
+      "title": "台東区 子育て世帯住宅リフォーム支援制度",
+      "organization": "台東区",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F: 公式ポータルのリンクから到達した個別制度ページ",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-27T11:20:20.157Z",
+      "officialConfirmedAt": "2026-10-27",
+      "officialConfirmNote": "台東区公式サイトの個別制度ページ。内容をWeb確認（M7-F・AIエージェントによる確認）",
+      "contentRetrievedAt": "2026-10-27T11:20:20.157Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "このページの先頭です このページの本文へ移動 音声読み上げ・文字拡大 Foreign Language アクセス 閉じる 現在のページ トップページ まちづくり・住宅・環境 住まい・建築・区施設整備 住まい 居住支援制度 子育て世帯住宅リフォーム支援制度 本文ここから 子育て世帯住宅リフォーム支援制度 ページID：180841314 更新日：2025年4月1日 印刷 1 制度の概要 子育て世帯の居住環境の向上を目的としたリフォーム工事を行う方に対し、予算の範囲内で助成金を交付…",
+      "retrievalPolicy": {
+        "maxAgeDays": 30,
+        "note": "人手で実行する取得のみ。自動巡回はしない"
+      },
+      "robots": {
+        "checkedAt": null,
+        "note": "未確認（取得時に robots.txt を確認する）"
+      },
+      "terms": {
+        "acknowledgedAt": null,
+        "note": "未確認（サイトの利用条件は人手で要確認）"
+      }
+    },
+    {
+      "urlId": "src-www-city-bunkyo-lg-jp-kosodatekyouiku-kosodate-teate-index-html",
+      "url": "https://www.city.bunkyo.lg.jp/kosodatekyouiku/kosodate/teate/index.html",
+      "title": "文京区 こどもの手当・助成など",
+      "organization": "文京区",
+      "programIds": [],
+      "registeredAt": "2026-10-27",
+      "registrationNote": "M7-F: 公式ポータルのリンクから到達した個別制度ページ",
+      "urlState": "official-confirmed",
+      "reachableAt": "2026-10-27T11:20:52.587Z",
+      "officialConfirmedAt": "2026-10-27",
+      "officialConfirmNote": "文京区公式サイトのこどもの手当・助成ページ。内容をWeb確認（M7-F・AIエージェントによる確認）",
+      "contentRetrievedAt": "2026-10-27T11:20:52.587Z",
+      "contentState": "needs-review",
+      "review": {
+        "reviewedAt": null,
+        "reviewedFields": [],
+        "note": null,
+        "reviewer": null
+      },
+      "provenance": {
+        "registered": "user-registered",
+        "retrieval": "fetch-run",
+        "review": null
+      },
+      "lastFetchResult": "ok",
+      "lastFetchFailureReason": null,
+      "excerpt": "本文へスキップします。 文京区 やさしい日本語ON みえかたサポート 文字サイズ・色合い変更 音声読み上げ 閉じる Language 日本語 English 한국어 简体中文 繁體中文 閉じる 緊急情報 検索 検索 メニュー 分類別 閉じる ホーム お役立ちリンク 閉じる 検索 閉じる 観光案内 緊急情報 現在、情報はありません。 文京区防災ポータル AED（自動体外式除細動器） 休日・夜間診療 緊急情報一覧 閉じる 防災・安全 手続き・くらし 子育て・教育 健康・医療・福祉…",
       "retrievalPolicy": {
         "maxAgeDays": 30,
         "note": "人手で実行する取得のみ。自動巡回はしない"

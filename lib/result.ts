@@ -822,7 +822,13 @@ export function buildSimulationResult(
       label: "公的支援の額",
       valueText: `確定 ${supports.confirmedTotalYen}円／推定 ${supports.estimatedTotalYen}円`,
       flag: "unverified",
-      note: "モックデータに基づく未確認の試算です。確定した支給額ではありません",
+      note: `未確認の試算です。確定した支給額ではありません${
+        supports.effects.some(
+          (e) => e.includedInTotal && e.program.conditions.combinedWith.length === 0,
+        )
+          ? "。併用可否が未確認の制度を含むため、合計は単純合算の試算です（要確認）"
+          : ""
+      }`,
     },
     {
       label: "妊娠・出産の費用",

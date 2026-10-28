@@ -455,6 +455,58 @@ async function main(): Promise<void> {
       e0.estimatedTotalYen === 2_160_000,
   );
 
+  // ══════════════════════════════════════════════════════════
+  section("F. 期限切れ制度の非計上・期限基準日の注入（M7-G）");
+  // ══════════════════════════════════════════════════════════
+  const fxExpired = fixtureProgram({
+    id: "fx-expired",
+    name: "期限切れテスト",
+    application: {
+      where: "窓口",
+      documents: [],
+      deadlineNote: "受付期限 2020-01-01",
+      steps: [],
+      deadlineDate: "2020-01-01",
+    },
+  });
+  const expiredCalc = calculateSupportEffects(planOf([child("c1", 0)]), [fxExpired]);
+  const expiredEffect = expiredCalc.effects[0];
+  check(
+    "期限切れ（deadlineDate < 今日）の制度は合計に含めず、理由付きで案内しない",
+    expiredEffect.includedInTotal === false &&
+      (expiredEffect.excludedReason ?? "").includes("受付期限") &&
+      (expiredEffect.excludedReason ?? "").includes("過ぎている") &&
+      expiredCalc.confirmedTotalYen === 0 &&
+      expiredCalc.estimatedTotalYen === 0,
+    expiredEffect.excludedReason ?? "",
+  );
+  const fxFuture = fixtureProgram({
+    id: "fx-future",
+    name: "期限内テスト",
+    application: {
+      where: "窓口",
+      documents: [],
+      deadlineNote: "受付期限 2999-12-31",
+      steps: [],
+      deadlineDate: "2999-12-31",
+    },
+  });
+  const futureCalc = calculateSupportEffects(planOf([child("c1", 0)]), [fxFuture]);
+  check(
+    "期限内の制度は従来どおり合計に含まれる（期限ガードの誤爆なし）",
+    futureCalc.effects[0].includedInTotal === true &&
+      futureCalc.estimatedTotalYen === 2_160_000,
+    String(futureCalc.estimatedTotalYen),
+  );
+  const backdatedCalc = calculateSupportEffects(planOf([child("c1", 0)]), [fxExpired], {
+    today: "2019-12-31",
+  });
+  check(
+    "期限判定は基準日（today）を注入でき、基準日以前なら期限内として扱う",
+    backdatedCalc.effects[0].includedInTotal === true,
+    backdatedCalc.effects[0].excludedReason ?? "",
+  );
+
   console.log(
     failed === 0
       ? "M6-D: すべての確認項目が成功"

@@ -12,6 +12,7 @@
  * - 貸付が給付額の合計に混入しない
  * - 既存の相談機能と結果画面が引き続き動作する（API・カード表示の継続）
  */
+import { readFileSync } from "node:fs";
 import { createElement } from "react";
 import { renderToString } from "react-dom/server";
 import { z } from "zod";
@@ -201,6 +202,22 @@ async function main(): Promise<void> {
       verificationBadgeText(mockMedical) === "モック・未確認",
   );
   check(
+    "人手確認未完了の制度（humanConfirmed:false）は「AI確認済み・人手確認待ち」と表示（M7-G）",
+    childAllowance !== undefined &&
+      verificationBadgeText({
+        ...childAllowance,
+        mock: false,
+        verification: {
+          status: "partial",
+          verifiedAt: "2026-10-27",
+          verifiedFields: [],
+          note: "テスト",
+          confirmedBy: "AIエージェント",
+          humanConfirmed: false,
+        },
+      }) === "AI確認済み・人手確認待ち",
+  );
+  check(
     "児童手当: 検証済み公式出典あり（hasVerifiedOfficialSource）",
     childAllowance !== undefined && hasVerifiedOfficialSource(childAllowance),
   );
@@ -262,8 +279,19 @@ async function main(): Promise<void> {
   section("C. 公式URL検証のポリシー");
   // ══════════════════════════════════════════════════════════
   const loggedUrls = verifiedOfficialUrls();
+  // M7-F: 情報源台帳（data/source-ledger.json）で公式確認済みの URL も
+  // 根拠のある公式URLとして扱う（M6-C の調査ログ由来URLに加えて、
+  // M7-F で台帳に登録→実取得→公式確認した URL を追加。推測URLは含まない）
+  {
+    const ledger = JSON.parse(
+      readFileSync("data/source-ledger.json", "utf8"),
+    ) as { entries: Array<{ url: string; urlState: string }> };
+    for (const e of ledger.entries) {
+      if (e.urlState === "official-confirmed") loggedUrls.add(e.url);
+    }
+  }
   check(
-    "urlVerified=true の出典はすべて調査ログ（本文照合済み）の公式URLと一致",
+    "urlVerified=true の出典はすべて調査ログまたは情報源台帳で公式確認済みのURLと一致",
     registry.every((p) =>
       p.sources.every((s) => !s.urlVerified || loggedUrls.has(s.url ?? "")),
     ),

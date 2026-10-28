@@ -208,6 +208,17 @@ export const programVerificationSchema = z.object({
   verifiedFields: z.array(z.string()),
   /** 確認方法・確認範囲のメモ */
   note: z.string().min(1).nullable(),
+  /**
+   * 人手確認が完了しているか（M7-G）。
+   * - false: AI エージェントによる照合のみで、人手確認は未実施。
+   *   「確認済み」として表示してはならない。
+   * - true: 人手確認が完了。
+   * - 未設定（旧データ）: 判別情報がないため従来どおりの表示。
+   * （reviewedBy: 'manual' は確認記録スキーマの固定値であり、人手確認の証明にはならない）
+   */
+  humanConfirmed: z.boolean().optional(),
+  /** 確認を実施した主体（人名またはエージェント名。M7-G） */
+  confirmedBy: z.string().min(1).optional(),
 })
 export type ProgramVerification = z.infer<typeof programVerificationSchema>
 

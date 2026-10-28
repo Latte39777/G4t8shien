@@ -299,7 +299,7 @@ export default function Result({
             <p className="mt-1 text-[11px] leading-4 text-rose-700">
               確定 {formatYen(supportTotals.confirmedYen)}／
               推定（要確認） {formatYen(supportTotals.estimatedYen)}
-              。モックデータに基づく試算であり、支給が確定したものではありません。
+              。未確認の試算であり、支給が確定したものではありません。併用可否が未確認の制度を含むため、合計は単純合算の試算です（要確認）。
             </p>
           </div>
           </div>
@@ -394,7 +394,7 @@ export default function Result({
             負担軽減の見込額は「支援なしの場合の費用総額 −
             確定支援と推定支援を反映した場合の参考費用」です。
             うち推定支援 {formatYen(supportTotals.estimatedYen)}{" "}
-            は未確認の試算を含みます。支援額はモックデータに基づく試算であり、
+            は未確認の試算を含みます。支援額は未確認の試算であり、
             支給が確定したことや、実際の負担額が保証されることを意味しません。
           </p>
         </section>

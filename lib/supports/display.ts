@@ -164,6 +164,10 @@ export function estimateSummaryText(estimate: SupportEstimate): string {
  */
 export function verificationBadgeText(program: SupportProgram): string {
   if (program.mock) return 'モック・未確認'
+  // 人手確認が未完了の制度は「確認済み」と表示しない（M7-G）
+  if (program.verification?.humanConfirmed === false) {
+    return 'AI確認済み・人手確認待ち'
+  }
   const status = program.verification?.status
   if (status === 'official-verified') return '公式確認済み'
   if (status === 'partial' || hasVerifiedOfficialSource(program)) {

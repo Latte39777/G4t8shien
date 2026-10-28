@@ -77,7 +77,8 @@ export function SupportCard({
           className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
             verificationBadgeText(program) === "公式確認済み"
               ? "bg-emerald-100 text-emerald-700"
-              : verificationBadgeText(program) === "公式確認済み（一部要確認）"
+              : verificationBadgeText(program) === "公式確認済み（一部要確認）" ||
+                  verificationBadgeText(program) === "AI確認済み・人手確認待ち"
                 ? "bg-amber-100 text-amber-700"
                 : "bg-rose-100 text-rose-600"
           }`}
@@ -266,6 +267,9 @@ export function SupportCard({
           </p>
         )}
         <ul className="mt-1.5 space-y-0.5 text-[11px] leading-4 text-slate-500">
+          {program.conditions.combinedWith.length === 0 && (
+            <li>・併用可否: 未確認（他の制度との併用可否は要確認です）</li>
+          )}
           {program.conditions.incomeLimitNote && (
             <li>・{program.conditions.incomeLimitNote}</li>
           )}

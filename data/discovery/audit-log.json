@@ -1,0 +1,1200 @@
+{
+  "formatVersion": 1,
+  "savedAt": "2026-10-27T11:44:22.952Z",
+  "entries": [
+    {
+      "auditId": "aud-0649ea48547b805a",
+      "at": "2026-10-27T11:12:14.130Z",
+      "candidateId": "cand-524889568224",
+      "action": "extracted",
+      "actor": "ai-extraction",
+      "reason": "AI 抽出で候補として保存（モデル: iniad:gpt-5.4）",
+      "fromStatus": null,
+      "toStatus": "unverified",
+      "pageUrl": "https://www.cfa.go.jp/policies/shussan-kosodate",
+      "fields": [
+        "summary",
+        "fiscalYear",
+        "implementer"
+      ],
+      "programId": null,
+      "details": "発見: 2026-10-27T11:12:08.588Z / 根拠抜粋 3 件"
+    },
+    {
+      "auditId": "aud-429a18ee31c8ce69",
+      "at": "2026-10-27T11:14:02.734Z",
+      "candidateId": "cand-f1e367aebeed",
+      "action": "extracted",
+      "actor": "ai-extraction",
+      "reason": "AI 抽出で候補として保存（モデル: iniad:gpt-5.4）",
+      "fromStatus": null,
+      "toStatus": "unverified",
+      "pageUrl": "https://www.cfa.go.jp/policies/hitori-oya",
+      "fields": [
+        "summary",
+        "implementer",
+        "eligibility.householdNote",
+        "amount.description"
+      ],
+      "programId": null,
+      "details": "発見: 2026-10-27T11:13:55.864Z / 根拠抜粋 4 件"
+    },
+    {
+      "auditId": "aud-4d2e00e2d10d43f8",
+      "at": "2026-10-27T11:15:34.657Z",
+      "candidateId": "cand-5e49e6b60a59",
+      "action": "extracted",
+      "actor": "ai-extraction",
+      "reason": "AI 抽出で候補として保存（モデル: iniad:gpt-5.4）",
+      "fromStatus": null,
+      "toStatus": "unverified",
+      "pageUrl": "https://www.kodomoseisaku.metro.tokyo.lg.jp/syougakukinhenkansien",
+      "fields": [
+        "summary",
+        "implementer",
+        "regionScope",
+        "eligibility.other",
+        "amount",
+        "validPeriod",
+        "application.how",
+        "application.documents",
+        "eligibility.other",
+        "fiscalYear"
+      ],
+      "programId": null,
+      "details": "発見: 2026-10-27T11:15:16.939Z / 根拠抜粋 10 件"
+    },
+    {
+      "auditId": "aud-0d76a0443b38fbee",
+      "at": "2026-10-27T11:16:01.140Z",
+      "candidateId": "cand-8ee179e3b51b",
+      "action": "extracted",
+      "actor": "ai-extraction",
+      "reason": "AI 抽出で候補として保存（モデル: iniad:gpt-5.4）",
+      "fromStatus": null,
+      "toStatus": "unverified",
+      "pageUrl": "https://www.city.shinjuku.lg.jp/kodomo/jidoikusei01_000001_00008.html",
+      "fields": [
+        "name",
+        "summary",
+        "implementer",
+        "regionScope",
+        "kind",
+        "eligibility.householdNote",
+        "eligibility.other",
+        "eligibility.other",
+        "eligibility.other",
+        "eligibility.other",
+        "eligibility.other",
+        "eligibility.other",
+        "eligibility.other",
+        "amount",
+        "application.how",
+        "application.how",
+        "application.deadlineNote",
+        "application.deadlineNote",
+        "application.documents",
+        "application.documents",
+        "application.documents",
+        "application.documents",
+        "fiscalYear"
+      ],
+      "programId": null,
+      "details": "発見: 2026-10-27T11:15:37.659Z / 根拠抜粋 23 件"
+    },
+    {
+      "auditId": "aud-4176e895d3346f49",
+      "at": "2026-10-27T11:16:49.941Z",
+      "candidateId": "cand-31aebe48dfd2",
+      "action": "extracted",
+      "actor": "ai-extraction",
+      "reason": "AI 抽出で候補として保存（モデル: iniad:gpt-5.4）",
+      "fromStatus": null,
+      "toStatus": "unverified",
+      "pageUrl": "https://www.city.setagaya.lg.jp/02243/29576.html",
+      "fields": [
+        "summary",
+        "amount",
+        "eligibility.ageNote",
+        "amount",
+        "amount",
+        "application.how",
+        "application.how",
+        "application.how",
+        "application.deadlineNote",
+        "application.deadlineNote",
+        "fiscalYear",
+        "validPeriod",
+        "eligibility.other"
+      ],
+      "programId": null,
+      "details": "発見: 2026-10-27T11:16:28.767Z / 根拠抜粋 13 件"
+    },
+    {
+      "auditId": "aud-6af0371544d92db7",
+      "at": "2026-10-27T11:23:34.527Z",
+      "candidateId": "cand-a774a5cf4134",
+      "action": "extracted",
+      "actor": "ai-extraction",
+      "reason": "AI 抽出で候補として保存（モデル: iniad:gpt-5.4）",
+      "fromStatus": null,
+      "toStatus": "unverified",
+      "pageUrl": "https://www.city.taito.lg.jp/kenchiku/jutaku/sumai/yachinhojo/kosodatereform.html",
+      "fields": [
+        "name",
+        "summary",
+        "implementer",
+        "regionScope",
+        "eligibility.ageNote",
+        "eligibility.householdNote",
+        "eligibility.householdNote",
+        "eligibility.incomeNote",
+        "eligibility.other",
+        "eligibility.other",
+        "eligibility.other",
+        "amount",
+        "application.how",
+        "application.deadlineNote",
+        "application.deadlineNote",
+        "application.deadlineNote",
+        "application.documents",
+        "application.documents",
+        "application.documents",
+        "application.documents",
+        "application.documents",
+        "validPeriod",
+        "validPeriod"
+      ],
+      "programId": null,
+      "details": "発見: 2026-10-27T11:23:16.862Z / 根拠抜粋 23 件"
+    },
+    {
+      "auditId": "aud-6ddfb43fd015b507",
+      "at": "2026-10-27T11:24:04.701Z",
+      "candidateId": "cand-3a40c8701d68",
+      "action": "extracted",
+      "actor": "ai-extraction",
+      "reason": "AI 抽出で候補として保存（モデル: iniad:gpt-5.4）",
+      "fromStatus": null,
+      "toStatus": "unverified",
+      "pageUrl": "https://www.city.minato.tokyo.jp/kosodatesien/kodomo/kate/kodomoiryo.html",
+      "fields": [
+        "summary",
+        "implementer",
+        "regionScope",
+        "kind",
+        "eligibility.ageNote",
+        "eligibility.householdNote",
+        "eligibility.householdNote",
+        "eligibility.other",
+        "amount.description",
+        "amount.description",
+        "application.how",
+        "application.deadlineNote",
+        "application.documents",
+        "application.documents",
+        "application.documents",
+        "fiscalYear",
+        "validPeriod",
+        "validPeriod"
+      ],
+      "programId": null,
+      "details": "発見: 2026-10-27T11:23:50.068Z / 根拠抜粋 18 件"
+    },
+    {
+      "auditId": "aud-1f1dfde0fd64a89f",
+      "at": "2026-10-27T11:31:54.422Z",
+      "candidateId": "cand-f1e367aebeed",
+      "action": "discarded",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "母子家庭等対策総合支援事業は都道府県等への補助金交付事業であり、子育て世帯が直接申請・利用できる制度ではないためアプリ掲載対象外と判断（根拠自体は cfa.go.jp の公式記載）",
+      "fromStatus": "unverified",
+      "toStatus": "discarded",
+      "pageUrl": "https://www.cfa.go.jp/policies/hitori-oya",
+      "fields": [],
+      "programId": null,
+      "details": null
+    },
+    {
+      "auditId": "aud-20652b2fbec08d61",
+      "at": "2026-10-27T11:32:28.879Z",
+      "candidateId": "cand-524889568224",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "amount.value の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.cfa.go.jp/policies/shussan-kosodate",
+      "fields": [
+        "amount.value"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 妊娠期から面談を通じて出産・子育ての相談に応じ、様々なニーズに即した必要な支援につなぐ伴走型の相談支援と妊婦のための支援給付による経済的支援を組み合わせて実施します。"
+    },
+    {
+      "auditId": "aud-e6369ce87308533f",
+      "at": "2026-10-27T11:32:30.031Z",
+      "candidateId": "cand-524889568224",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "eligibility.age の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.cfa.go.jp/policies/shussan-kosodate",
+      "fields": [
+        "eligibility.age"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 妊娠期から面談を通じて出産・子育ての相談に応じ、様々なニーズに即した必要な支援につなぐ伴走型の相談支援と妊婦のための支援給付による経済的支援を組み合わせて実施します。"
+    },
+    {
+      "auditId": "aud-4a51139e370eca70",
+      "at": "2026-10-27T11:32:31.168Z",
+      "candidateId": "cand-524889568224",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "eligibility.household の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.cfa.go.jp/policies/shussan-kosodate",
+      "fields": [
+        "eligibility.household"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 妊娠期から面談を通じて出産・子育ての相談に応じ、様々なニーズに即した必要な支援につなぐ伴走型の相談支援と妊婦のための支援給付による経済的支援を組み合わせて実施します。"
+    },
+    {
+      "auditId": "aud-394bb7f055af1a4a",
+      "at": "2026-10-27T11:32:32.321Z",
+      "candidateId": "cand-524889568224",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "eligibility.income の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.cfa.go.jp/policies/shussan-kosodate",
+      "fields": [
+        "eligibility.income"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 妊娠期から面談を通じて出産・子育ての相談に応じ、様々なニーズに即した必要な支援につなぐ伴走型の相談支援と妊婦のための支援給付による経済的支援を組み合わせて実施します。"
+    },
+    {
+      "auditId": "aud-0ce67864a5f1fb85",
+      "at": "2026-10-27T11:32:33.462Z",
+      "candidateId": "cand-524889568224",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "application.deadline の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.cfa.go.jp/policies/shussan-kosodate",
+      "fields": [
+        "application.deadline"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 妊娠期から面談を通じて出産・子育ての相談に応じ、様々なニーズに即した必要な支援につなぐ伴走型の相談支援と妊婦のための支援給付による経済的支援を組み合わせて実施します。"
+    },
+    {
+      "auditId": "aud-f0923248c143aa77",
+      "at": "2026-10-27T11:32:34.607Z",
+      "candidateId": "cand-524889568224",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "regionScope の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.cfa.go.jp/policies/shussan-kosodate",
+      "fields": [
+        "regionScope"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 妊娠期から面談を通じて出産・子育ての相談に応じ、様々なニーズに即した必要な支援につなぐ伴走型の相談支援と妊婦のための支援給付による経済的支援を組み合わせて実施します。"
+    },
+    {
+      "auditId": "aud-bc8e00c1ce6100b0",
+      "at": "2026-10-27T11:32:35.756Z",
+      "candidateId": "cand-524889568224",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "validPeriod の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.cfa.go.jp/policies/shussan-kosodate",
+      "fields": [
+        "validPeriod"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 妊娠期から面談を通じて出産・子育ての相談に応じ、様々なニーズに即した必要な支援につなぐ伴走型の相談支援と妊婦のための支援給付による経済的支援を組み合わせて実施します。"
+    },
+    {
+      "auditId": "aud-75c6377cdbe976ab",
+      "at": "2026-10-27T11:32:36.906Z",
+      "candidateId": "cand-524889568224",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "fiscalYear の根拠を本文と照合（令和7年度）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.cfa.go.jp/policies/shussan-kosodate",
+      "fields": [
+        "fiscalYear"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 令和4年度補正予算から始まった「出産・子育て応援交付金事業」を令和7年度から法律に基づく制度として実施します。"
+    },
+    {
+      "auditId": "aud-e46f11b801af7cb3",
+      "at": "2026-10-27T11:33:19.780Z",
+      "candidateId": "cand-524889568224",
+      "action": "approved",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "重要8項目を公式ページ本文と根拠抜粋照合で確認（金額・年齢・世帯・所得・期限・地域・有効期間は本文に記載がないため（記載なし）で確認、適用年度は令和7年度を本文照合）。人間レビューではなくAIエージェントによる照合である点は監査actorに記録",
+      "fromStatus": "unverified",
+      "toStatus": "approved",
+      "pageUrl": "https://www.cfa.go.jp/policies/shussan-kosodate",
+      "fields": [],
+      "programId": null,
+      "details": null
+    },
+    {
+      "auditId": "aud-f71fdd7b29f93da6",
+      "at": "2026-10-27T11:33:20.928Z",
+      "candidateId": "cand-524889568224",
+      "action": "published",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "こども家庭庁の公式ページで確認できた範囲に基づき新規制度として公開（金額等の未記載事項は missingInformation として保持）",
+      "fromStatus": "approved",
+      "toStatus": "approved",
+      "pageUrl": "https://www.cfa.go.jp/policies/shussan-kosodate",
+      "fields": [
+        "amount.value",
+        "eligibility.age",
+        "eligibility.household",
+        "eligibility.income",
+        "application.deadline",
+        "regionScope",
+        "validPeriod",
+        "fiscalYear"
+      ],
+      "programId": "disc-524889568224",
+      "details": "mode: new / バックアップ: /home/user/enshu/g8t4/my-app/data/programs/programs.json.backup-20261027T113320Z"
+    },
+    {
+      "auditId": "aud-8f6955f48bfd8f3b",
+      "at": "2026-10-27T11:34:21.526Z",
+      "candidateId": "cand-8ee179e3b51b",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "amount.value の根拠を本文と照合（10000）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.shinjuku.lg.jp/kodomo/jidoikusei01_000001_00008.html",
+      "fields": [
+        "amount.value"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 支給額 対象児童1人につき、 10,000円 （1回限り）です。"
+    },
+    {
+      "auditId": "aud-b3eb35c0b8847be7",
+      "at": "2026-10-27T11:34:22.672Z",
+      "candidateId": "cand-8ee179e3b51b",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "eligibility.age の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.shinjuku.lg.jp/kodomo/jidoikusei01_000001_00008.html",
+      "fields": [
+        "eligibility.age"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 物価高の影響が長期化する中、特に、その影響を強く受けている子育て世帯を応援し、子どもたちの健やかな成長を応援する観点から、国の重点支援地方交付金を活用し、下記のとおり区独自の子育て応援臨時給付金（以下「応援臨時給付金」といいます。）を支給し"
+    },
+    {
+      "auditId": "aud-2626af00c02fde0c",
+      "at": "2026-10-27T11:34:23.814Z",
+      "candidateId": "cand-8ee179e3b51b",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "eligibility.household の根拠を本文と照合（子育て世帯）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.shinjuku.lg.jp/kodomo/jidoikusei01_000001_00008.html",
+      "fields": [
+        "eligibility.household"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 特に、その影響を強く受けている子育て世帯を応援し"
+    },
+    {
+      "auditId": "aud-c0f1a7a7a5114993",
+      "at": "2026-10-27T11:34:24.948Z",
+      "candidateId": "cand-8ee179e3b51b",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "eligibility.income の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.shinjuku.lg.jp/kodomo/jidoikusei01_000001_00008.html",
+      "fields": [
+        "eligibility.income"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 物価高の影響が長期化する中、特に、その影響を強く受けている子育て世帯を応援し、子どもたちの健やかな成長を応援する観点から、国の重点支援地方交付金を活用し、下記のとおり区独自の子育て応援臨時給付金（以下「応援臨時給付金」といいます。）を支給し"
+    },
+    {
+      "auditId": "aud-7bbda05ff32c4b2b",
+      "at": "2026-10-27T11:34:56.080Z",
+      "candidateId": "cand-8ee179e3b51b",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "application.deadline の根拠を本文と照合（公務員の方、および令和8年9月分の児童手当を受給していないが受給要件を満たす方の受付期間は令和8年11月2日（月）～令和9年1月29日（金）（必着）。令和8年10月9日（金）に児童手当が入金された方の受給拒否届出は令和8年10月23日（金）（必着）まで。）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.shinjuku.lg.jp/kodomo/jidoikusei01_000001_00008.html",
+      "fields": [
+        "application.deadline"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 【受付期間】 令和8年11月2日（月）～令和9年1月29日（金）（必着）"
+    },
+    {
+      "auditId": "aud-455d2cc821e374f7",
+      "at": "2026-10-27T11:34:57.237Z",
+      "candidateId": "cand-8ee179e3b51b",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "regionScope の根拠を本文と照合（新宿区）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.shinjuku.lg.jp/kodomo/jidoikusei01_000001_00008.html",
+      "fields": [
+        "regionScope"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 新宿区子育て応援臨時給付金"
+    },
+    {
+      "auditId": "aud-0e74c8f482d3370f",
+      "at": "2026-10-27T11:34:58.403Z",
+      "candidateId": "cand-8ee179e3b51b",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "fiscalYear の根拠を本文と照合（令和8年度）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.shinjuku.lg.jp/kodomo/jidoikusei01_000001_00008.html",
+      "fields": [
+        "fiscalYear"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 対象者 支給対象者 1 令和8年9月分の児童手当を受給している方"
+    },
+    {
+      "auditId": "aud-319d91478a686b89",
+      "at": "2026-10-27T11:34:59.574Z",
+      "candidateId": "cand-8ee179e3b51b",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "validPeriod の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.shinjuku.lg.jp/kodomo/jidoikusei01_000001_00008.html",
+      "fields": [
+        "validPeriod"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 物価高の影響が長期化する中、特に、その影響を強く受けている子育て世帯を応援し、子どもたちの健やかな成長を応援する観点から、国の重点支援地方交付金を活用し、下記のとおり区独自の子育て応援臨時給付金（以下「応援臨時給付金」といいます。）を支給し"
+    },
+    {
+      "auditId": "aud-4420337ae212c5f0",
+      "at": "2026-10-27T11:35:47.273Z",
+      "candidateId": "cand-8ee179e3b51b",
+      "action": "approved",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "重要8項目を公式ページ本文と根拠抜粋照合で確認（金額10,000円・受付期間・新宿区・令和8年度を本文照合、年齢・所得・有効期間は（記載なし）で確認）",
+      "fromStatus": "unverified",
+      "toStatus": "approved",
+      "pageUrl": "https://www.city.shinjuku.lg.jp/kodomo/jidoikusei01_000001_00008.html",
+      "fields": [],
+      "programId": null,
+      "details": null
+    },
+    {
+      "auditId": "aud-3021180c9f1bb724",
+      "at": "2026-10-27T11:35:48.424Z",
+      "candidateId": "cand-8ee179e3b51b",
+      "action": "published",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "新宿区の公式発表（区独自事業）で確認できた範囲に基づき新規制度として公開",
+      "fromStatus": "approved",
+      "toStatus": "approved",
+      "pageUrl": "https://www.city.shinjuku.lg.jp/kodomo/jidoikusei01_000001_00008.html",
+      "fields": [
+        "amount.value",
+        "eligibility.age",
+        "eligibility.household",
+        "eligibility.income",
+        "application.deadline",
+        "regionScope",
+        "fiscalYear",
+        "validPeriod"
+      ],
+      "programId": "disc-8ee179e3b51b",
+      "details": "mode: new / バックアップ: /home/user/enshu/g8t4/my-app/data/programs/programs.json.backup-20261027T113548Z"
+    },
+    {
+      "auditId": "aud-d9375c5ae9c56e79",
+      "at": "2026-10-27T11:36:21.857Z",
+      "candidateId": "cand-31aebe48dfd2",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "amount.value の根拠を本文と照合（世田谷区民の方が区内の施設を利用した場合は無償（世田谷区が負担）。利用可能時間は最大月48時間（国制度10時間＋区上乗せ枠38時間）。）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.setagaya.lg.jp/02243/29576.html",
+      "fields": [
+        "amount.value"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 利用料金 世田谷区民の方 区内の施設を利用した場合 無償（世田谷区が負担）"
+    },
+    {
+      "auditId": "aud-0b6992d2a5d94624",
+      "at": "2026-10-27T11:36:23.007Z",
+      "candidateId": "cand-31aebe48dfd2",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "eligibility.age の根拠を本文と照合（認可保育園、地域型保育事業、認定こども園、幼稚園、企業主導型保育施設のいずれの保育施設にも在籍していない、生後6か月～2歳児クラス年齢（3歳の誕生日を迎えた年度末）のお子さん（対象年齢は施設種別により異なります）。）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.setagaya.lg.jp/02243/29576.html",
+      "fields": [
+        "eligibility.age"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 対象 認可保育園、地域型保育事業、認定こども園、幼稚園、企業主導型保育施設のいずれの保育施設にも在籍していない、生後6か月～2歳児クラス年齢（3歳の誕生日を迎えた年度末）のお子さん（対象年齢は施設種別により異なります）。"
+    },
+    {
+      "auditId": "aud-31a137f08e283139",
+      "at": "2026-10-27T11:36:24.162Z",
+      "candidateId": "cand-31aebe48dfd2",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "eligibility.household の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.setagaya.lg.jp/02243/29576.html",
+      "fields": [
+        "eligibility.household"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 世田谷区では、「世田谷版こども誰でも通園制度」として、保育園や幼稚園などを利用していないお子さんを一定期間、定期的にお預かりし、友だちや保育士との関わりの中でお子さんの健やかな成長を促すとともに、保護者の方の孤立感や育児不安の軽減を図ります"
+    },
+    {
+      "auditId": "aud-589b23a95819bba9",
+      "at": "2026-10-27T11:36:25.315Z",
+      "candidateId": "cand-31aebe48dfd2",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "eligibility.income の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.setagaya.lg.jp/02243/29576.html",
+      "fields": [
+        "eligibility.income"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 世田谷区では、「世田谷版こども誰でも通園制度」として、保育園や幼稚園などを利用していないお子さんを一定期間、定期的にお預かりし、友だちや保育士との関わりの中でお子さんの健やかな成長を促すとともに、保護者の方の孤立感や育児不安の軽減を図ります"
+    },
+    {
+      "auditId": "aud-bb0255b7c2cd8820",
+      "at": "2026-10-27T11:37:18.260Z",
+      "candidateId": "cand-31aebe48dfd2",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "application.deadline の根拠を本文と照合（私立保育園、私立認定こども園、地域型保育事業は、令和8年（2026年）4月利用申込は令和8年（2026年）3月5日より受付開始。それ以降は利用希望月の前月1日以降申込み可能。認証保育所、私立幼稚園は令和8年（2026年）4月利用申込は令和8年（2026年）3月5日より受付開始し、それ以降は施設により異なる。）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.setagaya.lg.jp/02243/29576.html",
+      "fields": [
+        "application.deadline"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 私立保育園、私立認定こども園、地域型保育事業 令和8年（2026年）4月の利用申込は、令和8年（2026年）3月5日より、準備ができた施設から順次システム内で受付を開始します。 それ以降は、利用希望月の前月1日（土日祝日や年末年始も含まれま"
+    },
+    {
+      "auditId": "aud-b54773c4daf97159",
+      "at": "2026-10-27T11:37:19.394Z",
+      "candidateId": "cand-31aebe48dfd2",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "regionScope の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.setagaya.lg.jp/02243/29576.html",
+      "fields": [
+        "regionScope"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 世田谷区では、「世田谷版こども誰でも通園制度」として、保育園や幼稚園などを利用していないお子さんを一定期間、定期的にお預かりし、友だちや保育士との関わりの中でお子さんの健やかな成長を促すとともに、保護者の方の孤立感や育児不安の軽減を図ります"
+    },
+    {
+      "auditId": "aud-5f6d15c5f2423f5f",
+      "at": "2026-10-27T11:37:20.544Z",
+      "candidateId": "cand-31aebe48dfd2",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "fiscalYear の根拠を本文と照合（令和8年度（2026年度））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.setagaya.lg.jp/02243/29576.html",
+      "fields": [
+        "fiscalYear"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 令和8年度（2026年度） 世田谷版こども誰でも通園制度 事業実施施設（予定）一覧（PDF：78KB）"
+    },
+    {
+      "auditId": "aud-f855cab2292df4b0",
+      "at": "2026-10-27T11:37:21.709Z",
+      "candidateId": "cand-31aebe48dfd2",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "validPeriod の根拠を本文と照合（施設種別ごとに利用期間が異なり、私立認可保育園・私立認定こども園・地域型保育事業は2か月、認証保育所・私立幼稚園は2か月以上。）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.setagaya.lg.jp/02243/29576.html",
+      "fields": [
+        "validPeriod"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 施設種別 実施方法 対象年齢（クラス年齢※） 利用期間 私立認可保育園 私立認定こども園 地域型保育事業 一般型（専用室実施型） 1歳児～2歳児 2か月 余裕活用型（空き定員を活用） 0歳児（生後6か月以上）～2歳児 認証保育所 一般型（在"
+    },
+    {
+      "auditId": "aud-850467ae9894492b",
+      "at": "2026-10-27T11:37:52.901Z",
+      "candidateId": "cand-3a40c8701d68",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "amount.value の根拠を本文と照合（医療費の自己負担分を助成。通院・入院にかかる保険診療の自己負担分及び入院時の食事療養標準負担額が対象。）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.minato.tokyo.jp/kosodatesien/kodomo/kate/kodomoiryo.html",
+      "fields": [
+        "amount.value"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 助成の範囲は、通院・入院にかかる保険診療の自己負担分及び、入院時の食事療養標準負担額（入院時の食事代）です。"
+    },
+    {
+      "auditId": "aud-44efa9c0efb1d4d5",
+      "at": "2026-10-27T11:37:54.031Z",
+      "candidateId": "cand-3a40c8701d68",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "eligibility.age の根拠を本文と照合（18歳に達する日以後の最初の3月31日までの子ども）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.minato.tokyo.jp/kosodatesien/kodomo/kate/kodomoiryo.html",
+      "fields": [
+        "eligibility.age"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 18歳に達する日以後の最初の3月31日までの子ども"
+    },
+    {
+      "auditId": "aud-a337eb4c77267551",
+      "at": "2026-10-27T11:37:55.201Z",
+      "candidateId": "cand-3a40c8701d68",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "eligibility.household の根拠を本文と照合（保護者と子どもが港区に住民登録があり、日本の公的な健康保険に加入していること。生活保護法による保護を受けている人、児童福祉施設に入所している児童、里親に委託されている人は対象外。）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.minato.tokyo.jp/kosodatesien/kodomo/kate/kodomoiryo.html",
+      "fields": [
+        "eligibility.household"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 対象 保護者と子どもが港区に住民登録があり、日本の公的な健康保険に加入していること。"
+    },
+    {
+      "auditId": "aud-631ac09a38726382",
+      "at": "2026-10-27T11:37:56.361Z",
+      "candidateId": "cand-3a40c8701d68",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "eligibility.income の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.minato.tokyo.jp/kosodatesien/kodomo/kate/kodomoiryo.html",
+      "fields": [
+        "eligibility.income"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 18歳に達する日以後の最初の3月31日までの子どもが、医療機関等で健康保険による診療・調剤を受けたときに、医療費の自己負担分を港区が助成する制度です。"
+    },
+    {
+      "auditId": "aud-603ef6e360508473",
+      "at": "2026-10-27T11:38:43.889Z",
+      "candidateId": "cand-31aebe48dfd2",
+      "action": "approved",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "重要8項目を公式ページ本文と根拠抜粋照合で確認（無償・対象年齢・申込期限・適用年度・利用期間を本文照合、世帯・所得・対象地域は（記載なし）で確認）",
+      "fromStatus": "unverified",
+      "toStatus": "approved",
+      "pageUrl": "https://www.city.setagaya.lg.jp/02243/29576.html",
+      "fields": [],
+      "programId": null,
+      "details": null
+    },
+    {
+      "auditId": "aud-d6a7436e73235e26",
+      "at": "2026-10-27T11:38:45.005Z",
+      "candidateId": "cand-31aebe48dfd2",
+      "action": "published",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "世田谷区公式ページで確認できた範囲に基づき新規制度として公開（国のこども誰でも通園制度への区上乗せ事業であり国制度の重複登録ではない）",
+      "fromStatus": "approved",
+      "toStatus": "approved",
+      "pageUrl": "https://www.city.setagaya.lg.jp/02243/29576.html",
+      "fields": [
+        "amount.value",
+        "eligibility.age",
+        "eligibility.household",
+        "eligibility.income",
+        "application.deadline",
+        "regionScope",
+        "fiscalYear",
+        "validPeriod"
+      ],
+      "programId": "disc-31aebe48dfd2",
+      "details": "mode: new / バックアップ: /home/user/enshu/g8t4/my-app/data/programs/programs.json.backup-20261027T113845Z"
+    },
+    {
+      "auditId": "aud-4c270d84220bf2ed",
+      "at": "2026-10-27T11:39:18.787Z",
+      "candidateId": "cand-3a40c8701d68",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "application.deadline の根拠を本文と照合（出生、転入日から15日以内。）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.minato.tokyo.jp/kosodatesien/kodomo/kate/kodomoiryo.html",
+      "fields": [
+        "application.deadline"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 出生、転入日から15日以内に子ども給付係へ郵送、各総合支所区民課保健福祉係へ持参、マイナポータルによる電子申請のいずれかで申請してください。"
+    },
+    {
+      "auditId": "aud-f6ae64fc14a88678",
+      "at": "2026-10-27T11:39:19.952Z",
+      "candidateId": "cand-3a40c8701d68",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "regionScope の根拠を本文と照合（港区）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.minato.tokyo.jp/kosodatesien/kodomo/kate/kodomoiryo.html",
+      "fields": [
+        "regionScope"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 医療費の自己負担分を港区が助成する制度です。"
+    },
+    {
+      "auditId": "aud-4bd0506c39c365b3",
+      "at": "2026-10-27T11:39:21.079Z",
+      "candidateId": "cand-3a40c8701d68",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "fiscalYear の根拠を本文と照合（令和5年4月から対象を高校生等まで拡大）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.minato.tokyo.jp/kosodatesien/kodomo/kate/kodomoiryo.html",
+      "fields": [
+        "fiscalYear"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: ※令和5年4月から、子ども医療費助成の対象を高校生等まで拡大しました。"
+    },
+    {
+      "auditId": "aud-e7216724aba9471e",
+      "at": "2026-10-27T11:39:22.277Z",
+      "candidateId": "cand-3a40c8701d68",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "validPeriod の根拠を本文と照合（出生・転入日から15日以内に申請した場合は出生・転入日から資格が発生。子ども医療証は毎年10月1日に更新。）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.minato.tokyo.jp/kosodatesien/kodomo/kate/kodomoiryo.html",
+      "fields": [
+        "validPeriod"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 子ども医療証は、毎年10月1日に更新します。"
+    },
+    {
+      "auditId": "aud-f4c904d801e32acd",
+      "at": "2026-10-27T11:40:11.718Z",
+      "candidateId": "cand-3a40c8701d68",
+      "action": "approved",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "重要8項目を公式ページ本文と根拠抜粋照合で確認（助成範囲・対象年齢・世帯要件・申請期限・港区・資格・更新を本文照合、所得は（記載なし）で確認）",
+      "fromStatus": "unverified",
+      "toStatus": "approved",
+      "pageUrl": "https://www.city.minato.tokyo.jp/kosodatesien/kodomo/kate/kodomoiryo.html",
+      "fields": [],
+      "programId": null,
+      "details": null
+    },
+    {
+      "auditId": "aud-bdee262b7c1b90c3",
+      "at": "2026-10-27T11:40:12.910Z",
+      "candidateId": "cand-3a40c8701d68",
+      "action": "published",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "港区公式ページで確認できた範囲に基づき新規制度として公開（区が実施する子ども医療費助成）",
+      "fromStatus": "approved",
+      "toStatus": "approved",
+      "pageUrl": "https://www.city.minato.tokyo.jp/kosodatesien/kodomo/kate/kodomoiryo.html",
+      "fields": [
+        "amount.value",
+        "eligibility.age",
+        "eligibility.household",
+        "eligibility.income",
+        "application.deadline",
+        "regionScope",
+        "fiscalYear",
+        "validPeriod"
+      ],
+      "programId": "disc-3a40c8701d68",
+      "details": "mode: new / バックアップ: /home/user/enshu/g8t4/my-app/data/programs/programs.json.backup-20261027T114012Z"
+    },
+    {
+      "auditId": "aud-afb1e9e78ce38b89",
+      "at": "2026-10-27T11:40:46.901Z",
+      "candidateId": "cand-a774a5cf4134",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "amount.value の根拠を本文と照合（対象工事費（消費税を除く）の3分の1（千円未満切り捨て）、上限20万円）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.taito.lg.jp/kenchiku/jutaku/sumai/yachinhojo/kosodatereform.html",
+      "fields": [
+        "amount.value"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 対象工事費（消費税を除く）の3分の1 （千円未満切り捨て） 上限20万円"
+    },
+    {
+      "auditId": "aud-bda5bde7a2df8ff9",
+      "at": "2026-10-27T11:40:48.040Z",
+      "candidateId": "cand-a774a5cf4134",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "eligibility.age の根拠を本文と照合（18歳に達する日以後の最初の3月31日までの間にある者（高校生以下の子供）を扶養し同居していること、又は、申請者本人もしくは同居の配偶者が出産前で母子健康手帳の交付を受けていること。）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.taito.lg.jp/kenchiku/jutaku/sumai/yachinhojo/kosodatereform.html",
+      "fields": [
+        "eligibility.age"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 18歳に達する日以後の最初の3月31日までの間にある者（高校生以下の子供）を扶養し同居していること、又は、申請者本人もしくは同居の配偶者が出産前で母子健康手帳の交付を受けていること 。"
+    },
+    {
+      "auditId": "aud-c9662857def47c51",
+      "at": "2026-10-27T11:40:49.206Z",
+      "candidateId": "cand-a774a5cf4134",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "eligibility.household の根拠を本文と照合（申請者本人が居住する区内の住宅、又はリフォーム工事後に居住予定の区内の住宅が対象。同居予定の場合は、リフォーム工事完了日から30日以内、又は令和9年3月31日のいずれか早い日までに同居し、住民登録を行うこと。）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.taito.lg.jp/kenchiku/jutaku/sumai/yachinhojo/kosodatereform.html",
+      "fields": [
+        "eligibility.household"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: ●申請者本人が居住する区内の住宅であること。 ●リフォーム工事後に居住予定の区内の住宅であること。居住予定の場合は、リフォーム工事完了日から30日以内、又は令和9年3月31日のいずれか早い日までに居住し、住民登録を行うこと。"
+    },
+    {
+      "auditId": "aud-56e4820c31f9d353",
+      "at": "2026-10-27T11:40:50.359Z",
+      "candidateId": "cand-a774a5cf4134",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "eligibility.income の根拠を本文と照合（申請者本人、配偶者及び申請者と同居する方全員の前年の総所得金額の合計が1,200万円以下（1月から6月に申請する場合は前々年の総所得金額の合計が1,200万円以下）。）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.taito.lg.jp/kenchiku/jutaku/sumai/yachinhojo/kosodatereform.html",
+      "fields": [
+        "eligibility.income"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 申請者本人、配偶者 及び申請者 と同居する方 ※ 全員の前年の総所得金額の合計が1,200万円以下であること。（1月から6月に申請する場合は前々年の総所得金額の合計が1,200万円以下であること。）"
+    },
+    {
+      "auditId": "aud-dcf3246fac03cfe7",
+      "at": "2026-10-27T11:41:36.109Z",
+      "candidateId": "cand-a774a5cf4134",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "application.deadline の根拠を本文と照合（リフォーム工事着手前に申請が必要。居住予定・同居予定の場合は、リフォーム工事完了日から30日以内、又は令和9年3月31日のいずれか早い日までに居住・同居し、住民登録を行うこと。）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.taito.lg.jp/kenchiku/jutaku/sumai/yachinhojo/kosodatereform.html",
+      "fields": [
+        "application.deadline"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: ※リフォーム工事着手前に申請が必要になります。"
+    },
+    {
+      "auditId": "aud-6736acb85c39838c",
+      "at": "2026-10-27T11:41:37.260Z",
+      "candidateId": "cand-a774a5cf4134",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "regionScope の根拠を本文と照合（区内の住宅）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.taito.lg.jp/kenchiku/jutaku/sumai/yachinhojo/kosodatereform.html",
+      "fields": [
+        "regionScope"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: ●申請者本人が居住する区内の住宅であること。 ●リフォーム工事後に居住予定の区内の住宅であること。"
+    },
+    {
+      "auditId": "aud-27cee06256077c33",
+      "at": "2026-10-27T11:41:38.427Z",
+      "candidateId": "cand-a774a5cf4134",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "fiscalYear の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.taito.lg.jp/kenchiku/jutaku/sumai/yachinhojo/kosodatereform.html",
+      "fields": [
+        "fiscalYear"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 子育て世帯の居住環境の向上を目的としたリフォーム工事を行う方に対し、予算の範囲内で助成金を交付します。"
+    },
+    {
+      "auditId": "aud-b51071931a4bf5de",
+      "at": "2026-10-27T11:41:39.558Z",
+      "candidateId": "cand-a774a5cf4134",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "validPeriod の根拠を本文と照合（令和9年3月31日までに居住・同居及び住民登録（該当する場合））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.city.taito.lg.jp/kenchiku/jutaku/sumai/yachinhojo/kosodatereform.html",
+      "fields": [
+        "validPeriod"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 居住予定の場合は、リフォーム工事完了日から30日以内、又は令和9年3月31日のいずれか早い日までに居住し、住民登録を行うこと。"
+    },
+    {
+      "auditId": "aud-c4ac98020cde81fc",
+      "at": "2026-10-27T11:42:10.726Z",
+      "candidateId": "cand-5e49e6b60a59",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "amount.value の根拠を本文と照合（大学等の在学時に貸与を受けた奨学金について、奨学金返還総額（採用時の返還残額）の1/2の額を都が本人に代わって返還。上限額150万円。技術系公務員・警察職員・消防職員で大学院でも貸与を受けていた場合は225万円。）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.kodomoseisaku.metro.tokyo.lg.jp/syougakukinhenkansien",
+      "fields": [
+        "amount.value"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: ２.支援内容 大学等の在学時に貸与を受けた奨学金について、奨学金返還総額（採用時の返還残額）の1/2の額を都が本人に代わって返還します（上限額150万円。技術系公務員・警察職員・消防職員で大学院でも貸与を受けていた場合は225万円）。"
+    },
+    {
+      "auditId": "aud-90459d69904be705",
+      "at": "2026-10-27T11:42:11.875Z",
+      "candidateId": "cand-5e49e6b60a59",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "eligibility.age の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.kodomoseisaku.metro.tokyo.lg.jp/syougakukinhenkansien",
+      "fields": [
+        "eligibility.age"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 東京都では、奨学金の貸与を受けていた大学生等が、「都内で勤務する教員」や「都市の強靭化に携わる技術系公務員」「首都東京の治安維持・強靭化を支える警察人材や消防人材」になった場合に、奨学金の返還を支援する取組を実施しています。"
+    },
+    {
+      "auditId": "aud-302d4da49f8b363d",
+      "at": "2026-10-27T11:42:13.037Z",
+      "candidateId": "cand-5e49e6b60a59",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "eligibility.household の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.kodomoseisaku.metro.tokyo.lg.jp/syougakukinhenkansien",
+      "fields": [
+        "eligibility.household"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 東京都では、奨学金の貸与を受けていた大学生等が、「都内で勤務する教員」や「都市の強靭化に携わる技術系公務員」「首都東京の治安維持・強靭化を支える警察人材や消防人材」になった場合に、奨学金の返還を支援する取組を実施しています。"
+    },
+    {
+      "auditId": "aud-2f0e19ac5373985f",
+      "at": "2026-10-27T11:42:14.165Z",
+      "candidateId": "cand-5e49e6b60a59",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "eligibility.income の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.kodomoseisaku.metro.tokyo.lg.jp/syougakukinhenkansien",
+      "fields": [
+        "eligibility.income"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 東京都では、奨学金の貸与を受けていた大学生等が、「都内で勤務する教員」や「都市の強靭化に携わる技術系公務員」「首都東京の治安維持・強靭化を支える警察人材や消防人材」になった場合に、奨学金の返還を支援する取組を実施しています。"
+    },
+    {
+      "auditId": "aud-1f4ed0769dbd09cd",
+      "at": "2026-10-27T11:43:02.842Z",
+      "candidateId": "cand-a774a5cf4134",
+      "action": "approved",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "重要8項目を公式ページ本文と根拠抜粋照合で確認（上限20万円の助成・対象年齢・世帯・所得1,200万円以下・着工前申請・区内住宅・令和9年3月31日までを本文照合、適用年度は（記載なし）で確認）",
+      "fromStatus": "unverified",
+      "toStatus": "approved",
+      "pageUrl": "https://www.city.taito.lg.jp/kenchiku/jutaku/sumai/yachinhojo/kosodatereform.html",
+      "fields": [],
+      "programId": null,
+      "details": null
+    },
+    {
+      "auditId": "aud-410034a0bb5371c7",
+      "at": "2026-10-27T11:43:03.984Z",
+      "candidateId": "cand-a774a5cf4134",
+      "action": "published",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "台東区公式ページで確認できた範囲に基づき新規制度として公開（区が交付する助成金であり国・都の住宅支援制度の重複登録ではない）",
+      "fromStatus": "approved",
+      "toStatus": "approved",
+      "pageUrl": "https://www.city.taito.lg.jp/kenchiku/jutaku/sumai/yachinhojo/kosodatereform.html",
+      "fields": [
+        "amount.value",
+        "eligibility.age",
+        "eligibility.household",
+        "eligibility.income",
+        "application.deadline",
+        "regionScope",
+        "fiscalYear",
+        "validPeriod"
+      ],
+      "programId": "disc-a774a5cf4134",
+      "details": "mode: new / バックアップ: /home/user/enshu/g8t4/my-app/data/programs/programs.json.backup-20261027T114303Z"
+    },
+    {
+      "auditId": "aud-475257ab82fd7165",
+      "at": "2026-10-27T11:43:37.340Z",
+      "candidateId": "cand-5e49e6b60a59",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "application.deadline の根拠を本文と照合（（記載なし））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.kodomoseisaku.metro.tokyo.lg.jp/syougakukinhenkansien",
+      "fields": [
+        "application.deadline"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 東京都では、奨学金の貸与を受けていた大学生等が、「都内で勤務する教員」や「都市の強靭化に携わる技術系公務員」「首都東京の治安維持・強靭化を支える警察人材や消防人材」になった場合に、奨学金の返還を支援する取組を実施しています。"
+    },
+    {
+      "auditId": "aud-91ac1362f465dd99",
+      "at": "2026-10-27T11:43:38.499Z",
+      "candidateId": "cand-5e49e6b60a59",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "regionScope の根拠を本文と照合（都内）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.kodomoseisaku.metro.tokyo.lg.jp/syougakukinhenkansien",
+      "fields": [
+        "regionScope"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 東京都では、奨学金の貸与を受けていた大学生等が、「都内で勤務する教員」や「都市の強靭化に携わる技術系公務員」「首都東京の治安維持・強靭化を支える警察人材や消防人材」になった場合に、奨学金の返還を支援する取組を実施しています。"
+    },
+    {
+      "auditId": "aud-709b79ca27b7bcd7",
+      "at": "2026-10-27T11:43:39.640Z",
+      "candidateId": "cand-5e49e6b60a59",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "fiscalYear の根拠を本文と照合（令和8年度）",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.kodomoseisaku.metro.tokyo.lg.jp/syougakukinhenkansien",
+      "fields": [
+        "fiscalYear"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 奨学金返還支援制度｜令和8年度 警視庁採用サイト"
+    },
+    {
+      "auditId": "aud-68e71dd23fe5f20d",
+      "at": "2026-10-27T11:43:40.817Z",
+      "candidateId": "cand-5e49e6b60a59",
+      "action": "field-verified",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "validPeriod の根拠を本文と照合（採用2年目から11年目までの10年間（最長））",
+      "fromStatus": "unverified",
+      "toStatus": null,
+      "pageUrl": "https://www.kodomoseisaku.metro.tokyo.lg.jp/syougakukinhenkansien",
+      "fields": [
+        "validPeriod"
+      ],
+      "programId": null,
+      "details": "根拠抜粋: 返還支援を行う期間は採用２年目から11年目までの10年間（最長）です。"
+    },
+    {
+      "auditId": "aud-275759181be0a459",
+      "at": "2026-10-27T11:44:21.774Z",
+      "candidateId": "cand-5e49e6b60a59",
+      "action": "approved",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "重要8項目を公式ページ本文と根拠抜粋照合で確認（返還総額1/2・上限150万円/225万円・対象職種・都内・令和8年度・採用2年目から11年目の10年間を本文照合、年齢・世帯・所得・期限は（記載なし）で確認）",
+      "fromStatus": "unverified",
+      "toStatus": "approved",
+      "pageUrl": "https://www.kodomoseisaku.metro.tokyo.lg.jp/syougakukinhenkansien",
+      "fields": [],
+      "programId": null,
+      "details": null
+    },
+    {
+      "at": "2026-10-27T11:44:22.952Z",
+      "candidateId": "cand-5e49e6b60a59",
+      "action": "publish-rejected",
+      "actor": "AIエージェント(M7-F)",
+      "reason": "東京都子供政策連携室の公式ページで確認できた範囲に基づき公開を試行（貸与型奨学金の返還支援であり貸付そのもの・現金給付とは区別）",
+      "fromStatus": "approved",
+      "toStatus": null,
+      "pageUrl": "https://www.kodomoseisaku.metro.tokyo.lg.jp/syougakukinhenkansien",
+      "fields": [],
+      "programId": null,
+      "details": "支援種別が明確であること: 支援種別が不明確です（kind: other） / SupportProgram スキーマに適合すること: 変換の前提を満たしていません / 公式 URL と情報源が記録されていること: 根拠となる公式 URL・出典レコードが不足しています / 未確認項目・検証状態が不適切に格上げされていないこと: 検証状態の記録と人手確認の内容が一致しません",
+      "auditId": "aud-05d26a5fde9d3150"
+    }
+  ]
+}

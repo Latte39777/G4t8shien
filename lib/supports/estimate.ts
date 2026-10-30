@@ -41,7 +41,7 @@ export type UnitBreakdown = {
    * 計上した単位の数。
    * - 月額: 計上月数（支給期間上限を反映した実数）
    * - 年額: 計上年数（子ども×年）
-   * - 一時金: 計上回数（子どもごとに最大1回ずつ）
+   * - 一時金: 計上回数（子どもごとに最大1回ずつ。世帯単位 per_household の制度は世帯で1回）
    * 金額未確認（baseAmountYen=null）なら 0。
    */
   countedUnits: number

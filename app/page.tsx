@@ -1,37 +1,40 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import Top from '@/components/Top'
-import Form from '@/components/Form'
-import Result from '@/components/Result'
-import Consult from '@/components/Consult'
+import { useState } from "react";
+import Top from "@/components/Top";
+import Form from "@/components/Form";
+import Result from "@/components/Result";
+import Consult from "@/components/Consult";
 import {
   toConsultContextProgram,
   type ConsultSession,
-} from '@/lib/consult/conversation'
-import { useConsultChat } from '@/lib/consult/useConsultChat'
-import type { ConsultContextProgram } from '@/lib/consult/types'
-import type { SimulationInput } from '@/lib/simulation'
-import type { SupportProgram } from '@/lib/types/support'
+} from "@/lib/consult/conversation";
+import { useConsultChat } from "@/lib/consult/useConsultChat";
+import type { ConsultContextProgram } from "@/lib/consult/types";
+import type { SimulationInput } from "@/lib/simulation";
+import type { SupportProgram } from "@/lib/types/support";
 
 /** 画面の切り替え状態（SPAライクな遷移） */
-type Step = 'top' | 'form' | 'result' | 'consult'
+type Step = "top" | "form" | "result" | "consult";
 
 export default function Home() {
-  const [step, setStep] = useState<Step>('top')
-  const [input, setInput] = useState<SimulationInput | null>(null)
+  const [step, setStep] = useState<Step>("top");
+  const [input, setInput] = useState<SimulationInput | null>(null);
   /**
    * 相談対象の制度（M5）。
    * - 制度カードの「この制度について相談する」→ 制度情報を引き継いで相談開始
    * - 「支援制度の相談（制度を指定せず）」→ null で自由な相談を開始
    * 制度は相談のきっかけにすぎず、相談画面では他の制度も自由に質問できる。
    */
-  const [consultTarget, setConsultTarget] = useState<ConsultContextProgram | null>(null)
+  const [consultTarget, setConsultTarget] =
+    useState<ConsultContextProgram | null>(null);
   /** 相談の会話状態（メモリのみ。リロードで消える） */
-  const chat = useConsultChat()
+  const chat = useConsultChat();
 
   /** 相談に渡す最小限の入力情報（金額は渡さない） */
-  const buildConsultSession = (program: SupportProgram | null): ConsultSession => ({
+  const buildConsultSession = (
+    program: SupportProgram | null,
+  ): ConsultSession => ({
     program: program ? toConsultContextProgram(program) : null,
     userContext: input
       ? {
@@ -40,31 +43,31 @@ export default function Home() {
           usedProgramIds: input.household.usedSupportProgramIds,
         }
       : null,
-  })
+  });
 
   /** 相談開始（自由な相談 / 制度カードからの相談の2つの入口） */
   const handleConsult = (program: SupportProgram | null) => {
-    const session = buildConsultSession(program)
-    chat.startSession(session)
-    setConsultTarget(session.program)
-    setStep('consult')
-  }
+    const session = buildConsultSession(program);
+    chat.startSession(session);
+    setConsultTarget(session.program);
+    setStep("consult");
+  };
 
   /** アンケート送信時：入力値を保存して結果画面へ */
   const handleSubmit = (values: SimulationInput) => {
-    setInput(values)
-    setConsultTarget(null)
-    chat.clear()
-    setStep('result')
-  }
+    setInput(values);
+    setConsultTarget(null);
+    chat.clear();
+    setStep("result");
+  };
 
   /** 「最初からやり直す」：すべてリセットしてトップへ */
   const handleReset = () => {
-    setInput(null)
-    setConsultTarget(null)
-    chat.clear()
-    setStep('top')
-  }
+    setInput(null);
+    setConsultTarget(null);
+    chat.clear();
+    setStep("top");
+  };
 
   return (
     <div className="flex min-h-dvh flex-col bg-gradient-to-b from-slate-50 via-white to-blue-50">
@@ -76,12 +79,12 @@ export default function Home() {
               ¥
             </span>
             <span className="text-sm font-bold text-slate-800">
-              養育費・公的支援シミュレーター
+              ファミレーション
             </span>
           </div>
-          {step !== 'top' && (
+          {step !== "top" && (
             <div className="flex items-center gap-2">
-              {step === 'result' && (
+              {step === "result" && (
                 <button
                   type="button"
                   onClick={() => handleConsult(null)}
@@ -92,11 +95,11 @@ export default function Home() {
                 </button>
               )}
               <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-500">
-                {step === 'form'
-                  ? 'STEP 1 / 2'
-                  : step === 'result'
-                    ? 'STEP 2 / 2'
-                    : '相談'}
+                {step === "form"
+                  ? "STEP 1 / 2"
+                  : step === "result"
+                    ? "STEP 2 / 2"
+                    : "相談"}
               </span>
             </div>
           )}
@@ -105,19 +108,19 @@ export default function Home() {
 
       {/* 画面本体（状態に応じてコンポーネントを切り替え） */}
       <main className="flex flex-1 flex-col">
-        {step === 'top' && <Top onStart={() => setStep('form')} />}
-        {step === 'form' && (
-          <Form onSubmit={handleSubmit} onBack={() => setStep('top')} />
+        {step === "top" && <Top onStart={() => setStep("form")} />}
+        {step === "form" && (
+          <Form onSubmit={handleSubmit} onBack={() => setStep("top")} />
         )}
-        {step === 'result' && input && (
+        {step === "result" && input && (
           <Result
             input={input}
-            onEdit={() => setStep('form')}
+            onEdit={() => setStep("form")}
             onReset={handleReset}
             onConsult={handleConsult}
           />
         )}
-        {step === 'consult' && (
+        {step === "consult" && (
           <Consult
             program={consultTarget}
             userContext={
@@ -136,8 +139,8 @@ export default function Home() {
             onReset={chat.reset}
             onRetry={() => void chat.retry()}
             retryable={chat.retryable}
-            onBack={() => setStep('result')}
-            onOpenSupports={() => setStep('result')}
+            onBack={() => setStep("result")}
+            onOpenSupports={() => setStep("result")}
           />
         )}
       </main>
@@ -146,11 +149,12 @@ export default function Home() {
       <footer className="border-t border-slate-100 bg-white/70">
         <div className="mx-auto w-full max-w-[1520px] px-4 py-4 sm:px-6 lg:px-10">
           <p className="mx-auto max-w-3xl text-center text-xs leading-5 text-slate-400">
-            ※ 本アプリはプロトタイプです。表示される支援額はモックデータに基づく試算であり、
+            ※
+            本アプリはプロトタイプです。表示される支援額はモックデータに基づく試算であり、
             実際の支給額・制度とは異なります。
           </p>
         </div>
       </footer>
     </div>
-  )
+  );
 }

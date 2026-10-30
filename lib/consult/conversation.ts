@@ -50,14 +50,19 @@ export function toConsultContextProgram(program: {
   }
 }
 
-/** 開始時の案内メッセージ（自由相談 / 制度指定の2種類） */
+/**
+ * 開始時の案内メッセージ（自由相談 / 制度指定の2種類）（M7-K に続く M7-M で短縮）
+ *
+ * - メッセージ本文は「どの制度について相談中か」「ほかの制度も質問できるか」だけに絞る
+ * - 制度の概要・金額・申請先・確認状態は相談画面の折りたたみ（制度の詳細）に集約する
+ * - 回答モード（実AI/モック）の説明は画面のモード別パネルに一本化して重複させない
+ */
 export function buildKickoffMessage(session: ConsultSession): ChatMessage {
   const lines: string[] = []
   if (session.program) {
     lines.push(
-      `「${session.program.name}」についての相談を開始しました。`,
-      `制度の概要（${session.program.mock ? 'モック・未確認' : '確認済み'}）：${session.program.summary}`,
-      '※この制度は相談のきっかけです。この制度以外の支援制度についても自由に質問できます。',
+      `「${session.program.name}」について相談中です。`,
+      'この制度をきっかけに、ほかの支援制度についても質問できます。',
     )
   } else {
     lines.push(
@@ -65,9 +70,6 @@ export function buildKickoffMessage(session: ConsultSession): ChatMessage {
       '気になることがあれば自由に質問してください。',
     )
   }
-  lines.push(
-    'このアシスタントの回答はすべて開発用のモックサンプルです。制度情報は未確認のモックデータに基づき、公式サイトの検索結果ではありません。',
-  )
   return {
     id: nextId(),
     role: 'assistant',

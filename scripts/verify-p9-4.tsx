@@ -497,27 +497,29 @@ async function main(): Promise<void> {
   check(
     'モード注意書き（モック）: 開発用モックサンプルであることを明示',
     mockModeHtml.includes('開発用のモックサンプルです') &&
-      mockModeHtml.includes('公式サイトの検索を行った結果ではありません'),
+      mockModeHtml.includes('公式サイトをリアルタイム検索する機能ではありません'),
   )
   check(
     'モード注意書き（モック）: AI 利用中であるかのような表示をしない',
-    !mockModeHtml.includes('生成した応答です'),
+    !mockModeHtml.includes('生成した応答です') && !mockModeHtml.includes('質問に回答します'),
   )
   check(
     'モード注意書き（ライブ）: AI 生成応答であることを明示',
-    liveModeHtml.includes('生成した応答です') &&
+    liveModeHtml.includes('外部AI（INIAD AI-MOP API）が質問に回答します') &&
       liveModeHtml.includes('INIAD AI-MOP API'),
   )
   check(
     'モード注意書き（ライブ）: モックであるかのような表示をしない',
     !liveModeHtml.includes('開発用のモックサンプル') &&
-      !liveModeHtml.includes('開発用モックサンプル'),
+      !liveModeHtml.includes('開発用モックサンプル') &&
+      !liveModeHtml.includes('外部 AI へ送信していません'),
   )
   check(
     'モード注意書き（未確認）: モックと AI の両方があり得ると示し、AI 利用を断定しない',
     unknownModeHtml.includes('開発用のモックサンプル') &&
-      unknownModeHtml.includes('AI 生成応答の場合があります') &&
-      !unknownModeHtml.includes('生成した応答です'),
+      unknownModeHtml.includes('生成応答の場合があります') &&
+      !unknownModeHtml.includes('生成した応答です') &&
+      !unknownModeHtml.includes('質問に回答します'),
   )
   check(
     'モード注意書き（モック）: 未確認の免責を維持',

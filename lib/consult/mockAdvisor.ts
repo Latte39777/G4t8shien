@@ -30,10 +30,6 @@ import type {
 const MOCK_HEADER =
   '【開発用モック応答】この回答は開発用のサンプルです。公式サイトの検索結果ではなく、制度情報には公式確認済みの情報と未確認のモックデータが混在しています（確認状況は各制度の記載をご確認ください）。'
 
-/** 未確認情報を含む回答の共通フッタ */
-const VERIFY_FOOTER =
-  '実際の受給資格・金額・申請期限・必要書類は未確認です。お住まいの自治体・公式窓口で必ずご確認ください。'
-
 /** 制度区分の表示ラベル（給付・減免・貸与の混同を防ぐため明示する） */
 /** 制度区分のラベル（返還不要/返済が必要の区別を明示。相談 UI のチップ表示でも再利用する） */
 export function categoryLabel(category: SupportCategory): string {
@@ -142,7 +138,6 @@ function greetingReply(): ConsultReply {
   return reply(
     [
       'こんにちは。支援制度の相談アシスタント（モック）です。',
-      'このアシスタントの回答はすべて開発用のサンプルであり、制度情報には未確認のデータが含まれます（未確認の内容を事実として扱いません）。',
       '以下のような質問を試せます。',
       ...MOCK_CONSULT_EXAMPLES.map((e) => `・${e}`),
       '制度を特定せずに自由に質問してください。',
@@ -163,13 +158,13 @@ function overviewReply(program: SupportProgram | null): ConsultReply {
   })
   return reply(
     [
-      '子育て関連の支援として、次の制度が登録されています（確認状況を付記しています）。',
+      '子育てでもらえる主な支援には、次のものがあります（確認状況を付記しています）。',
       ...lines,
       program
         ? `いま相談中の「${program.name}」についても、対象条件・申請方法などを質問できます。`
-        : '気になる制度があれば、制度名を含めて質問してください。',
-      '※登録データにない制度（自治体独自の制度など）も存在するため、実際の制度の一覧ではありません。未確認の金額・条件は確定情報ではありません。',
-      VERIFY_FOOTER,
+        : 'どの制度についても、制度名を含めて質問できます。',
+      '※ここに挙げたのは一部の制度で、実際の利用可能な制度の一覧ではありません。未確認の金額・条件は確定情報ではありません。',
+      'お住まいの市区町村はどちらですか？（自治体独自の給付や医療費助成もご案内できるため）',
     ].join('\n'),
     toRelated(PROGRAMS),
   )
@@ -189,20 +184,19 @@ function eligibilityReply(
   const targetLines = target
     ? [
         `「${target.name}」の対象条件について：`,
-        `・対象条件の目安（${target.mock ? 'モック・要確認' : '公式確認済みの記載・一部要確認'}）：${target.conditions.other.join('／') || '記載なし'}`,
-        `・所得制限：${target.conditions.incomeLimitNote ?? '記載なし（要確認）'}`,
+        `・対象条件の目安（${target.mock ? '未確認（モック・要確認）' : '公式確認済みの記載・一部要確認'}）：${target.conditions.other.join('／') || '確認できていません'}`,
+        `・所得制限：${target.conditions.incomeLimitNote ?? '確認できていません（要確認）'}`,
         `・判定に不足している情報：${target.missingInformation.join('、') || 'なし'}`,
       ]
     : [
-        'どの制度の対象条件かを、制度名を含めて質問していただくと、登録データの範囲でお答えできます。',
+        'どの制度の対象条件かを、制度名を含めて質問していただくと、確認できている範囲でお答えできます。',
       ]
   return reply(
     [
       '受給資格の判定は、このモック段階では確定できません。正式な受給資格の決定ではありません。',
       ...contextLines,
       ...targetLines,
-      '対象条件・所得制限の基準は未確認のため、該当するかどうかの結論は公式窓口での確認が必要です。',
-      VERIFY_FOOTER,
+      '対象条件・所得制限の基準は未確認のため、該当するかどうかの結論は、お住まいの自治体の窓口・公式窓口での確認が必要です。',
     ].join('\n'),
     target ? toRelated([target]) : toRelated(PROGRAMS),
   )
@@ -217,10 +211,9 @@ function applicationReply(
     return reply(
       [
         'どの制度の申請方法か、制度名を含めて質問してください。',
-        '登録されている制度：',
+        '確認できている制度：',
         ...PROGRAMS.map((p) => `・${p.name}`),
-        'なお、申請先・期限・必要書類には未確認の内容が含まれます。この回答は公式サイトの検索結果ではありません。',
-        VERIFY_FOOTER,
+        'なお、申請先・期限・必要書類には未確認の内容が含まれます。公式サイトの検索結果ではありません。',
       ].join('\n'),
       toRelated(PROGRAMS),
     )
@@ -228,13 +221,12 @@ function applicationReply(
   const app = target.application
   return reply(
     [
-      `「${target.name}」の申請について、登録データの記載は次のとおりです（確認状況: ${target.mock ? '未確認（モック）' : '公式確認済みの項目と未確認の項目が混在'}）。`,
+      `「${target.name}」の申請について、確認できている内容は次のとおりです（確認状況: ${target.mock ? '未確認（モック）' : '公式確認済みの項目と未確認の項目が混在'}）。`,
       `・申請先：${app.where ?? '未確認'}（要確認）`,
       `・申請期限・時期：${app.deadlineNote ?? '未確認'}（要確認）`,
       `・必要書類：${app.documents.join('、') || '未確認'}（要確認）`,
       `・申請手順：${app.steps.join('→') || '未確認'}（要確認）`,
-      '※上記は開発用サンプルの転記であり、公式の申請案内ではありません。必要書類の一覧が正式なものである保証もありません。',
-      VERIFY_FOOTER,
+      '※これは開発用のサンプル情報であり、公式の申請案内ではありません。実際の申請先・申請期限・必要書類などは、お住まいの自治体の窓口・公式サイトで必ずご確認ください。',
     ].join('\n'),
     toRelated([target]),
   )
@@ -249,15 +241,14 @@ function otherProgramsReply(
   return reply(
     [
       target
-        ? `「${target.name}」以外にも、次の制度が登録されています（確認状況は未確認のものもあります）。`
-        : '次の制度が登録されています（確認状況は未確認のものもあります）。',
+        ? `「${target.name}」以外にも、次の支援制度があります（確認状況を付記しています）。`
+        : '子育て支援の制度には、ほかにも次のようなものがあります（確認状況を付記しています）。',
       ...rest.map(
         (p) =>
           `・${p.name}【${categoryLabel(p.category)}】【${p.mock ? '未確認（モック）' : '公式確認済み（一部要確認）'}】：${p.summary}`,
       ),
-      '※登録データは一部の制度のみを収録したサンプルで、実際の利用可能な制度の一覧ではありません。確認済みの制度にも未確認の項目が含まれます。',
-      'どの制度についても自由に質問できます。制度名を含めて質問してください。',
-      VERIFY_FOOTER,
+      '※ここに挙げたのは一部の制度で、実際の利用可能な制度の一覧ではありません。確認済みの制度にも未確認の項目が含まれます。',
+      'どの制度についても、制度名を含めて質問してください。',
     ].join('\n'),
     toRelated(rest),
   )
@@ -284,13 +275,12 @@ function detailReply(
       : target.amount.description
   return reply(
     [
-      `「${target.name}」について、登録データの記載は次のとおりです（確認状況: ${target.mock ? '未確認（モック）' : '公式確認済みの項目と未確認の項目が混在'}）。`,
+      `「${target.name}」について、確認できている内容は次のとおりです（確認状況: ${target.mock ? '未確認（モック）' : '公式確認済みの項目と未確認の項目が混在'}）。`,
       `・概要：${target.summary}`,
       `・金額【${categoryLabel(target.category)}】：${amount}【${target.amount.basis === 'confirmed' ? '公式確認済み' : target.amount.basis === 'estimated' ? '推定・要確認' : '未確認'}】`,
       `・対象期間：${target.period.startAgeYears ?? 0}歳〜${target.period.endAgeYears ?? '上限なし（要確認）'}歳`,
       `・根拠法令：${target.legalBasis.lawName ?? target.legalBasis.ordinanceName ?? '未確認'}（要確認）`,
-      '※金額・対象条件は確定情報ではありません。',
-      VERIFY_FOOTER,
+      '※金額・対象条件は確定情報ではありません。実際の受給資格・金額・申請期限・必要書類は、お住まいの自治体・公式窓口で必ずご確認ください。',
     ].join('\n'),
     toRelated([target]),
   )
@@ -300,10 +290,10 @@ function unsupportedReply(): ConsultReply {
   return reply(
     [
       '申し訳ありませんが、その質問には未対応です。',
-      '登録データにない制度情報や、確認していない情報を推測で生成することはしません（公式サイトを検索した結果でもありません）。',
+      '確認できていない情報を推測で答えることはしません（公式サイトの検索結果でもありません）。',
       '次のような質問ならお答えできます。',
       ...MOCK_CONSULT_EXAMPLES.map((e) => `・${e}`),
-      '具体的な制度名（例：児童手当）を含む質問にも、モックデータの範囲でお答えできます。',
+      '具体的な制度名（例：児童手当）を含む質問にも、サンプルデータの範囲でお答えできます。',
     ].join('\n'),
     [],
     { unsupported: true, hasUnverified: false },

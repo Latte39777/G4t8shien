@@ -301,7 +301,7 @@ const AI_PROPOSAL_CAUTION = 'AI が関連の可能性を挙げた制度です。
 function proposalNoteFor(card: KbFactCard | null): string {
   const base =
     card === null
-      ? '未確認の情報。確認できる公式情報の記録がありません（確定情報ではありません）'
+      ? '未確認の情報です。確認できる公式情報がありません（確定情報ではありません）'
       : kbNoteFor(card)
   return `${base}（${AI_PROPOSAL_CAUTION}）`
 }

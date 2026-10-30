@@ -23,14 +23,24 @@
  *   （lib/consult/replyMode.ts。本文の表現からは推測しない）
  * - フォールバック時はライブ AI が回答したかのような表示をしない
  *
- * 【個人情報の注意表示（P9-4 / P10-1）】
- * - 質問入力欄付近で、入力してはいけない個人情報・マスクの限界・
- *   質問文中の金額や個人情報の取り扱いを案内する
+ * 【個人情報の注意表示（P9-4 / P10-1 / M7-M）】
+ * - 質問入力欄の近くに、送信内容・個人情報・マスクの限界の短い注意を常に表示し、
+ *   詳細（シミュレーション情報の範囲・履歴の非保存など）は折りたたみに集約する
  * - 外部送信の説明は環境の実態（GET /api/consult の liveAiEnabled。POST と
  *   同じ 2 重スイッチ判定）に合わせて切り替える。ライブ AI 有効時は
  *   質問文・会話履歴が外部 AI（INIAD AI-MOP API）へ送信されることを
  *   送信前に案内し、「送信していない」という実態と矛盾する表示をしない
  *   （状態未確認時は安全側＝送信され得る前提の表示。API キー等は表示しない）
+ * - 外部 AI への送信が行われることは折りたたみの中だけに隠さず、
+ *   常時見える短い注意書きで必ず案内する
+ *
+ * 【画面構成（M7-M: 説明文の最適化）】
+ * - 上部: 結果画面に戻る／会話をリセット（消える旨を確認してから実行）／
+ *   タイトル／相談対象の制度名と短い説明（金額・申請先などの詳細は折りたたみ）
+ * - 実AIとモックの説明は実行モードに応じて1つだけ表示し、混在させない
+ *   （判定は既存の GET liveAiEnabled と各回答の isMock / sourceType のみ）
+ * - 質問例はクリックできるチップ表示（既存の送信動作を維持）
+ * - 下部の誘導は「結果画面で支援制度一覧を見る」の1つだけ（重複リンクを廃止）
  */
 import { useEffect, useState, type FormEvent } from "react";
 import {
@@ -135,7 +145,7 @@ function CitationList({ citations }: { citations: ConsultCitation[] }) {
       data-testid="consult-citations"
     >
       <p className="text-[10px] font-bold text-slate-400">
-        出典（公式情報KBで確認した資料）
+        参考にした公式ページ
       </p>
       <ul className="mt-1 space-y-1.5">
         {citations.map((c, index) => {
@@ -197,21 +207,23 @@ function RelatedChips({
             p.sources?.some((s) => s.reviewOutdated === true) ?? false;
           return (
             <li key={p.id} className="flex flex-col items-start gap-0.5">
+              {/* 名前とバッジを行で分離し、「児童手当検証済み」のような連結表示にしない */}
               <button
                 type="button"
                 onClick={onOpenSupports}
                 data-testid="consult-related-program"
-                className="inline-flex flex-wrap items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-600 hover:bg-slate-100"
+                className="inline-flex flex-col items-start gap-1 rounded-2xl border border-slate-200 bg-slate-50 px-2.5 py-1.5 text-left text-[11px] font-semibold text-slate-600 hover:bg-slate-100"
               >
-                {p.name}
-                {p.category !== undefined && (
-                  <span
-                    className="rounded-full bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-500"
-                    data-testid="consult-related-category"
-                  >
-                    {categoryLabel(p.category)}
-                  </span>
-                )}
+                <span>{p.name}</span>
+                <span className="flex flex-wrap items-center gap-1">
+                  {p.category !== undefined && (
+                    <span
+                      className="rounded-full bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-500"
+                      data-testid="consult-related-category"
+                    >
+                      {categoryLabel(p.category)}
+                    </span>
+                  )}
                 {p.sourceType === "mock" ? (
                   <span className="rounded-full bg-rose-100 px-1.5 py-0.5 text-[9px] font-bold text-rose-600">
                     モック・未確認
@@ -228,6 +240,7 @@ function RelatedChips({
                     検証済み
                   </span>
                 )}
+                </span>
               </button>
               {(p.verification !== undefined ||
                 p.checkedAt !== undefined ||
@@ -345,7 +358,7 @@ function MessageBubble({
 }
 
 /**
- * 外部 AI への送信状況の説明文（送信前・質問入力欄の直前。P10-1）。
+ * 外部 AI への送信状況の説明文（詳細折りたたみ内の送信仕様の説明。P10-1 / M7-M）。
  * POST と同じ 2 重スイッチ判定（GET /api/consult の liveAiEnabled）に合わせて
  * 切り替え、環境の実態と矛盾する表示をしない。
  * - live: ライブ AI 有効（質問文・会話履歴が外部 AI サービスへ送信される）
@@ -363,18 +376,35 @@ const PRIVACY_TRANSMISSION_NOTICE: Record<
 };
 
 /**
- * 回答モードの注意書き（上部の赤い注意書き。実行モードと一致させる）
- * - live: 外部 AI（INIAD AI-MOP API）の生成応答であることを明示する
- * - mock: 従来どおり開発用モックサンプルであることを明示する
+ * 外部送信の短い注意書き（質問入力欄・送信ボタンの近くに常に表示。M7-M）。
+ * 外部 AI への送信が行われることは折りたたみの中だけに隠さず、この短い文で必ず案内する。
+ * 実態（liveAiState）に合わせて表現を切り替え、「送信していない」と矛盾する表示をしない。
+ */
+const PRIVACY_SHORT_NOTICE: Record<"live" | "mock" | "unknown", string> = {
+  live: "質問文と会話履歴は外部AIサービス（INIAD AI-MOP API）へ送信されます。氏名・住所・マイナンバー・口座情報などは入力しないでください。",
+  mock: "現在は外部AIへ送信していません（開発用のモックサンプル）。AI回答を有効にした場合は、質問文と会話履歴は外部AIサービスへ送信されます。氏名・住所・マイナンバー・口座情報などは入力しないでください。",
+  unknown:
+    "環境の設定によっては、質問文と会話履歴は外部AIサービスへ送信されます。氏名・住所・マイナンバー・口座情報などは入力しないでください。",
+};
+
+/**
+ * 回答モードの注意書き（上部の注意書き。実行モードと一致させ、1つだけ表示する。M7-M）
+ * - live: 外部 AI（INIAD AI-MOP API）が回答すること・リアルタイム検索でないことを明示する
+ * - mock: 開発用のサンプル回答であることを明示する（AI が回答しているような説明をしない）
  * - unknown: 環境状態が未確認のときは、どちらとも断定しない（特に
  *   「AI が回答している」と断定しない）。実際の種類は各回答のバッジで区別する
+ * 実AIとモックの説明を同時表示しない。判定は既存の GET liveAiEnabled のみを使う。
  */
 const MODE_NOTICE: Record<"live" | "mock" | "unknown", string> = {
-  live: "この相談アシスタントの回答は、外部の生成 AI サービス（INIAD AI-MOP API）が生成した応答です。AI による検索や公式サイトの検索を行った結果ではありません。制度の受給資格・金額・申請期限・必要書類などは未確認であり、確定情報として回答することはありません。回答の種類（AI・モック）は各回答のバッジで区別しています。",
-  mock: "この相談アシスタントの回答は開発用のモックサンプルです。AI による検索や公式サイトの検索を行った結果ではありません。制度の受給資格・金額・申請期限・必要書類などは未確認であり、確定情報として回答することはありません。",
+  live: "外部AI（INIAD AI-MOP API）が質問に回答します。公式サイトをリアルタイム検索する機能ではありません。制度の受給資格・金額・申請期限・必要書類などは未確認であり、最新情報や受給条件は公式情報でご確認ください。回答の種類は各回答のバッジで区別しています。",
+  mock: "現在は開発用のモックサンプルです。実際の制度相談や申請判断には使用できません。公式サイトをリアルタイム検索する機能ではありません。制度の受給資格・金額・申請期限・必要書類などは未確認です。",
   unknown:
-    "この相談アシスタントの回答は、環境の設定によっては開発用のモックサンプルの場合と AI 生成応答の場合があります。AI による検索や公式サイトの検索を行った結果ではありません。制度の受給資格・金額・申請期限・必要書類などは未確認であり、確定情報として回答することはありません。実際の種類（AI・モック）は各回答のバッジで区別しています。",
+    "回答は、開発用のモックサンプルの場合と外部AI（INIAD AI-MOP API）の生成応答の場合があります。実際の種類は各回答のバッジで区別しています。公式サイトをリアルタイム検索する機能ではありません。制度の受給資格・金額・申請期限・必要書類などは未確認です。",
 };
+
+/** 会話リセット前の確認文言（会話履歴が消えることを事前に確認する。M7-M） */
+const RESET_CONFIRM_MESSAGE =
+  "会話履歴は消えます。会話をリセットしますか？（この操作は取り消せません）";
 
 export default function Consult({
   program,
@@ -428,23 +458,39 @@ export default function Consult({
     onSend(trimmed);
   };
 
+  /** 会話リセット前に、会話履歴が消えることを確認する（M7-M） */
+  const handleResetClick = () => {
+    if (window.confirm(RESET_CONFIRM_MESSAGE)) onReset();
+  };
+
+  /** ユーザー質問がある＝会話が始まった（初期説明を邪魔にならない形にする） */
+  const hasConversation = messages.some((m) => m.role === "user");
+
+  /** 回答モードの注意書き（実態に応じて1つだけ表示） */
+  const modeNoticeText =
+    liveAiState === true
+      ? MODE_NOTICE.live
+      : liveAiState === false
+        ? MODE_NOTICE.mock
+        : MODE_NOTICE.unknown;
+
   return (
     <div className="mx-auto w-full max-w-3xl px-5 py-6" data-testid="consult-screen">
-      {/* ヘッダー（戻る・リセット） */}
+      {/* ヘッダー（戻る・リセット。リセットは会話履歴が消えることを確認してから実行） */}
       <div className="flex flex-wrap items-center justify-between gap-2">
         <button
           type="button"
           onClick={onBack}
           data-testid="consult-back"
-          className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50"
+          className="min-h-11 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50"
         >
           ← 結果画面に戻る
         </button>
         <button
           type="button"
-          onClick={onReset}
+          onClick={handleResetClick}
           data-testid="consult-reset"
-          className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50"
+          className="min-h-11 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50"
         >
           会話をリセット
         </button>
@@ -454,28 +500,52 @@ export default function Consult({
         支援制度の相談
       </h1>
 
-      {/* 制度カードから開始された場合の引き継ぎ情報 */}
+      {/* 相談対象の制度（M7-M: 「〜について相談中」＋短い説明。
+          金額・申請先などの詳細は折りたたみ、確認状態は隠さない） */}
       {program ? (
         <div
           className="mt-3 rounded-2xl border border-blue-200 bg-blue-50 px-4 py-3"
           data-testid="consult-program-context"
         >
-          <p className="text-xs font-bold text-blue-800">
-            「{program.name}」についての相談から開始しています
-            {program.mock && (
-              <span className="ml-2 rounded-full bg-rose-100 px-2 py-0.5 text-[10px] font-bold text-rose-600">
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="text-xs font-bold text-blue-800">
+              「{program.name}」について相談中
+            </p>
+            {program.mock ? (
+              <span className="rounded-full bg-rose-100 px-2 py-0.5 text-[10px] font-bold text-rose-600">
                 モック・未確認
               </span>
+            ) : (
+              <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                公式情報で確認済み
+              </span>
             )}
+          </div>
+          <p className="mt-1 text-[11px] leading-5 text-blue-800">
+            この制度をきっかけに、ほかの支援制度についても質問できます。
           </p>
-          <ul className="mt-1.5 space-y-0.5 text-[11px] leading-5 text-blue-800">
-            <li>・概要（要確認）：{program.summary}</li>
-            <li>・金額（要確認）：{program.amountDescription}</li>
-            <li>・申請先（要確認）：{program.where ?? "未確認"}</li>
-          </ul>
-          <p className="mt-1.5 text-[11px] leading-5 text-blue-700">
-            この制度は相談のきっかけにすぎません。この制度以外の支援制度についても自由に質問できます。
-          </p>
+          {program.missingInformation.length > 0 && (
+            <p className="mt-1 text-[11px] leading-5 text-blue-700">
+              {`未確認の項目：${program.missingInformation.length}件（制度の詳細で確認できます）`}
+            </p>
+          )}
+          {/* 金額・申請先・確認状態などの詳細は折りたたみ */}
+          <details className="mt-2" data-testid="consult-program-details">
+            <summary className="inline-flex min-h-11 cursor-pointer items-center rounded-full px-3 py-2 text-[11px] font-bold text-blue-700 hover:bg-blue-100">
+              制度の詳細（概要・金額・申請先・確認状態）
+            </summary>
+            <ul className="mt-1 space-y-0.5 text-[11px] leading-5 text-blue-800">
+              <li>{`・概要（${program.mock ? "要確認" : "確認済み"}）：${program.summary}`}</li>
+              <li>{`・金額（${program.mock ? "要確認" : "確認済み"}）：${program.amountDescription}`}</li>
+              <li>{`・申請先（${program.mock ? "要確認" : "確認済み"}）：${program.where ?? "未確認"}`}</li>
+              <li>{`・申請期限・時期（${program.mock ? "要確認" : "確認済み"}）：${program.deadlineNote ?? "未確認"}`}</li>
+              <li>{`・確認状態：${program.verification !== undefined ? VERIFICATION_LABELS[program.verification].text : program.mock ? "未確認（モックデータ）" : "確認済み"}`}</li>
+              <li>{`・確認日：${program.checkedAt ?? "未確認"}`}</li>
+              {program.missingInformation.length > 0 && (
+                <li>{`・判定に不足している情報：${program.missingInformation.join("、")}`}</li>
+              )}
+            </ul>
+          </details>
         </div>
       ) : (
         <div
@@ -488,31 +558,29 @@ export default function Consult({
         </div>
       )}
 
-      {/* 実行モード（モック/ライブ AI）に応じた注意書きを必ず明示。状態が未確認のときはどちらとも断定しない */}
-      <p
-        className="mt-3 rounded-xl bg-rose-50 px-4 py-3 text-xs leading-5 text-rose-700"
-        data-testid="consult-mode-notice"
-      >
-        {liveAiState === true
-          ? MODE_NOTICE.live
-          : liveAiState === false
-            ? MODE_NOTICE.mock
-            : MODE_NOTICE.unknown}
-      </p>
-
-      {/* 会話履歴の取り扱いの明示 */}
-      <p className="mt-2 rounded-xl bg-slate-50 px-4 py-3 text-xs leading-5 text-slate-600">
-        会話履歴はこのブラウザのメモリ上にのみ保持されます（localStorage・サーバー等には保存しません）。
-        <span className="font-semibold text-slate-800">
-          ページをリロードすると会話履歴は消えます。
-        </span>
-      </p>
-
-      {/* 相談に利用する入力情報の範囲（フォームの金額と質問文中の金額を区別する） */}
-      {userContext && (
-        <p className="mt-2 rounded-xl bg-slate-50 px-4 py-3 text-[11px] leading-5 text-slate-500">
-          シミュレーションの入力情報のうち、相談に必要な範囲（お子さまの人数・世帯年収の入力有無・利用中の制度）のみを利用しています。
-          シミュレーションの入力フォームで入力した金額（収入・貯蓄など）は相談機能に渡していません。ただし、質問文に自分で書いた金額は相談の本文として扱われます。
+      {/* 回答モードの注意書き（M7-M: 実AI/モックの説明はこの1つに集約。実態と一致させ、混在させない）。
+          会話が始まった後は折りたたみ、実際の回答モードは各回答のバッジで区別する */}
+      {hasConversation ? (
+        <details
+          className="mt-3 rounded-xl bg-rose-50"
+          data-testid="consult-mode-notice-details"
+        >
+          <summary className="inline-flex min-h-11 cursor-pointer items-center rounded-xl px-4 py-3 text-xs font-bold text-rose-700">
+            回答モード・注意事項
+          </summary>
+          <p
+            className="px-4 pb-3 text-xs leading-5 text-rose-700"
+            data-testid="consult-mode-notice"
+          >
+            {modeNoticeText}
+          </p>
+        </details>
+      ) : (
+        <p
+          className="mt-3 rounded-xl bg-rose-50 px-4 py-3 text-xs leading-5 text-rose-700"
+          data-testid="consult-mode-notice"
+        >
+          {modeNoticeText}
         </p>
       )}
 
@@ -555,29 +623,8 @@ export default function Consult({
         </div>
       )}
 
-      {/* 初めて使う人向けの質問例 */}
-      <div className="mt-5 rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
-        <p className="text-xs font-bold text-slate-700">
-          質問例（クリックで送信できます）
-        </p>
-        <ul className="mt-2 flex flex-wrap gap-2">
-          {MOCK_CONSULT_EXAMPLES.map((example) => (
-            <li key={example}>
-              <button
-                type="button"
-                onClick={() => onSend(example)}
-                disabled={sending}
-                data-testid="consult-example"
-                className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-left text-[11px] font-semibold text-blue-700 hover:bg-blue-100 disabled:opacity-50"
-              >
-                {example}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* 個人情報の取り扱いの注意（質問入力欄の直前で確認できるようにする） */}
+      {/* 個人情報・外部送信の注意（M7-M: 質問入力欄の近くに短い注意を常に表示し、詳細は折りたたみ。
+          外部AIへの送信が行われることは折りたたみの中だけに隠さず、短い文で必ず案内する） */}
       <div
         className="mt-4 rounded-2xl border border-amber-200 bg-amber-50 p-4"
         data-testid="consult-privacy-notice"
@@ -585,21 +632,48 @@ export default function Consult({
         <p className="text-xs font-bold text-amber-800">
           ご入力の前にご確認ください（個人情報の取り扱い）
         </p>
-        <ul className="mt-2 space-y-1 text-[11px] leading-5 text-amber-900/90">
-          <li>
-            ・氏名・住所・電話番号・メールアドレス・個人番号（マイナンバー）・口座情報など、相談に不要な個人情報は入力しないでください。
-          </li>
-          <li>
-            ・入力内容には自動で伏せ字（マスク）をかける仕組みがありますが、完全な検出ではありません。氏名・住所・表記ゆれなどは伏せ字にできないことがあります。
-          </li>
-          <li>
-            {liveAiState === true
-              ? PRIVACY_TRANSMISSION_NOTICE.live
-              : liveAiState === false
-                ? PRIVACY_TRANSMISSION_NOTICE.mock
-                : PRIVACY_TRANSMISSION_NOTICE.unknown}
-          </li>
-        </ul>
+        <p className="mt-1.5 text-[11px] leading-5 text-amber-900/90">
+          {liveAiState === true
+            ? PRIVACY_SHORT_NOTICE.live
+            : liveAiState === false
+              ? PRIVACY_SHORT_NOTICE.mock
+              : PRIVACY_SHORT_NOTICE.unknown}
+          自動マスキングは完全ではありません。
+        </p>
+        <details className="mt-2" data-testid="consult-privacy-details">
+          <summary className="inline-flex min-h-11 cursor-pointer items-center rounded-full px-3 py-2 text-[11px] font-bold text-amber-800 hover:bg-amber-100">
+            個人情報の取り扱いの詳細
+          </summary>
+          <ul className="mt-1 space-y-1 text-[11px] leading-5 text-amber-900/90">
+            <li>
+              ・氏名・住所・電話番号・メールアドレス・個人番号（マイナンバー）・口座情報など、相談に不要な個人情報は入力しないでください。
+            </li>
+            <li>
+              ・入力内容には自動で伏せ字（マスク）をかける仕組みがありますが、完全な検出ではありません。氏名・住所・表記ゆれなどは伏せ字にできないことがあります。
+            </li>
+            <li>
+              {liveAiState === true
+                ? PRIVACY_TRANSMISSION_NOTICE.live
+                : liveAiState === false
+                  ? PRIVACY_TRANSMISSION_NOTICE.mock
+                  : PRIVACY_TRANSMISSION_NOTICE.unknown}
+            </li>
+            {userContext && (
+              <li>
+                ・シミュレーションの入力情報のうち、相談に必要な範囲（お子さまの人数・世帯年収の入力有無・利用中の制度）のみを利用しています。
+              </li>
+            )}
+            <li>
+              ・シミュレーションの入力フォームで入力した金額（収入・貯蓄など）は相談機能に渡していません。ただし、質問文に自分で書いた金額は相談の本文として扱われます。
+            </li>
+            <li>
+              ・会話履歴はこのブラウザのメモリ上にのみ保持されます（localStorage・サーバー等には保存しません）。
+              <span className="font-semibold text-amber-900">
+                ページをリロードすると会話履歴は消えます。
+              </span>
+            </li>
+          </ul>
+        </details>
       </div>
 
       {/* 質問入力 */}
@@ -626,39 +700,51 @@ export default function Consult({
           type="submit"
           disabled={sending}
           data-testid="consult-send"
-          className="mt-2 w-full rounded-full bg-blue-500 px-6 py-3 text-sm font-bold text-white shadow-md shadow-blue-500/20 transition-colors hover:bg-blue-600 disabled:opacity-50 sm:w-auto"
+          className="mt-2 min-h-11 w-full rounded-full bg-blue-500 px-6 py-3 text-sm font-bold text-white shadow-md shadow-blue-500/20 transition-colors hover:bg-blue-600 disabled:opacity-50 sm:w-auto"
         >
           {sending ? "送信中…" : "送信する"}
         </button>
       </form>
 
-      {/* 関連制度・公式情報の確認導線 */}
+      {/* 質問例（M7-M: クリックで送信するチップ表示。既存の送信動作を維持し、44px以上のタップ領域） */}
       <div className="mt-5 rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
         <p className="text-xs font-bold text-slate-700">
-          関連する支援制度・公式情報の確認
+          質問例（クリックで送信できます）
+        </p>
+        <ul className="mt-2 flex flex-wrap gap-2">
+          {MOCK_CONSULT_EXAMPLES.map((example) => (
+            <li key={example}>
+              <button
+                type="button"
+                onClick={() => onSend(example)}
+                disabled={sending}
+                data-testid="consult-example"
+                className="min-h-11 rounded-full border border-blue-200 bg-blue-50 px-4 py-2.5 text-left text-[11px] font-semibold text-blue-700 hover:bg-blue-100 disabled:opacity-50"
+              >
+                {example}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* 下部の誘導は1つだけ（M7-M: 重複リンクを廃止。戻る導線は上部の1つで足りる） */}
+      <div className="mt-5 rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
+        <p className="text-xs font-bold text-slate-700">
+          制度一覧・公式情報へのリンク
         </p>
         <p className="mt-1.5 text-[11px] leading-5 text-slate-500">
-          モックデータに基づく制度一覧は結果画面で確認できます。実際の受給資格・金額・申請期限・必要書類は、
+          制度一覧は結果画面で確認できます。実際の受給資格・金額・申請期限・必要書類は、
           お住まいの自治体の窓口や公式情報を必ずご確認ください。
         </p>
-        <div className="mt-2 flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={onOpenSupports}
-            data-testid="consult-open-supports"
-            className="rounded-full border border-blue-500 px-4 py-2 text-xs font-bold text-blue-600 hover:bg-blue-50"
-          >
-            結果画面の支援制度一覧を見る
-          </button>
-          <button
-            type="button"
-            onClick={onBack}
-            data-testid="consult-back-bottom"
-            className="rounded-full border border-slate-200 px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50"
-          >
-            結果画面に戻る
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={onOpenSupports}
+          data-testid="consult-open-supports"
+          className="mt-2 min-h-11 rounded-full border border-blue-500 px-4 py-2 text-xs font-bold text-blue-600 hover:bg-blue-50"
+        >
+          結果画面で支援制度一覧を見る
+        </button>
       </div>
     </div>
   );

@@ -52,6 +52,43 @@ export function amountText(program: SupportProgram): string {
   return `${formatYen(value)}（${UNIT_LABELS[unit]}）`
 }
 
+/** M7-K: 金額の確度を短く示すラベル（金額の近くに表示する） */
+export const ACCURACY_LABELS = {
+  confirmed: '確認済み',
+  estimated: '推定・要確認',
+  unknown: '金額未確認',
+  capOnly: '上限額のみ確認',
+  excluded: '計算対象外',
+} as const
+
+export type AccuracyKey = keyof typeof ACCURACY_LABELS
+
+/** 金額の確度ラベル（M7-K） */
+export function accuracyOf(program: SupportProgram): AccuracyKey {
+  if (program.amount.capOnly === true) return 'capOnly'
+  if (program.amount.basis === 'confirmed') return 'confirmed'
+  if (program.amount.basis === 'estimated') return 'estimated'
+  return 'unknown'
+}
+
+/**
+ * 上限額のみ判明している制度の金額表示（M7-K）。
+ * 上限額を実際の受給見込額と誤認させない文言にする。
+ */
+export function capOnlyAmountText(program: SupportProgram): string {
+  const { value } = program.amount
+  return value === null
+    ? '金額未確認（要確認）'
+    : `最大${formatYen(value)}（上限額のみ確認済み・実際の補助額は対象工事費などによって決まります）`
+}
+
+/** 金額の表示（上限額のみの制度は capOnlyAmountText に切り替える） */
+export function amountDisplayText(program: SupportProgram): string {
+  return program.amount.capOnly === true
+    ? capOnlyAmountText(program)
+    : amountText(program)
+}
+
 /** 単位別の内訳表示（月額・年額・一時金の区別を明示） */
 export function unitBreakdownText(estimate: SupportEstimate): string {
   const b = estimate.unitBreakdown

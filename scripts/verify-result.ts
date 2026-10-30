@@ -353,16 +353,29 @@ const DISPLAY_KEYS: DisplayStageKey[] = DISPLAY_STAGES.map((d) => d.key);
     r.comparison.grossCostYen === r.costTotals.totalYen,
   );
   check(
-    "比較: 確定支援のみ＝費用総額−確定支援（既存の比較計算と一致）",
+    "比較: 確定支援のみ＝費用総額−確定支援（0円以下にはならない・M7-J1）",
     r.comparison.afterConfirmedYen ===
-      r.comparison.grossCostYen - r.supportTotals.confirmedYen,
+      Math.max(0, r.comparison.grossCostYen - r.supportTotals.confirmedYen),
   );
   check(
-    "比較: 確定＋推定＝費用総額−確定−推定（既存の比較計算と一致）",
+    "比較: 確定＋推定＝費用総額−確定−推定（0円以下にはならない・M7-J1）",
     r.comparison.afterAllYen ===
-      r.comparison.grossCostYen -
-        r.supportTotals.confirmedYen -
-        r.supportTotals.estimatedYen,
+      Math.max(
+        0,
+        r.comparison.grossCostYen -
+          r.supportTotals.confirmedYen -
+          r.supportTotals.estimatedYen,
+      ),
+  );
+  check(
+    "比較: 支援が費用を上回る分は supportSurplusYen に分離（負値にしない）",
+    r.comparison.supportSurplusYen ===
+      Math.max(
+        0,
+        r.supportTotals.confirmedYen +
+          r.supportTotals.estimatedYen -
+          r.comparison.grossCostYen,
+      ),
   );
   const goal = r.goalCoverage;
   check("目標額あり: カバー状況が計算される", goal !== null);

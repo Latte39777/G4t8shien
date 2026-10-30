@@ -129,8 +129,9 @@ async function main(): Promise<void> {
       !sysPrompt.includes('確定情報を含めないでください'),
   )
   check(
-    '「公式確認済み」等の語は断定の禁止に整理され、KB 記録の説明は許可される',
-    sysPrompt.includes('「KB の記録では確認済み」') &&
+    '内部用語（KB の記録では等）の使用禁止と確認状態の自然な表現が指示されている',
+    !sysPrompt.includes('「KB の記録では確認済み」') &&
+      sysPrompt.includes('内部用語の禁止') &&
       sysPrompt.includes('受給資格・利用資格・申請可否を確定と表現しない') &&
       !sysPrompt.includes('表現も使用禁止'),
   )

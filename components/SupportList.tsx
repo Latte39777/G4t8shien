@@ -1,13 +1,15 @@
 "use client";
 
 /**
- * 支援制度一覧（M4 / M6-C）
+ * 支援制度一覧（M4 / M6-C / M7-K）
  *
- * - 既存の /api/supports から制度データを取得して制度カードを表示する
  * - 未確認情報を確定済みの事実として表示しない
  *   （「モック・未確認」「要確認」バッジ、URL未確認のリンクは公式リンクとして扱わない）
  * - M6-C: 公式確認済みの制度と未確認のモック制度をバッジで区別する。
  *   確認済み項目・未確認項目（理由付き）・適用年度・対象地域を区別して表示する
+ * - M7-K: 初期表示を「制度名・確認状態・種類・対象地域・短い説明・金額」に
+ *   絞り、金額の内訳・期間・条件・根拠法令・申請情報は「詳細を見る」に集約する。
+ *   全体を「モックデータ」と一括断定せず、制度ごとの確認状態をバッジで示す
  * - 「この制度について相談する」ボタンは M5 の相談画面につながる
  *   （親から渡す onConsult コールバックを呼び出す）
  */
@@ -17,8 +19,10 @@ import { supportProgramSchema, type SupportProgram } from "@/lib/types/support";
 import type { SupportEffect } from "@/lib/finance/supports";
 import { formatYen } from "@/lib/simulation";
 import {
+  ACCURACY_LABELS,
+  accuracyOf,
   amountBandsText,
-  amountText,
+  amountDisplayText,
   checkedAtText,
   fiscalYearLabel,
   legalBasisText,
@@ -26,7 +30,9 @@ import {
   periodText,
   sourceEntryText,
   unconfirmedItemsText,
+  UNIT_LABELS,
   verificationBadgeText,
+  type AccuracyKey,
 } from "@/lib/supports/display";
 import { jurisdictionText } from "@/lib/supports/region";
 
@@ -37,12 +43,32 @@ const ELIGIBILITY_LABELS: Record<string, string> = {
   ineligible: "対象外の可能性",
 };
 
+/** 制度の種類（M7-K: 現金給付・費用軽減・貸付を混同させない） */
 const CATEGORY_LABELS: Record<string, string> = {
   cash_benefit: "現金給付",
-  fee_reduction: "費用の減免",
-  loan: "貸付（返済義務あり）",
+  fee_reduction: "費用軽減",
+  loan: "貸付（返済が必要）",
   tax: "税制",
 };
+
+/** 金額の確度バッジ（確認済み／推定・要確認／金額未確認／上限額のみ確認／計算対象外） */
+function AccuracyBadge({ accuracy }: { accuracy: AccuracyKey }) {
+  const cls =
+    accuracy === "confirmed"
+      ? "bg-emerald-100 text-emerald-700"
+      : accuracy === "estimated" || accuracy === "capOnly"
+        ? "bg-amber-100 text-amber-700"
+        : accuracy === "excluded"
+          ? "bg-slate-200 text-slate-600"
+          : "bg-rose-100 text-rose-600";
+  return (
+    <span
+      className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${cls}`}
+    >
+      {ACCURACY_LABELS[accuracy]}
+    </span>
+  );
+}
 
 export type SupportCardProps = {
   program: SupportProgram;
@@ -70,7 +96,7 @@ export function SupportCard({
       className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
       data-testid={`support-card-${program.id}`}
     >
-      {/* 制度名・区分・確認状況バッジ（確認済み／未確認を必ず区別する） */}
+      {/* 初期表示（M7-K）：制度名・確認状態・種類・対象地域・短い説明・金額 */}
       <div className="flex flex-wrap items-center gap-2">
         <h3 className="text-sm font-bold text-slate-900">{program.name}</h3>
         <span
@@ -85,27 +111,11 @@ export function SupportCard({
         >
           {verificationBadgeText(program)}
         </span>
-        {/* 金額の確度（初期表示で確認できるようにする） */}
-        {program.amount.basis === "confirmed" && (
-          <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
-            確認済み
-          </span>
-        )}
-        {program.amount.basis === "estimated" && (
-          <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-700">
-            推定・要確認
-          </span>
-        )}
-        {program.amount.basis === "unknown" && (
-          <span className="rounded-full bg-rose-100 px-2 py-0.5 text-[10px] font-bold text-rose-600">
-            未確認
-          </span>
-        )}
         <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-500">
           {CATEGORY_LABELS[program.category]}
         </span>
         <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-500">
-          {LEVEL_LABELS[program.level]}
+          {jurisdictionText(program.jurisdiction)}
         </span>
         {isUsed && (
           <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-bold text-blue-600">
@@ -114,49 +124,45 @@ export function SupportCard({
         )}
       </div>
 
-      {/* 支援内容 */}
+      {/* 短い制度説明 */}
       <p className="mt-2 text-xs leading-5 text-slate-600">{program.summary}</p>
 
-      {/* 概要（常に表示）：見込額・対象可能性・注意 */}
-      <dl className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
-        <div className="rounded-xl bg-slate-50 px-3 py-2">
-          <dt className="text-[10px] font-semibold text-slate-400">
-            この世帯の見込額
-          </dt>
-          <dd className="mt-0.5 text-sm font-bold text-slate-800">
-            {effect
+      {/* 金額または未確認表示（確度は必ず金額とセットで表示する） */}
+      <div className="mt-2 flex flex-wrap items-center gap-2">
+        <span className="text-[11px] font-semibold text-slate-400">金額</span>
+        <span className="text-sm font-bold text-slate-800">
+          {amountDisplayText(program)}
+        </span>
+        <AccuracyBadge accuracy={accuracyOf(program)} />
+      </div>
+
+      {/* この世帯の見込額（目安。長い注意は「詳細を見る」に集約） */}
+      <dl className="mt-3 rounded-xl bg-slate-50 px-3 py-2">
+        <dt className="text-[10px] font-semibold text-slate-400">
+          この世帯の見込額
+        </dt>
+        <dd className="mt-0.5 text-sm font-bold text-slate-800">
+          {(program.amount.capOnly === true ? "最大" : "") +
+            (effect
               ? effect.estimatedTotalYen === null
                 ? "計算不能（金額未確認）"
                 : formatYen(effect.estimatedTotalYen)
-              : "未計算（要確認）"}
-          </dd>
-          <dd className="mt-1 text-[11px] leading-4 text-slate-500">
-            {program.mock
-              ? "モック・未確認データに基づく目安です。支給が確定した金額ではありません。"
-              : "確認済みの公式情報と推定値に基づく目安です。受給資格は未判定（要確認）であり、支給が確定した金額ではありません。"}
-          </dd>
-        </div>
-        <div className="rounded-xl bg-slate-50 px-3 py-2">
-          <dt className="text-[10px] font-semibold text-slate-400">
-            対象条件の確認状況
-          </dt>
-          <dd className="mt-1">
-            <span
-              className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
-                eligibility === "likely"
-                  ? "bg-emerald-100 text-emerald-700"
-                  : eligibility === "possible"
-                    ? "bg-amber-100 text-amber-700"
-                    : "bg-slate-100 text-slate-500"
-              }`}
-            >
-              {ELIGIBILITY_LABELS[eligibility]}
-            </span>
-          </dd>
-          <dd className="mt-1 text-[11px] leading-4 text-slate-500">
-            （これは目安であり、正式な受給資格の決定ではありません）
-          </dd>
-        </div>
+              : "未計算（要確認）")}
+        </dd>
+        <dd className="mt-1 flex flex-wrap items-center gap-1.5">
+          <AccuracyBadge
+            accuracy={
+              effect?.excludedReason != null ? "excluded" : accuracyOf(program)
+            }
+          />
+          <span className="text-[11px] leading-4 text-slate-500">
+            {effect?.excludedReason != null
+              ? "合計に含めていない参考額です（理由は下記）"
+              : program.amount.capOnly === true
+                ? "上限額いっぱいの場合の参考試算です（受給見込額ではありません）"
+                : "参考試算です（支給が確定した金額ではありません）"}
+          </span>
+        </dd>
       </dl>
       {effect?.excludedReason && (
         <p className="mt-2 rounded-lg bg-slate-50 px-3 py-2 text-[11px] leading-4 text-slate-600">
@@ -191,24 +197,17 @@ export function SupportCard({
         <div className="rounded-xl bg-slate-50 px-3 py-2">
           <dt className="text-[10px] font-semibold text-slate-400">金額</dt>
           <dd className="mt-0.5 text-sm font-bold text-slate-800">
-            {amountText(program)}
+            {amountDisplayText(program)}
           </dd>
           <dd className="mt-1 flex items-center gap-1.5">
-            {program.amount.basis === "estimated" && (
-              <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-700">
-                推定・要確認
-              </span>
-            )}
-            {program.amount.basis === "unknown" && (
-              <span className="rounded-full bg-rose-100 px-2 py-0.5 text-[10px] font-bold text-rose-600">
-                未確認
-              </span>
-            )}
-            {program.amount.basis === "confirmed" && (
-              <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
-                確認済み
-              </span>
-            )}
+            <AccuracyBadge accuracy={accuracyOf(program)} />
+          </dd>
+          {/* 年額・月額・一時金の区別と適用単位 */}
+          <dd className="mt-1 text-[11px] leading-4 text-slate-500">
+            単位の区別：{UNIT_LABELS[program.amount.unit]}／適用単位：
+            {program.amount.scope === "per_household"
+              ? "世帯あたり"
+              : "子ども1人あたり"}
           </dd>
           <dd className="mt-1 text-[11px] leading-4 text-slate-500">
             {program.amount.description}
@@ -260,6 +259,12 @@ export function SupportCard({
           {effect?.program.eligibilityNote ?? program.eligibilityNote}
           （これは目安であり、正式な受給資格の決定ではありません）
         </p>
+        {/* 制度ごとに異なる注意（共通の注意書きは結果画面上部に1か所だけ） */}
+        <p className="mt-1 text-[11px] leading-4 text-slate-500">
+          {program.mock
+            ? "モック・未確認データに基づく目安です。支給が確定した金額ではありません。"
+            : "確認済みの公式情報と推定値に基づく目安です。受給資格は未判定（要確認）であり、支給が確定した金額ではありません。"}
+        </p>
         {missing.length > 0 && (
           <p className="mt-1.5 text-[11px] leading-4 text-slate-500">
             <span className="font-semibold text-amber-600">不足情報：</span>
@@ -269,6 +274,11 @@ export function SupportCard({
         <ul className="mt-1.5 space-y-0.5 text-[11px] leading-4 text-slate-500">
           {program.conditions.combinedWith.length === 0 && (
             <li>・併用可否: 未確認（他の制度との併用可否は要確認です）</li>
+          )}
+          {program.conditions.combinedWith.length > 0 && (
+            <li>
+              ・併用不可の指定がある制度があります（同時受給できない場合があります・要確認）
+            </li>
           )}
           {program.conditions.incomeLimitNote && (
             <li>・{program.conditions.incomeLimitNote}</li>
@@ -292,7 +302,8 @@ export function SupportCard({
         <div>
           <dt className="font-semibold text-slate-400">対象地域</dt>
           <dd className="mt-0.5 text-slate-600">
-            {jurisdictionText(program.jurisdiction)}
+            {jurisdictionText(program.jurisdiction)}（{LEVEL_LABELS[program.level]}
+            ）
           </dd>
         </div>
         <div>
@@ -320,6 +331,11 @@ export function SupportCard({
           {program.application.documents.length > 0 && (
             <dd className="mt-0.5 text-slate-500">
               必要書類：{program.application.documents.join("・")}
+            </dd>
+          )}
+          {program.application.steps.length > 0 && (
+            <dd className="mt-0.5 text-slate-500">
+              申請方法：{program.application.steps.join(" → ")}
             </dd>
           )}
         </div>
@@ -393,19 +409,28 @@ type SupportListProps = {
   /** 現在利用中の制度 ID */
   usedProgramIds: string[];
   onConsult: (program: SupportProgram) => void;
+  /**
+   * 取得済みの制度一覧（スナップショット検証用の省略可能な上書き）。
+   * 指定時は /api/supports を取得せず、この一覧を表示する。既定は従来どおり取得する。
+   */
+  initialPrograms?: SupportProgram[] | null;
 };
 
 export default function SupportList({
   effectById,
   usedProgramIds,
   onConsult,
+  initialPrograms,
 }: SupportListProps) {
-  const [programs, setPrograms] = useState<SupportProgram[] | null>(null);
+  const [programs, setPrograms] = useState<SupportProgram[] | null>(
+    initialPrograms ?? null,
+  );
   const [disclaimer, setDisclaimer] = useState<string>("");
   const [verificationNote, setVerificationNote] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (initialPrograms) return;
     let cancelled = false;
     fetch("/api/supports")
       .then((res) => res.json())
@@ -434,18 +459,23 @@ export default function SupportList({
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [initialPrograms]);
 
   return (
     <div>
-      {/* モックデータであることを必ず明示 */}
-      <p className="rounded-xl bg-rose-50 px-4 py-3 text-xs leading-5 text-rose-700">
-        {disclaimer ||
-          "この制度情報はモックデータです。金額・対象条件・根拠法令・申請期限は未確認の仮データであり、確定情報ではありません。"}
+      {/* 全体の注意書き（M7-K）：制度ごとに確認状況が異なることを明示する。
+          「この制度情報はモックデータです」と一括断定しない（個別カードのバッジで区別）。 */}
+      <p className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs leading-5 text-slate-600">
+        制度ごとに情報の確認状況が異なります。金額・対象条件・申請期限などは各制度の詳細をご確認ください。受給資格・実際の金額・併用可否は確定していません。正式な申請は自治体・公式窓口でご確認ください。
       </p>
       {verificationNote !== "" && (
         <p className="mt-2 rounded-xl bg-amber-50 px-4 py-3 text-xs leading-5 text-amber-800">
           {verificationNote}
+        </p>
+      )}
+      {disclaimer !== "" && (
+        <p className="mt-2 rounded-xl bg-rose-50 px-4 py-3 text-xs leading-5 text-rose-700">
+          未確認のモック・仮データを含む制度には「モック・未確認」と表示しています。該当制度の金額・対象条件・根拠法令・申請期限は確定情報ではありません。
         </p>
       )}
 

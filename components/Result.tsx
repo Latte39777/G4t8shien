@@ -1,20 +1,28 @@
 "use client";
 
 /**
- * シミュレーション結果画面（M4 / レイアウト再設計）
+ * シミュレーション結果画面（M4 / レイアウト再設計 / M7-K UI整理）
  *
- * - PC では最大幅約 1520px を使い、次の順で全幅レイアウトに並べる：
- *   ① 結果サマリー（費用総額・支援額の2カード横並び）
- *   ② 2列（左：支援を反映した場合の費用比較＝数値中心／右：目標のカバー状況）
- *   ③ 教育段階別の費用と支援（世帯全体/子ども別の切り替え・横棒グラフ・支援ON/OFF）
- *   ④ 利用できる可能性のある支援制度（カード2列。サイドバーには固定しない）
- *   ⑤ 将来の家計予測（折りたたみ）／⑥ 前提条件（折りたたみ）／アクション
- * - 費用比較は横棒グラフを使わず数値で表示し、支援による負担軽減の見込額を
+ * - PC では最大幅約 1520px を使い、次の順で全幅レイアウトに並べる（M7-K）：
+ *   ① 結果サマリー（子育て費用の総額／支援制度の試算＝区分ごとに分離表示）
+ *   ② 共通の注意書き（結果全体で1か所だけ）
+ *   ③ 支援を反映した場合の費用比較（数値中心）と目標資金のカバー状況（2列）
+ *   ④ 教育段階別の費用と支援（世帯全体/子ども別の切り替え・横棒グラフ・支援ON/OFF）
+ *   ⑤ 計算の前提・詳細（将来の家計予測・前提条件は折りたたみ）
+ *   ⑥ 利用できる可能性のある支援制度（カード2列）／⑦ 支援制度の相談／アクション
+ * - 支援額は「確認済みの現金給付・費用軽減」「仮定額による参考試算」「貸付（別枠）」
+ *   「上限額のみ確認の制度（別枠）」を分離して表示する（M7-K）。
+ *   未確認の仮定額を受給見込み額のように大きく表示しない
+ * - 費用比較は横棒グラフを使わず数値で表示し、支援による負担軽減の参考額を
  *   緑で強調する（金額はすべて buildSimulationResult の計算結果から取得し、
- *   ハードコードしない）
+ *   ハードコードしない。UI 側で再計算しない）
  * - 子ども別の金額・教育方針・計算対象外の注意は教育段階別セクションの
  *   スコープ切り替え（ScopeSummary）に統合し、重複セクションは持たない
- * - 支援制度一覧（/api/supports のモックデータ）と制度カード・相談ボタン
+ * - 対象年数は「子ども年分（子どもN人の合計）」と表示し、年齢範囲の長さと
+ *   混同させない（M7-K）
+ * - 支援制度一覧（/api/supports）と制度カード・相談ボタン
+ *   （制度カードは初期表示を名前・確認状態・種類・対象地域・金額に絞り、
+ *    詳細は「詳細を見る」に集約する）
  * - 計算に使用した前提条件と、仮定値・未確認値を必ず明示する
  *   （未確認の費用総額を確定値のように表示しない）
  * - 複数の子どもがいる場合は、世帯全体の合計と子ども別の詳細を区別する
@@ -24,6 +32,7 @@ import type { SimulationInput } from "@/lib/simulation";
 import { formatYen } from "@/lib/simulation";
 import { getSupportPrograms } from "@/lib/supports/registry";
 import type { SupportProgram } from "@/lib/types/support";
+import type { SupportEffect } from "@/lib/finance/supports";
 import {
   buildSimulationResult,
   type AssumptionItem,
@@ -45,6 +54,11 @@ type ResultProps = {
    * - 「支援制度の相談（制度を指定せず）」→ null で自由な相談を開始
    */
   onConsult: (program: SupportProgram | null) => void;
+  /**
+   * 制度一覧の上書き（スナップショット検証用の省略可能な引数）。
+   * 指定時はこの一覧で計算・表示する。既定はレジストリ＋/api/supports（従来どおり）。
+   */
+  programs?: SupportProgram[];
 };
 
 /** 仮定値・未確認値を明示するバッジ（確定値と混同させないため） */
@@ -225,16 +239,37 @@ export default function Result({
   onEdit,
   onReset,
   onConsult,
+  programs,
 }: ResultProps) {
   const result: SimulationResult = buildSimulationResult(
     input,
-    getSupportPrograms(),
+    programs ?? getSupportPrograms(),
   );
   const { costTotals, supportTotals, comparison } = result;
   const effectById = new Map(
     result.supports.effects.map((e) => [e.program.id, e]),
   );
   const goal = result.goalCoverage;
+
+  // ── M7-K 表示用の集計（計算ロジックには干渉しない。表示区分の分離のみ） ──
+  // 上限額のみ確認（capOnly）の制度を、通常の参考試算から分けて表示する
+  const capOnlyEffects = result.supports.effects.filter(
+    (e) => e.program.amount.capOnly === true && e.includedInTotal,
+  );
+  const sumEstimated = (fx: SupportEffect[]): number =>
+    fx.reduce((s, e) => s + (e.estimatedTotalYen ?? 0), 0);
+  const capOnlyYen = sumEstimated(capOnlyEffects);
+  const capOnlyCashYen = sumEstimated(
+    capOnlyEffects.filter((e) => e.program.category === "cash_benefit"),
+  );
+  const capOnlyFeeYen = sumEstimated(
+    capOnlyEffects.filter((e) => e.program.category === "fee_reduction"),
+  );
+  const estimatedShownYen = supportTotals.estimatedYen - capOnlyYen;
+  const cashEstimatedShownYen =
+    supportTotals.cashBenefit.estimatedYen - capOnlyCashYen;
+  const feeEstimatedShownYen =
+    supportTotals.feeReduction.estimatedYen - capOnlyFeeYen;
 
   return (
     <div className="mx-auto w-full max-w-[1520px] px-4 py-8 sm:px-6 sm:py-10 lg:px-10 lg:py-12">
@@ -248,17 +283,6 @@ export default function Result({
           子育て費用の見込みと、利用できる可能性のある支援を試算しました。
         </p>
       </div>
-
-      {/* 仮定値・未確認値を含むことの明示（確定値のように扱わせない） */}
-      <p
-        className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-xs leading-5 text-amber-800"
-        data-testid="unverified-banner"
-      >
-        <span className="font-bold">【要確認】</span>
-        この結果には仮定値・未確認のデータが含まれます。費用総額は確定値ではなく、
-        公式資料での確認前に金額が変更される可能性があります。
-        金額の確度（確認済み／仮定値・要確認／未確認）を各項目に表示しています。
-      </p>
 
       {/* 本文：PC では横幅を活かして全幅で配置し、スマートフォンでは1列表示 */}
       <div className="mt-6">
@@ -285,25 +309,119 @@ export default function Result({
             </p>
           </div>
 
-          {/* 利用できる可能性のある支援額（大きな数値2） */}
+          {/* 利用できる可能性のある支援額（M7-K：現金給付・費用軽減・貸付・上限額のみ確認を分離表示） */}
           <div className="rounded-2xl bg-rose-50 p-4 sm:p-5" data-testid="support-total">
             <div className="flex items-center gap-2">
               <p className="text-xs font-semibold text-rose-800">
                 利用できる可能性のある支援額
               </p>
-              <FlagBadge flag="unverified" />
             </div>
-            <p className="mt-1 text-4xl font-bold tracking-tight text-rose-900">
-              {formatYen(supportTotals.confirmedYen + supportTotals.estimatedYen)}
-            </p>
-            <p className="mt-1 text-[11px] leading-4 text-rose-700">
-              確定 {formatYen(supportTotals.confirmedYen)}／
-              推定（要確認） {formatYen(supportTotals.estimatedYen)}
-              。未確認の試算であり、支給が確定したものではありません。併用可否が未確認の制度を含むため、合計は単純合算の試算です（要確認）。
-            </p>
+
+            {/* 確認済みの支援額（現金給付・費用軽減） */}
+            <div className="mt-2 rounded-xl bg-white/80 px-3 py-2">
+              <div className="flex flex-wrap items-center gap-1.5">
+                <p className="text-[11px] font-semibold text-slate-700">
+                  確認済みの支援額
+                </p>
+                <span className="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                  確認済み
+                </span>
+              </div>
+              <p className="mt-0.5 text-xl font-bold tracking-tight text-slate-900">
+                {formatYen(supportTotals.confirmedYen)}
+              </p>
+              <p className="mt-0.5 text-[11px] leading-4 text-slate-600">
+                現金給付 {formatYen(supportTotals.cashBenefit.confirmedYen)}／
+                費用軽減 {formatYen(supportTotals.feeReduction.confirmedYen)}
+              </p>
+              {supportTotals.confirmedYen === 0 && (
+                <p className="mt-0.5 text-[11px] leading-4 text-rose-700">
+                  計算に反映できる確認済みの金額が 0
+                  円という意味です。制度が存在しないことや、支援額が 0
+                  円と確認されたことを意味しません。
+                </p>
+              )}
+            </div>
+
+            {/* 仮定額による参考試算（現金給付・費用軽減） */}
+            <div className="mt-2 rounded-xl bg-white/80 px-3 py-2">
+              <div className="flex flex-wrap items-center gap-1.5">
+                <p className="text-[11px] font-semibold text-slate-700">
+                  仮定額による現金給付・費用軽減の参考試算
+                </p>
+                <span className="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-700">
+                  推定・要確認
+                </span>
+              </div>
+              <p className="mt-0.5 text-xl font-bold tracking-tight text-slate-900">
+                {formatYen(estimatedShownYen)}
+              </p>
+              <p className="mt-0.5 text-[11px] leading-4 text-slate-600">
+                現金給付 {formatYen(cashEstimatedShownYen)}／
+                費用軽減 {formatYen(feeEstimatedShownYen)}
+              </p>
+              <p className="mt-0.5 text-[11px] leading-4 text-rose-700">
+                金額・対象条件が未確認の仮定値に基づく計算です。実際の受給額や受給資格を示すものではありません。
+              </p>
+            </div>
+
+            {/* 上限額のみ判明している制度（通常の支援見込額とは別枠） */}
+            {capOnlyEffects.length > 0 && (
+              <div className="mt-2 rounded-xl border border-amber-200 bg-white/80 px-3 py-2">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <p className="text-[11px] font-semibold text-slate-700">
+                    上限額のみ判明している制度（通常の支援見込額とは別枠）
+                  </p>
+                  <span className="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-700">
+                    上限額のみ確認
+                  </span>
+                </div>
+                <ul className="mt-1 space-y-0.5">
+                  {capOnlyEffects.map((e) => (
+                    <li
+                      key={e.program.id}
+                      className="text-[11px] leading-4 text-slate-700"
+                    >
+                      {e.program.name}：最大 {formatYen(e.estimatedTotalYen ?? 0)}
+                      （上限額のみ確認済み・実際の補助額は対象工事費などによって決まります）
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-1 text-[11px] leading-4 text-amber-700">
+                  上限額は受給見込額ではありません。「支援を反映した場合の費用比較」の試算には、上限額いっぱいの場合の金額が含まれています（要確認）。
+                </p>
+              </div>
+            )}
+
+            {/* 貸付（返済が必要なため別枠） */}
+            <div className="mt-2 rounded-xl bg-white/80 px-3 py-2">
+              <div className="flex flex-wrap items-center gap-1.5">
+                <p className="text-[11px] font-semibold text-slate-700">
+                  貸付（返済が必要なため別枠）
+                </p>
+                <span className="inline-flex items-center rounded-full bg-slate-200 px-2 py-0.5 text-[10px] font-bold text-slate-600">
+                  計算対象外
+                </span>
+              </div>
+              <p className="mt-0.5 text-xl font-bold tracking-tight text-slate-900">
+                {formatYen(supportTotals.loanReferenceYen)}
+              </p>
+              <p className="mt-0.5 text-[11px] leading-4 text-slate-600">
+                貸付は返済が必要なため、現金給付・費用軽減の合計には含めていません（参考額）。
+              </p>
+            </div>
           </div>
           </div>
         </section>
+
+        {/* 共通の注意書き（M7-K：結果全体で1か所だけ表示する） */}
+        <p
+          className="mt-4 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-xs leading-5 text-amber-800"
+          data-testid="common-notes"
+        >
+          <span className="font-bold">【要確認】</span>
+          この結果は入力内容に基づく試算です。費用や支援額には仮定値・未確認情報が含まれる場合があります。受給資格・実際の金額・併用可否は確定していません。金額の確度（確認済み／推定・要確認／未確認）は各項目に表示しています。
+        </p>
 
         {/* ② 中段2列：支援を反映した場合の費用比較（左）／目標とする養育資金額のカバー状況（右） */}
         <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -332,6 +450,9 @@ export default function Result({
             <div className="flex items-center justify-between gap-3 border-t border-slate-100 px-4 py-2.5">
               <dt className="text-xs text-slate-500">
                 確定支援のみを反映した場合の参考費用
+                <span className="ml-1.5 inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                  確認済み
+                </span>
               </dt>
               <dd
                 className="text-sm font-bold text-slate-900"
@@ -343,6 +464,9 @@ export default function Result({
             <div className="flex items-center justify-between gap-3 border-t border-slate-100 px-4 py-2.5">
               <dt className="text-xs text-slate-500">
                 確定支援と推定支援を反映した場合の参考費用
+                <span className="ml-1.5 inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-700">
+                  推定・要確認
+                </span>
               </dt>
               <dd
                 className="text-sm font-bold text-slate-900"
@@ -353,14 +477,25 @@ export default function Result({
             </div>
           </dl>
 
-          {/* 支援による負担軽減の見込額（緑で強調して表示） */}
+          {/* 支援が費用を上回る場合は、上回る見込額を分離して参考表示する（負値は表示しない・M7-J1） */}
+          {comparison.supportSurplusYen > 0 && (
+            <p
+              className="mt-3 rounded-xl bg-amber-50 px-3 py-2 text-[11px] leading-4 text-amber-800"
+              data-testid="support-surplus"
+            >
+              支援が費用を上回る見込み額（参考）：
+              {formatYen(comparison.supportSurplusYen)}
+              。参考費用は 0 円として表示しています。この差額が現金で支給されるという意味ではありません（要確認）。
+            </p>
+          )}
+          {/* 支援による負担軽減の参考額（緑で強調して表示） */}
           <div
             className="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 sm:p-5"
             data-testid="support-relief"
           >
             <div className="flex flex-wrap items-center justify-between gap-2">
               <p className="text-xs font-semibold text-emerald-800">
-                支援による負担軽減の見込額
+                支援による負担軽減の参考額
               </p>
               <p className="text-3xl font-bold tracking-tight text-emerald-700">
                 {formatYen(comparison.grossCostYen - comparison.afterAllYen)}
@@ -390,13 +525,43 @@ export default function Result({
               {formatYen(supportTotals.confirmedYen)} のため）。
             </p>
           )}
-          <p className="mt-3 text-[11px] leading-4 text-slate-500">
-            負担軽減の見込額は「支援なしの場合の費用総額 −
-            確定支援と推定支援を反映した場合の参考費用」です。
-            うち推定支援 {formatYen(supportTotals.estimatedYen)}{" "}
-            は未確認の試算を含みます。支援額は未確認の試算であり、
-            支給が確定したことや、実際の負担額が保証されることを意味しません。
-          </p>
+
+          {/* 計算方法・推定額の内訳（長い説明は折りたたみ） */}
+          <CollapsibleSection
+            title="計算方法と支援見込額の内訳"
+            testId="comparison-details"
+          >
+            <p className="text-xs leading-5 text-slate-500">
+              負担軽減の参考額＝「支援なしの場合の費用総額 −
+              確定支援と推定支援を反映した場合の参考費用」です。
+              うち推定支援 {formatYen(supportTotals.estimatedYen)}{" "}
+              は未確認の試算を含みます。支援額は未確認の試算であり、
+              支給が確定したことや、実際の負担額が保証されることを意味しません。
+            </p>
+            <ul className="mt-3 space-y-1">
+              {result.fundingMeta.supportAllocationNotes.map((n) => (
+                <li key={n} className="text-[11px] leading-4 text-slate-600">
+                  ・{n}
+                </li>
+              ))}
+            </ul>
+            {result.fundingMeta.unallocatedSupports.length > 0 && (
+              <ul className="mt-2 space-y-1">
+                {result.fundingMeta.unallocatedSupports.map((u) => (
+                  <li
+                    key={u.programId}
+                    className="rounded-lg bg-slate-50 px-2 py-1.5 text-[11px] leading-4 text-slate-600"
+                  >
+                    <span className="font-semibold">{u.programName}</span>
+                    （{u.category === "loan" ? "貸付" : "現金給付等"}）
+                    {u.amountYen !== null && ` 見込額 ${formatYen(u.amountYen)}：`}
+                    {u.reason}
+                    {u.includedInTotal && "（世帯の支援見込額の合計には含まれます）"}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </CollapsibleSection>
         </section>
 
 
@@ -412,7 +577,7 @@ export default function Result({
             <p className="mt-1 text-xs text-slate-500">
               目標とする養育資金額 {formatYen(goal.targetYen)} に対するカバー状況
             </p>
-            {/* 貯蓄（確定）／確定支援／推定支援を区別した横棒 */}
+            {/* 貯蓄（確定）／確認済みの支援／仮定額の支援参考値を区別した横棒 */}
             <div
               className="mt-3 h-5 w-full overflow-hidden rounded-full bg-slate-100"
               role="img"
@@ -454,39 +619,79 @@ export default function Result({
                   className="inline-block h-2.5 w-4 rounded-sm bg-sky-500"
                   aria-hidden="true"
                 />
-                現在の貯蓄（確定）
+                現在の貯蓄
               </li>
               <li className="flex items-center gap-1.5">
                 <span
                   className="inline-block h-2.5 w-4 rounded-sm bg-emerald-500"
                   aria-hidden="true"
                 />
-                確定支援
+                確認済みの支援
               </li>
               <li className="flex items-center gap-1.5">
                 <span
                   className="inline-block h-2.5 w-4 rounded-sm bg-emerald-300"
                   aria-hidden="true"
                 />
-                支援見込（推定・要確認）
+                仮定額による支援参考値
               </li>
             </ul>
-            <p className="mt-3 text-xs text-slate-500">
-              現在の貯蓄 {formatYen(goal.savingsYen)} ＋ 支援見込{" "}
-              {formatYen(goal.supportTotalYen)} ＝{" "}
-              <span className="font-bold text-slate-800">
-                {formatYen(goal.savingsYen + goal.supportTotalYen)}
-              </span>
-              {goal.gapYen > 0
-                ? `（目標まで ${formatYen(goal.gapYen)} 不足）`
-                : "（目標を上回ります）"}
-            </p>
-            <p className="mt-2 text-[11px] leading-4 text-slate-400">
-              現在の貯蓄は確定している金額です。確定支援{" "}
-              {formatYen(goal.supportConfirmedYen)} と、支援見込（推定・要確認）{" "}
-              {formatYen(goal.supportEstimatedYen)} は確度が異なります。
-              推定を含む支援見込は、利用できない場合があります（要確認）。
-            </p>
+            {/* 金額と簡単な説明（初期表示）。詳しい前提は折りたたみ */}
+            <dl className="mt-3 space-y-1 text-xs">
+              <div className="flex items-baseline justify-between gap-3">
+                <dt className="text-slate-500">現在の貯蓄（確定）</dt>
+                <dd className="font-semibold text-slate-800">
+                  {formatYen(goal.savingsYen)}
+                </dd>
+              </div>
+              <div className="flex items-baseline justify-between gap-3">
+                <dt className="text-slate-500">
+                  確認済みの支援
+                  <span className="ml-1.5 inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                    確認済み
+                  </span>
+                </dt>
+                <dd className="font-semibold text-slate-800">
+                  {formatYen(goal.supportConfirmedYen)}
+                </dd>
+              </div>
+              <div className="flex items-baseline justify-between gap-3">
+                <dt className="text-slate-500">
+                  仮定額による支援参考値
+                  <span className="ml-1.5 inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-700">
+                    推定・要確認
+                  </span>
+                </dt>
+                <dd className="font-semibold text-slate-800">
+                  {formatYen(goal.supportEstimatedYen)}
+                </dd>
+              </div>
+              <div className="flex items-baseline justify-between gap-3">
+                <dt className="text-slate-500">
+                  {goal.gapYen > 0 ? "目標までの不足額" : "目標を上回る金額"}
+                </dt>
+                <dd
+                  className={`font-bold ${goal.gapYen > 0 ? "text-rose-500" : "text-emerald-600"}`}
+                >
+                  {formatYen(Math.abs(goal.gapYen))}
+                </dd>
+              </div>
+            </dl>
+            {/* 長い説明は折りたたみ（確度の違いの明示を含む） */}
+            <CollapsibleSection
+              title="この計算の前提と要確認事項"
+              testId="goal-details"
+            >
+              <p className="text-xs leading-5 text-slate-500">
+                現在の貯蓄は確定している金額です。確認済みの支援{" "}
+                {formatYen(goal.supportConfirmedYen)} と、仮定額による支援参考値{" "}
+                {formatYen(goal.supportEstimatedYen)} は確度が異なります。
+                仮定額による支援参考値は、利用できない場合があります（要確認）。
+                この金額は入力された「目標とする養育資金額」との比較による参考表示です。
+                自分で用意できる資金の計算前提は、教育段階別セクションの
+                「資金配分の前提（自分で用意できる資金）」をご確認ください。
+              </p>
+            </CollapsibleSection>
           </section>
         ) : (
           <p
@@ -521,69 +726,21 @@ export default function Result({
             />
           </div>
 
-          {/* 資金配分の前提・未配分の支援（推定と未確認を混同させない） */}
-          {(result.fundingMeta.selfFundingNotes.length > 0 ||
-            result.fundingMeta.supportAllocationNotes.length > 0 ||
-            result.fundingMeta.unallocatedSupports.length > 0) && (
-            <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-4">
-              <h3 className="text-xs font-bold text-slate-700">
-                資金配分の前提と要確認事項
-              </h3>
-              <ul className="mt-2 space-y-1">
+          {/* 資金配分の前提（長い説明は折りたたみ。支援の内訳は「計算方法と支援見込額の内訳」に記載） */}
+          {result.fundingMeta.selfFundingNotes.length > 0 && (
+            <CollapsibleSection
+              title="資金配分の前提（自分で用意できる資金）"
+              testId="stage-funding-notes"
+            >
+              <ul className="mt-1 space-y-1">
                 {result.fundingMeta.selfFundingNotes.map((n) => (
                   <li key={n} className="text-[11px] leading-4 text-slate-600">
                     ・{n}
                   </li>
                 ))}
-                {result.fundingMeta.supportAllocationNotes.map((n) => (
-                  <li key={n} className="text-[11px] leading-4 text-slate-600">
-                    ・{n}
-                  </li>
-                ))}
               </ul>
-              {result.fundingMeta.unallocatedSupports.length > 0 && (
-                <ul className="mt-2 space-y-1">
-                  {result.fundingMeta.unallocatedSupports.map((u) => (
-                    <li
-                      key={u.programId}
-                      className="rounded-lg bg-white px-2 py-1.5 text-[11px] leading-4 text-slate-600"
-                    >
-                      <span className="font-semibold">{u.programName}</span>
-                      （{u.category === "loan" ? "貸付" : "現金給付等"}）
-                      {u.amountYen !== null && ` 見込額 ${formatYen(u.amountYen)}`}：
-                      {u.reason}
-                      {u.includedInTotal && "（世帯の支援見込額の合計には含まれます）"}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+            </CollapsibleSection>
           )}
-        </section>
-
-        {/* ④ 利用できる可能性のある支援制度（全幅・PC ではカード2列） */}
-        <section className="mt-6 rounded-3xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
-          <h2 className="text-sm font-bold text-slate-900">利用できる可能性のある支援制度</h2>
-          <p className="mt-1 text-xs leading-5 text-slate-500">
-            金額・対象条件・根拠法令・申請期限はモックデータに基づく未確認の情報です。
-            確認済みの事実として表示していないため、必ず公式窓口でご確認ください。
-          </p>
-          {/* 自由な相談の入口（制度を指定せず質問できる） */}
-          <button
-            type="button"
-            onClick={() => onConsult(null)}
-            data-testid="consult-free-button"
-            className="mt-3 w-full rounded-full border border-blue-500 px-5 py-3 text-sm font-bold text-blue-600 transition-colors hover:bg-blue-50"
-          >
-            支援制度の相談（制度を指定せず）
-          </button>
-          <div className="mt-4">
-            <SupportList
-              effectById={effectById}
-              usedProgramIds={supportTotals.usedProgramIds}
-              onConsult={onConsult}
-            />
-          </div>
         </section>
 
         {/* ⑤ 将来の家計予測（折りたたみ） */}
@@ -652,6 +809,41 @@ export default function Result({
               </p>
             )}
           </CollapsibleSection>
+        </section>
+
+        {/* ⑦ 利用できる可能性のある支援制度（全幅・PC ではカード2列） */}
+        <section className="mt-6 rounded-3xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+          <h2 className="text-sm font-bold text-slate-900">利用できる可能性のある支援制度</h2>
+          <p className="mt-1 text-xs leading-5 text-slate-500">
+            入力内容と制度情報から、利用できる可能性のある制度を表示しています。
+            制度ごとに情報の確認状況が異なるため、各カードのバッジと詳細をご確認ください。
+          </p>
+          <div className="mt-4">
+            <SupportList
+              effectById={effectById}
+              usedProgramIds={supportTotals.usedProgramIds}
+              onConsult={onConsult}
+              initialPrograms={programs}
+            />
+          </div>
+        </section>
+
+        {/* ⑧ 支援制度の相談 */}
+        <section className="mt-6 rounded-3xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+          <h2 className="text-sm font-bold text-slate-900">支援制度の相談</h2>
+          <p className="mt-1 text-xs leading-5 text-slate-500">
+            制度を指定しても、指定せずにでも相談できます。各制度カードの
+            「この制度について相談する」からも開始できます。
+          </p>
+          {/* 自由な相談の入口（制度を指定せず質問できる） */}
+          <button
+            type="button"
+            onClick={() => onConsult(null)}
+            data-testid="consult-free-button"
+            className="mt-3 w-full rounded-full border border-blue-500 px-5 py-3 text-sm font-bold text-blue-600 transition-colors hover:bg-blue-50"
+          >
+            支援制度の相談（制度を指定せず）
+          </button>
         </section>
       </div>
 

@@ -88,7 +88,8 @@ function urlCautionNote(text: string): string {
  */
 export function toConsultReplyFromAi(parsed: AiReplyJson): ConsultReply {
   let text = parsed.reply.trim()
-  const questions = parsed.clarificationQuestions ?? []
+  // 確認質問は最も役立つものを1つだけ（プロンプトで1つを指示済み。複数返された場合も先頭のみ採用）
+  const questions = (parsed.clarificationQuestions ?? []).slice(0, 1)
   if (questions.length > 0) {
     text += `\n\n確認したいこと：\n${questions.map((q) => `・${q}`).join('\n')}`
   }

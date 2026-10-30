@@ -112,6 +112,13 @@ export const supportAmountSchema = z.object({
    * 公式資料で適用年度を確認できない場合は null（年度を推測しない）。
    */
   fiscalYear: z.string().min(1).nullable().optional(),
+  /**
+   * value が上限額（実費按分など）であり、確定支援額として扱えないか（M7-J1）。
+   * - true: 例「工事費の1/3・上限20万円」など実額が未確認のため、
+   *   計算では推定枠に計上し、確定額（confirmed）として扱わない
+   * - 省略時: 金額は確定額として扱える（basis に従う）
+   */
+  capOnly: z.boolean().optional(),
 })
 export type SupportAmount = z.infer<typeof supportAmountSchema>
 

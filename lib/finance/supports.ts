@@ -13,6 +13,7 @@
 import type { Eligibility, SupportProgram } from '../types/support'
 import type { ChildInput, FamilyPlan } from '../types/finance'
 import { childAgeAt, projectionHorizon } from './cashflow'
+import { TOKYO_WARD_LABELS } from '../supports/region'
 
 export type SupportEffect = {
   program: SupportProgram
@@ -91,7 +92,14 @@ function recomputeEligibility(
   return { eligibility, missing }
 }
 
-/** 1子について、対象期間の各年の見込額を返す */
+/**
+ * 1子について、対象期間の各年の見込額を返す。
+ *
+ * 一時金（M7-J1）: 「対象期間に入った最初の年」＝投影期間（t=0〜horizon）内で
+ * 最初に対象期間となった年に 1 回だけ計上する。
+ * t=0 の時点で既に対象期間内の子（既存の子・0歳児）も、その年に 1 回計上する
+ * （旧実装は t-1 年の年齢判定で t=0 を過去扱いし 0 円になっていた）。
+ */
 function perChildYearly(
   child: ChildInput,
   program: SupportProgram,
@@ -101,6 +109,7 @@ function perChildYearly(
   const value = program.amount.value
   if (value === null || program.amount.unit === 'other') return yearly
 
+  let countedOneTime = false
   for (let t = 0; t <= horizon; t += 1) {
     const age = childAgeAt(child, t)
     if (age === null || !inPeriod(age, program.period)) continue
@@ -109,9 +118,10 @@ function perChildYearly(
     } else if (program.amount.unit === 'yen_per_year') {
       yearly[t] += value
     } else if (program.amount.unit === 'yen_one_time') {
-      const prevAge = childAgeAt(child, t - 1)
-      const prevInPeriod = prevAge !== null && inPeriod(prevAge, program.period)
-      if (!prevInPeriod) yearly[t] += value
+      if (!countedOneTime) {
+        yearly[t] += value
+        countedOneTime = true
+      }
     }
   }
 
@@ -131,6 +141,98 @@ function perChildYearly(
   }
   return yearly
 }
+/**
+ * 世帯単位（per_household）の制度の各年の見込額を返す（M7-J1）。
+ *
+ * 支給単位が「世帯・申請・工事1件につき」の制度（例: 住宅リフォーム助成）は、
+ * 子どもの数を掛けず、世帯で 1 回（一時金）または各年に 1 回のみ計上する。
+ * 一時金は、投影期間内で最初に対象子が現れた年に 1 回だけ計上する。
+ */
+function householdYearly(
+  plan: FamilyPlan,
+  program: SupportProgram,
+  horizon: number,
+): number[] {
+  const yearly: number[] = new Array(horizon + 1).fill(0)
+  const value = program.amount.value
+  if (value === null || program.amount.unit === 'other') return yearly
+
+  let countedOneTime = false
+  for (let t = 0; t <= horizon; t += 1) {
+    const inPeriodThisYear = plan.children.some((c) => {
+      const age = childAgeAt(c, t)
+      return age !== null && inPeriod(age, program.period)
+    })
+    if (!inPeriodThisYear) continue
+    if (program.amount.unit === 'yen_per_month') {
+      yearly[t] += value * 12
+    } else if (program.amount.unit === 'yen_per_year') {
+      yearly[t] += value
+    } else if (program.amount.unit === 'yen_one_time') {
+      if (!countedOneTime) {
+        yearly[t] += value
+        countedOneTime = true
+      }
+    }
+  }
+
+  // 支給期間の上限（例：24ヶ月支給）を適用
+  if (
+    program.amount.unit === 'yen_per_month' &&
+    program.period.durationMonths !== null
+  ) {
+    const cap = value * program.period.durationMonths
+    let sum = 0
+    for (let t = 0; t <= horizon; t += 1) {
+      const remaining = cap - sum
+      const y = Math.min(yearly[t], Math.max(remaining, 0))
+      yearly[t] = y
+      sum += y
+    }
+  }
+  return yearly
+}
+
+/**
+ * 制度の対象地域と居住地の一致判定（M7-J1）。
+ *
+ * - 'match': 居住自治体が対象地域と一致（または地域限定の情報がない）→ 合計に含めうる
+ * - 'mismatch': 居住自治体が対象地域外 → 合計に含めない
+ * - 'unknown': 居住地が未入力・未定 → 合計に含めない（確定額として扱わない）
+ *
+ * 全国対象（nationwide）・対象地域未確認（unknown）の制度は絞り込まない
+ * （推測で適用・不適用を決めない）。判定は lib/supports/region.ts の
+ * filterProgramsByRegion と同じ考え方（区名・区コードのどちらでも一致判定）。
+ */
+function regionGate(
+  program: SupportProgram,
+  plan: FamilyPlan,
+): 'match' | 'mismatch' | 'unknown' {
+  const j = program.jurisdiction
+  if (
+    j === undefined ||
+    j.coverage === 'nationwide' ||
+    j.coverage === 'unknown'
+  ) {
+    return 'match'
+  }
+  const targetAreas: string[] = []
+  if (j.coverage === 'prefecture' && j.prefecture !== null) {
+    targetAreas.push(j.prefecture)
+  }
+  if (j.ward !== null) targetAreas.push(TOKYO_WARD_LABELS[j.ward])
+  if (j.municipality !== null) targetAreas.push(j.municipality)
+  // 対象自治体を特定できない場合は絞り込まない（推測しない）
+  if (targetAreas.length === 0) return 'match'
+  const userArea = plan.municipality
+  if (userArea === null || userArea === '' || userArea === '未定') {
+    return 'unknown'
+  }
+  return targetAreas.some((area) => userArea.includes(area))
+    ? 'match'
+    : 'mismatch'
+}
+
 /** 受付期限（YYYY-MM-DD）が今日より前なら期限切れ（M7-G） */
 function isDeadlineExpired(program: SupportProgram, today: string): boolean {
   const deadline = program.application.deadlineDate ?? null
@@ -157,23 +259,61 @@ export function calculateSupportEffects(
     const yearly: number[] = new Array(horizon + 1).fill(0)
     const computable =
       program.amount.value !== null && program.amount.unit !== 'other'
+    const scope = program.amount.scope ?? 'per_child'
     const childYearlyList: Array<{ childId: string; yearlyYen: number[] }> = []
-    const perChild = plan.children.map((child) => {
-      const childYearly = perChildYearly(child, program, horizon)
+    // 世帯単位（per_household）: 子どもの数を掛けず、世帯で 1 回のみ計上する（M7-J1）
+    const householdUnitYearly =
+      scope === 'per_household' && computable
+        ? householdYearly(plan, program, horizon)
+        : null
+    for (const child of plan.children) {
+      const childYearly =
+        householdUnitYearly !== null
+          ? new Array(horizon + 1).fill(0)
+          : perChildYearly(child, program, horizon)
       childYearlyList.push({ childId: child.id, yearlyYen: childYearly })
-      for (let t = 0; t <= horizon; t += 1) yearly[t] += childYearly[t]
-      return {
-        childId: child.id,
-        totalYen: computable ? childYearly.reduce((a, b) => a + b, 0) : null,
+    }
+    if (householdUnitYearly !== null) {
+      // Σ子ども別 = 世帯合計が成立するよう、計上額は最初に計上した年の
+      // 最初の対象子に帰属させる（表示用の帰属。金額の合計は世帯で 1 回のみ）
+      const countedYear = householdUnitYearly.findIndex((y) => y > 0)
+      const target =
+        countedYear >= 0
+          ? plan.children.find((c) => {
+              const age = childAgeAt(c, countedYear)
+              return age !== null && inPeriod(age, program.period)
+            })
+          : undefined
+      const entry = childYearlyList.find((e) => e.childId === target?.id)
+      if (entry !== undefined) {
+        for (let t = 0; t <= horizon; t += 1) {
+          entry.yearlyYen[t] = householdUnitYearly[t]
+        }
       }
-    })
+      for (let t = 0; t <= horizon; t += 1) yearly[t] += householdUnitYearly[t]
+    } else {
+      for (const entry of childYearlyList) {
+        for (let t = 0; t <= horizon; t += 1) yearly[t] += entry.yearlyYen[t]
+      }
+    }
+    const perChild = plan.children.map((child, i) => ({
+      childId: child.id,
+      totalYen: computable
+        ? childYearlyList[i].yearlyYen.reduce((a, b) => a + b, 0)
+        : null,
+    }))
     const total = computable ? yearly.reduce((a, b) => a + b, 0) : null
 
     let includedInTotal = true
     let excludedReason: string | null = null
+    const region = regionGate(program, plan)
     if (program.category === 'loan') {
       includedInTotal = false
       excludedReason = '貸付制度のため合計対象外'
+    } else if (region === 'mismatch') {
+      // 居住自治体が対象地域外の制度は合計に含めない（M7-J1）
+      includedInTotal = false
+      excludedReason = '居住自治体が対象地域外のため合計対象外'
     } else if (isDeadlineExpired(program, today)) {
       // 受付期限が過ぎた制度を利用可能として案内しない（M7-G）
       includedInTotal = false
@@ -188,6 +328,11 @@ export function calculateSupportEffects(
       includedInTotal = false
       excludedReason =
         '現在利用中のため見込み額に含めません（現在の家計に反映済みのため・要確認）'
+    } else if (region === 'unknown') {
+      // 居住地が未入力・未定の場合、地域限定の制度を確定額として扱わない（M7-J1）
+      includedInTotal = false
+      excludedReason =
+        '居住地が未入力・未定のため合計対象外（対象地域に該当するか要確認）'
     }
 
     return {
@@ -225,11 +370,15 @@ export function calculateSupportEffects(
   let estimatedTotalYen = 0
   for (const e of effects) {
     if (!e.includedInTotal) continue
-    const target =
-      e.program.amount.basis === 'confirmed' ? confirmedByYear : estimatedByYear
+    // 上限額のみ確認済みの制度（capOnly。実額が未確認）は、
+    // basis が confirmed でも確定額として扱わず推定枠に計上する（M7-J1）
+    const isConfirmed =
+      e.program.amount.basis === 'confirmed' &&
+      e.program.amount.capOnly !== true
+    const target = isConfirmed ? confirmedByYear : estimatedByYear
     for (let t = 0; t <= horizon; t += 1) target[t] += e.yearlyYen[t]
     const total = e.estimatedTotalYen ?? 0
-    if (e.program.amount.basis === 'confirmed') confirmedTotalYen += total
+    if (isConfirmed) confirmedTotalYen += total
     else estimatedTotalYen += total
   }
 

@@ -1256,7 +1256,8 @@
         "unit": "yen_one_time",
         "basis": "confirmed",
         "description": "対象児童1人につき、1回限り",
-        "fiscalYear": "令和8年度"
+        "fiscalYear": "令和8年度",
+        "scope": "per_child"
       },
       "period": {
         "startAgeYears": null,
@@ -1539,7 +1540,9 @@
         "unit": "yen_one_time",
         "basis": "confirmed",
         "description": "対象工事費（消費税を除く）の3分の1（千円未満切り捨て）、上限20万円",
-        "fiscalYear": null
+        "fiscalYear": null,
+        "scope": "per_household",
+        "capOnly": true
       },
       "period": {
         "startAgeYears": null,

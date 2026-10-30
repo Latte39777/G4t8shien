@@ -249,8 +249,15 @@ export type SimulationResult = {
     hasUnverified: boolean;
   };
   supportTotals: {
+    /** 現金給付＋費用軽減などの合計（内部整合・カバー率計算用。性質が異なるため画面表示では分離する） */
     confirmedYen: number;
     estimatedYen: number;
+    /** 現金給付（cash_benefit）の確定・推定（M7-J1。費用軽減と区別して集計） */
+    cashBenefit: { confirmedYen: number; estimatedYen: number };
+    /** 費用軽減（fee_reduction。保育料・医療費など実際の支出が減る分）の確定・推定 */
+    feeReduction: { confirmedYen: number; estimatedYen: number };
+    /** 貸付（loan）の参考額（返済が必要なため合計には含めない・M7-J1） */
+    loanReferenceYen: number;
     /** 合計に含めなかった制度（理由付き） */
     uncounted: SupportEffect[];
     usedProgramIds: string[];
@@ -258,7 +265,10 @@ export type SimulationResult = {
   comparison: {
     grossCostYen: number;
     afterConfirmedYen: number;
+    /** 0 以下にはならない（支援が費用を上回る分は supportSurplusYen に分離。M7-J1） */
     afterAllYen: number;
+    /** 支援が費用を上回る見込み額（0 以上。上回る分は参考値として分離表示する） */
+    supportSurplusYen: number;
   };
   /**
    * 目標とする養育資金額のカバー状況（未入力は null）。
@@ -822,7 +832,7 @@ export function buildSimulationResult(
       label: "公的支援の額",
       valueText: `確定 ${supports.confirmedTotalYen}円／推定 ${supports.estimatedTotalYen}円`,
       flag: "unverified",
-      note: `未確認の試算です。確定した支給額ではありません${
+      note: `未確認の試算です。確定した支給額ではありません。現金給付と費用軽減（実際の支出が減る分）は性質が異なるため、結果画面では分けて表示しています（貸付は合計に含みません）${
         supports.effects.some(
           (e) => e.includedInTotal && e.program.conditions.combinedWith.length === 0,
         )
@@ -850,6 +860,30 @@ export function buildSimulationResult(
     },
   ];
 
+  // 支援の区分別集計（M7-J1）: 現金給付・費用軽減・貸付は金額の意味が異なるため分離する。
+  // confirmedYen/estimatedYen（合計）は内部整合・カバー率計算用に従来どおり合算を維持し、
+  // 画面表示では cashBenefit / feeReduction / loanReferenceYen を分けて示す。
+  const cashBenefit = { confirmedYen: 0, estimatedYen: 0 };
+  const feeReduction = { confirmedYen: 0, estimatedYen: 0 };
+  let loanReferenceYen = 0;
+  for (const e of supports.effects) {
+    const total = e.estimatedTotalYen ?? 0;
+    if (e.program.category === "loan") {
+      // 貸付は返済が必要なため合計に含めない（参考額のみ保持）
+      loanReferenceYen += total;
+      continue;
+    }
+    if (!e.includedInTotal) continue;
+    // 上限額のみ確認済み（capOnly）は確定額として扱わない（supports 側の集計と同一規則）
+    const isConfirmed =
+      e.program.amount.basis === "confirmed" &&
+      e.program.amount.capOnly !== true;
+    const bucket =
+      e.program.category === "fee_reduction" ? feeReduction : cashBenefit;
+    if (isConfirmed) bucket.confirmedYen += total;
+    else bucket.estimatedYen += total;
+  }
+
   // 段階別資金配分の前提・要確認事項（推定値を確定扱いしないための明示）
   const fundingMeta: FundingMeta = {
     selfFundingNotes: [
@@ -874,6 +908,7 @@ export function buildSimulationResult(
       "教育段階ごとの支援額は、制度の対象年齢・対象期間と各年の子どもの年齢の重なりで配分しています（出生前の期間は「妊娠・出産」に計上）。",
       "貸付（返済が必要）・金額未確認・対象外・現在利用中の制度は配分せず、理由を付けて未配分としています。",
       "推定・要確認の支援を含みます。支給が確定した金額ではありません（モック・未確認データ）。",
+      "現金給付と費用軽減（保育料・医療費など実際の支出が減る分）は性質が異なるため、合計では区分して表示しています（配分計算では両方を支援として扱います）。貸付（返済が必要）は合計・配分の対象外です。",
       ...supportAllocation.notes,
     ],
     unallocatedSupports: supportAllocation.unallocated,
@@ -894,14 +929,24 @@ export function buildSimulationResult(
     supportTotals: {
       confirmedYen: supports.confirmedTotalYen,
       estimatedYen: supports.estimatedTotalYen,
+      cashBenefit,
+      feeReduction,
+      loanReferenceYen,
       uncounted: supports.uncounted,
       usedProgramIds: input.household.usedSupportProgramIds,
     },
     comparison: {
       grossCostYen: costTotalYen,
-      afterConfirmedYen: costTotalYen - supports.confirmedTotalYen,
-      afterAllYen:
+      // 負値は表示しない（0 以下にならない）。上回る分は supportSurplusYen に分離（M7-J1）
+      afterConfirmedYen: Math.max(0, costTotalYen - supports.confirmedTotalYen),
+      afterAllYen: Math.max(
+        0,
         costTotalYen - supports.confirmedTotalYen - supports.estimatedTotalYen,
+      ),
+      supportSurplusYen: Math.max(
+        0,
+        supports.confirmedTotalYen + supports.estimatedTotalYen - costTotalYen,
+      ),
     },
     goalCoverage:
       input.targetAmount !== null && input.targetAmount > 0

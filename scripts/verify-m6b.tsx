@@ -891,9 +891,13 @@ const initialMessages = buildInitialMessages({
   userContext: null,
 });
 check(
-  "相談連携: 開始メッセージが生成される（モック・未確認を明示）",
+  "相談連携: 開始メッセージが生成される（制度名を明示しモック・未確認の扱いを維持）",
   initialMessages.length === 1 &&
-    initialMessages[0].text.includes("モック・未確認"),
+    initialMessages[0].text.includes("児童手当（モック）") &&
+    initialMessages[0].text.includes("について相談中です") &&
+    initialMessages[0].hasUnverified &&
+    (initialMessages[0].relatedPrograms[0]?.sourceType ?? null) === "mock" &&
+    (initialMessages[0].relatedPrograms[0]?.note ?? "").includes("未確認"),
 );
 const consultReply = buildMockReply({
   message: "この制度の金額を教えてください",

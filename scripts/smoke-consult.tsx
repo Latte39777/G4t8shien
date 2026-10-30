@@ -1,12 +1,13 @@
 /**
- * 相談画面スモークテスト（M5 / M6 / P3）
+ * 相談画面スモークテスト（M5 / M6 / P3 / M7-M）
  *
  * 実行: npx tsx scripts/smoke-consult.tsx
  * Consult.tsx をサーバレンダリングし、相談画面の主要な表示
  * （自由相談/制度引き継ぎ・モック明示・履歴消滅の告知・質問例・入力欄・
  *   状態表示・リセット・公式情報への導線・M6: AI 応答バッジ／再試行ボタン／
  *   URL の非リンク化・P3: 出典の表示／リンク条件／確認状態／制度区分／
- *   応答正規化での KB 情報の受け渡し）を確認する。
+ *   応答正規化での KB 情報の受け渡し・M7-M: 実AI/モック説明の排他表示／
+ *   個人情報注意の常時表示と折りたたみ／質問例チップ／重複リンクの解消）を確認する。
  */
 import { createElement } from "react";
 import { renderToString } from "react-dom/server";
@@ -47,9 +48,13 @@ function main(): void {
     "支援制度の相談",
     "制度を指定しない自由な相談です",
     "開発用のモックサンプル",
-    "公式サイトの検索を行った結果ではありません",
+    "公式サイトをリアルタイム検索する機能ではありません",
     "会話履歴はこのブラウザのメモリ上にのみ保持されます",
     "ページをリロードすると会話履歴は消えます",
+    "質問文と会話履歴は外部AIサービス",
+    "自動マスキングは完全ではありません",
+    "入力フォームで入力した金額（収入・貯蓄など）は相談機能に渡していません",
+    "個人情報の取り扱いの詳細",
     "質問例",
     "子育てでもらえるお金には、どんなものがある？",
     "自分の状況で対象になりそうな支援は？",
@@ -59,8 +64,8 @@ function main(): void {
     "送信する",
     "会話をリセット",
     "結果画面に戻る",
-    "関連する支援制度・公式情報の確認",
-    "結果画面の支援制度一覧を見る",
+    "制度一覧・公式情報へのリンク",
+    "結果画面で支援制度一覧を見る",
     "必ずご確認ください",
   ], "consult/free");
 
@@ -86,8 +91,10 @@ function main(): void {
   );
   require(programHtml, [
     "児童手当（モック）",
-    "についての相談から開始しています",
-    "この制度以外の支援制度についても自由に質問できます",
+    "について相談中",
+    "この制度をきっかけに、ほかの支援制度についても質問できます",
+    "モック・未確認",
+    "制度の詳細（概要・金額・申請先・確認状態）",
     "概要（要確認）",
     "金額（要確認）",
     "申請先（要確認）",
@@ -99,6 +106,121 @@ function main(): void {
     "質問を入力してください。",
     "送信中…",
   ], "consult/program");
+
+  // ── M7-M: 実AI/モック説明の排他表示・重複リンクの解消・質問例チップ ──
+  const mockModeHtml = renderToString(
+    createElement(Consult, {
+      program: null,
+      userContext: null,
+      messages: [
+        {
+          id: "m-mock",
+          role: "assistant" as const,
+          text: "モックの回答です。",
+          isMock: true,
+          hasUnverified: true,
+          relatedPrograms: [],
+          sourceType: "mock" as const,
+        },
+      ],
+      sending: false,
+      error: null,
+      onSend: () => {},
+      onReset: () => {},
+      onBack: () => {},
+      onOpenSupports: () => {},
+      liveAiEnabled: false,
+    }),
+  );
+  require(mockModeHtml, [
+    "現在は開発用のモックサンプルです",
+    "実際の制度相談や申請判断には使用できません",
+    "現在は外部の AI へ送信していません",
+    "開発用モックサンプル",
+  ], "consult/mode-mock");
+  for (const liveOnly of ["質問に回答します", "AI回答（Web検索なし"]) {
+    if (mockModeHtml.includes(liveOnly)) {
+      console.log(`  ✘ [consult/mode-mock] 実AIの説明を混在させない: ${liveOnly}`);
+      failed += 1;
+    } else {
+      console.log("  ✔ [consult/mode-mock] 実AIの説明を混在させない");
+    }
+  }
+  if (mockModeHtml.includes("consult-ai-badge")) {
+    console.log("  ✘ [consult/mode-mock] モック回答に AI バッジを出さない");
+    failed += 1;
+  } else {
+    console.log("  ✔ [consult/mode-mock] モック回答に AI バッジを出さない");
+  }
+
+  const liveModeHtml = renderToString(
+    createElement(Consult, {
+      program: null,
+      userContext: null,
+      messages: [
+        {
+          id: "m-ai2",
+          role: "assistant" as const,
+          text: "AI の回答です。",
+          isMock: false,
+          hasUnverified: true,
+          relatedPrograms: [],
+          sourceType: "ai" as const,
+        },
+      ],
+      sending: false,
+      error: null,
+      onSend: () => {},
+      onReset: () => {},
+      onBack: () => {},
+      onOpenSupports: () => {},
+      liveAiEnabled: true,
+    }),
+  );
+  require(liveModeHtml, [
+    "外部AI（INIAD AI-MOP API）が質問に回答します",
+    "質問文と会話履歴は外部AIサービス（INIAD AI-MOP API）へ送信されます",
+    "AI回答（Web検索なし・未確認の可能性があります）",
+  ], "consult/mode-live");
+  for (const mockOnly of [
+    "開発用のモックサンプル",
+    "開発用モックサンプル",
+    "送信していません",
+  ]) {
+    if (liveModeHtml.includes(mockOnly)) {
+      console.log(`  ✘ [consult/mode-live] モックの説明を混在させない: ${mockOnly}`);
+      failed += 1;
+    } else {
+      console.log("  ✔ [consult/mode-live] モックの説明を混在させない");
+    }
+  }
+
+  // 「結果画面に戻る」は上部1つだけ（下部の重複リンクを廃止）
+  const backCount = (freeHtml.match(/結果画面に戻る/g) ?? []).length;
+  if (backCount !== 1) {
+    console.log(`  ✘ [consult/links] 「結果画面に戻る」は1つだけ（実際 ${backCount} 個）`);
+    failed += 1;
+  } else {
+    console.log("  ✔ [consult/links] 「結果画面に戻る」は1つだけ（重複なし）");
+  }
+  // 質問例はクリック可能なチップ（button）で4件
+  const exampleCount = (freeHtml.match(/data-testid="consult-example"/g) ?? []).length;
+  if (exampleCount !== 4) {
+    console.log(`  ✘ [consult/examples] 質問例チップは4件（実際 ${exampleCount} 件）`);
+    failed += 1;
+  } else {
+    console.log("  ✔ [consult/examples] 質問例チップは4件（クリックで送信）");
+  }
+  // 個人情報の詳細は折りたたみ（常時表示の短い注意と併存）
+  if (
+    !freeHtml.includes("consult-privacy-details") ||
+    !freeHtml.includes("consult-privacy-notice")
+  ) {
+    console.log("  ✘ [consult/privacy] 個人情報注意の常時表示＋詳細折りたたみ");
+    failed += 1;
+  } else {
+    console.log("  ✔ [consult/privacy] 個人情報注意の常時表示＋詳細折りたたみ");
+  }
   // ── M6: AI 応答バッジ・再試行ボタン・URL の非リンク化 ──
   const aiMessages = [
     ...buildInitialMessages({ program: null, userContext: null }),
@@ -279,7 +401,7 @@ function main(): void {
     }),
   );
   require(kbHtml, [
-    "出典（公式情報KBで確認した資料）",
+    "参考にした公式ページ",
     "児童手当の支給",
     "こども家庭庁",
     "確認日：2026-02-01",

@@ -89,13 +89,13 @@ check(
 // ── 3. 制度カードから開始すると正しい制度情報が引き継がれる ──
 const kickoff = buildInitialMessages({ program: ctxProgram, userContext: null })[0]
 check(
-  '引き継ぎ: 開始メッセージに制度名と概要が含まれる',
+  '引き継ぎ: 開始メッセージに制度名が含まれ短く開始する',
   kickoff.text.includes('児童手当（モック）') &&
-    kickoff.text.includes(childAllowance.summary),
+    kickoff.text.includes('について相談中です'),
 )
 check(
   '引き継ぎ: 制度はきっかけであり他制度も質問可能と明示',
-  kickoff.text.includes('この制度以外の支援制度についても自由に質問できます'),
+  kickoff.text.includes('ほかの支援制度についても質問できます'),
 )
 check(
   '引き継ぎ: モック制度は未確認として扱う',

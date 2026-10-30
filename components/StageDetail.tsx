@@ -57,6 +57,36 @@ function BasisBadge({ basis }: { basis: "reference" | "assumed" }) {
   );
 }
 
+/**
+ * 詳細の折りたたみ（M7-K）。開閉状態は aria-expanded で明示し、
+ * 中身は常に DOM に存在させる（読み上げ・検索から消えないようにする）。
+ */
+function DetailFold({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="mt-4">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="flex min-h-[44px] w-full items-center justify-between gap-2 rounded-full border border-slate-200 px-4 py-2.5 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-50"
+      >
+        <span>{title}</span>
+        <span aria-hidden="true" className="text-slate-400">
+          {open ? "▲ 閉じる" : "▼ 詳細を見る"}
+        </span>
+      </button>
+      <div className={open ? "mt-3" : "hidden"}>{children}</div>
+    </div>
+  );
+}
+
 function ItemRow({ item }: { item: CostLineItem }) {
   return (
     <li className="border-t border-slate-100 py-3 first:border-t-0">
@@ -322,42 +352,42 @@ export default function StageDetail({
         </p>
       </div>
 
-      {/* 凡例 */}
+      {/* 凡例（簡潔に） */}
       <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-[10px] text-slate-500">
         <li className="flex items-center gap-1.5">
           <span
             className="inline-block h-2.5 w-4 rounded-sm bg-blue-500"
             aria-hidden="true"
           />
-          自分で用意する資金
+          自前資金（青）
         </li>
         <li className="flex items-center gap-1.5">
           <span
             className="inline-block h-2.5 w-4 rounded-sm bg-emerald-500"
             aria-hidden="true"
           />
-          支援でまかなう金額（確定）
+          支援（確認済み・緑）
         </li>
         <li className="flex items-center gap-1.5">
           <span
             className="inline-block h-2.5 w-4 rounded-sm bg-emerald-300"
             aria-hidden="true"
           />
-          支援でまかなう金額（推定・要確認）
+          支援（参考・緑）
         </li>
         <li className="flex items-center gap-1.5">
           <span
             className="inline-block h-2.5 w-4 rounded-sm bg-rose-500"
             aria-hidden="true"
           />
-          不足する金額
+          不足（赤）
         </li>
         <li className="flex items-center gap-1.5">
           <span
             className="inline-block h-2.5 w-4 rounded-sm bg-slate-200"
             aria-hidden="true"
           />
-          背景・目盛り（残り）
+          目盛り（背景）
         </li>
       </ul>
 
@@ -413,7 +443,13 @@ export default function StageDetail({
                     </span>
                   </p>
                   <p className="text-sm font-bold text-slate-900">
-                    {formatYen(total)}
+                    {def.dataMissing ? (
+                      <span className="text-xs text-amber-600">
+                        費用データ未整備・要確認
+                      </span>
+                    ) : (
+                      formatYen(total)
+                    )}
                   </p>
                 </div>
                 {/* 費用のまかなえ方の棒（背景のグレー＝共通目盛りの残り） */}
@@ -453,38 +489,37 @@ export default function StageDetail({
                 </div>
                 {/* 棒の数値（支援ON/OFFに連動して更新） */}
                 <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-[10px] leading-4 text-slate-500">
-                  <span>自分で用意 {formatYen(f.selfFundedYen)}</span>
+                  <span>自前資金 {formatYen(f.selfFundedYen)}</span>
                   {supportOn ? (
                     <>
                       <span>
-                        支援でまかなう {formatYen(f.supportAppliedYen)}（確定{" "}
-                        {formatYen(f.supportConfirmedAppliedYen)}／推定{" "}
+                        支援 {formatYen(f.supportAppliedYen)}（確認済み{" "}
+                        {formatYen(f.supportConfirmedAppliedYen)}／参考{" "}
                         {formatYen(f.supportEstimatedAppliedYen)}）
                       </span>
                       <span className="font-semibold text-rose-500">
-                        支援を反映しても残る不足額{" "}
-                        {formatYen(f.shortageWithSupportYen)}
+                        残る不足 {formatYen(f.shortageWithSupportYen)}
                       </span>
                       {f.supportSurplusYen > 0 && (
                         <span>
-                          必要額を超える支援見込額{" "}
-                          {formatYen(f.supportSurplusYen)}
+                          必要額超えの支援 {formatYen(f.supportSurplusYen)}
                           （棒には表示していません）
                         </span>
                       )}
                     </>
                   ) : (
                     <span className="font-semibold text-rose-500">
-                      支援を反映しない場合の不足額{" "}
-                      {formatYen(f.shortageWithoutSupportYen)}
+                      不足 {formatYen(f.shortageWithoutSupportYen)}
                     </span>
                   )}
                 </div>
                 <p className="mt-1 text-[10px] text-slate-400">
                   {def.dataMissing
-                    ? "費用データ未整備（要確認）・0円扱い"
-                    : `対象 ${stage?.years ?? 0}年（${def.ageLabel}）`}
-                  ／ 選択すると内訳を表示
+                    ? "費用データ未整備・要確認（0円扱い）"
+                    : scope === "household"
+                      ? `将来の計算対象：${stage?.years ?? 0}子ども年分（子ども${childResults.length}人の合計）`
+                      : `この子の計算対象：${stage?.years ?? 0}年`}
+                  （{def.ageLabel}）／ 選択すると内訳を表示
                 </p>
               </button>
             </li>
@@ -505,11 +540,28 @@ export default function StageDetail({
             </span>
           </h4>
           <p className="mt-1 text-xs text-slate-500">
-            対象年数：{selectedStage.years}年（このシミュレーションに含まれる年数。
-            {selectedStage.label}全体では{selectedStage.fullYears}年）
+            {scope === "household"
+              ? `将来の計算対象：${selectedStage.years}子ども年分（子ども${childResults.length}人の合計。${selectedStage.label}全体では${selectedStage.fullYears}年）`
+              : `この子の計算対象：${selectedStage.years}年（${selectedStage.label}全体では${selectedStage.fullYears}年）`}
           </p>
+          {scope === "household" && (
+            <p className="mt-1 text-[11px] leading-4 text-slate-500">
+              子ども別の対象年数：
+              {childResults
+                .map(
+                  (c) =>
+                    `${c.label} ${
+                      c.stages.find((s) => s.key === selectedStage.key)?.years ?? 0
+                    }年`,
+                )
+                .join("／")}
+            </p>
+          )}
+
+          {/* 費用の内訳・計算条件（詳細は折りたたみ） */}
+          <DetailFold title="費用の内訳・計算条件を詳しく見る">
           {selectedStage.note && (
-            <p className="mt-2 rounded-lg bg-amber-50 px-3 py-2 text-xs leading-5 text-amber-800">
+            <p className="rounded-lg bg-amber-50 px-3 py-2 text-xs leading-5 text-amber-800">
               {selectedStage.note}
             </p>
           )}
@@ -570,6 +622,7 @@ export default function StageDetail({
               </p>
             </div>
           )}
+          </DetailFold>
 
           {/* この段階の費用のまかなえ方（資金配分） */}
           <div className="mt-4 rounded-xl border border-slate-100 p-3">
@@ -579,7 +632,7 @@ export default function StageDetail({
             <dl className="mt-2 space-y-1 text-xs">
               <div className="flex items-baseline justify-between gap-3">
                 <dt className="text-slate-500">
-                  自分で用意する資金（青）
+                  自前資金（青）
                 </dt>
                 <dd className="font-semibold text-slate-800">
                   {formatYen(selectedStage.funding.selfFundedYen)}
@@ -587,7 +640,7 @@ export default function StageDetail({
               </div>
               <div className="flex items-baseline justify-between gap-3">
                 <dt className="text-slate-500">
-                  支援でまかなう額・確定（緑）
+                  支援（確認済み・緑）
                 </dt>
                 <dd className="font-semibold text-slate-800">
                   {formatYen(selectedStage.funding.supportConfirmedAppliedYen)}
@@ -595,7 +648,7 @@ export default function StageDetail({
               </div>
               <div className="flex items-baseline justify-between gap-3">
                 <dt className="text-slate-500">
-                  支援でまかなう額・推定要確認（緑）
+                  支援（参考・緑）
                 </dt>
                 <dd className="font-semibold text-slate-800">
                   {formatYen(selectedStage.funding.supportEstimatedAppliedYen)}
@@ -603,7 +656,7 @@ export default function StageDetail({
               </div>
               <div className="flex items-baseline justify-between gap-3">
                 <dt className="text-slate-500">
-                  支援を反映しない場合の不足額（赤）
+                  支援OFF時の不足（赤）
                 </dt>
                 <dd className="font-semibold text-rose-500">
                   {formatYen(selectedStage.funding.shortageWithoutSupportYen)}
@@ -611,7 +664,7 @@ export default function StageDetail({
               </div>
               <div className="flex items-baseline justify-between gap-3">
                 <dt className="text-slate-500">
-                  支援を反映しても残る不足額（赤）
+                  支援ON時も残る不足（赤）
                 </dt>
                 <dd className="font-semibold text-rose-500">
                   {formatYen(selectedStage.funding.shortageWithSupportYen)}
